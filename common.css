@@ -136,23 +136,6 @@ a:hover
 	color: #33b5e5;
 }
 
-/*#headbar_cast
-{
-	width: 38px;
-	height: 29px;
-	float: right;
-	margin: 35px 25px;
-	background-image: url(icons/gcast/cast_icon_idle.png);
-	background-repeat: no-repeat;
-	background-position: center;
-	cursor: pointer;
-}
-#headbar_cast:after
-{
-	content: "";
-	clear: both;
-}*/
-
 #headbar_settings
 {
 	width: 15px;
