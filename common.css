@@ -1,0 +1,391 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* BY TAG */
+body
+{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	background: #fafafa;
+	background-image: url("bg.jpg");
+	background-repeat: repeat-y;
+	background-size: cover;
+}
+
+h2
+{
+	font-family: 'Open Sans', 'Segoe UI Light', 'Segoe UI', Ubuntu, Arial, Helvetica, sans-serif;
+	font-weight: 300;
+	font-size: 45px;
+	color: #33b5e5;
+	margin: 0;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+h3
+{
+	font-family: 'Open Sans', 'Segoe UI Light', 'Segoe UI', Ubuntu, Arial, Helvetica, sans-serif;
+	font-weight: 300;
+	font-size: 30px;
+	color: #33b5e5;
+	text-align: center;
+	vertical-align: middle;
+	margin: 20px 0;
+}
+
+h4
+{
+	font-family: 'Open Sans', 'Segoe UI Light', 'Segoe UI', Ubuntu, Arial, Helvetica, sans-serif;
+	font-weight: 300;
+	font-size: 25px;
+	color: #99cc00;
+	vertical-align: middle;
+	margin: 10px 10px;
+}
+
+p
+{
+	font-family: 'Open Sans', 'Segoe UI Light', 'Segoe UI', Ubuntu, Arial, Helvetica, sans-serif;
+	font-weight: 300;
+	font-size: 25px;
+	color: #282828;
+	text-align: center;
+}
+
+a
+{
+	color: #0099cc;
+	text-decoration: none;
+}
+a:hover
+{
+	color: #99cc00;
+	transition: color 0.2s;
+}
+/* BY ID */
+#headbar
+{
+	width: 100%;
+	min-width: 900px;
+	height: 100px;
+	margin: 0;
+	background: #282828;
+	color: #fff;
+	z-index: 10;
+	box-shadow: 0 3px 5px 2px rgba(0,0,0, 0.3);
+	position: relative;
+}
+
+#headbar_h2_w
+{
+	width: auto;
+	height: 100px;
+	margin: 0;
+	display: table;
+	position: relative;
+	float: left;
+}
+#headbar_h2_w:after		/*CLEARFIX*/
+{
+	content: " ";
+	clear: both;
+}
+
+#headbar_sharelink_w
+{
+	height: 100px;
+	width: auto;
+	float: right;
+	position: relative;
+	display: none;
+}
+#headbar_sharelink_w:after
+{
+	content: "";
+	clear: both;
+}
+
+#headbar_sharelink_shorten
+{
+	height: 40px;
+	width: 80px;
+	padding: 3px;
+	margin: 30px 0;
+	border: 1px #000 solid;
+	cursor: pointer;
+	color: #fff;
+	background: linear-gradient(to top, #007ccc, #33b5e5);
+}
+#headbar_sharelink_shorten:hover
+{
+	color: #1f1f1f;
+	transition: color 0.2s;
+}
+
+#headbar_sharelink_link
+{
+	height: 32px;
+	width: 192px;
+	padding: 3px;
+	margin: 30px 0;
+	border: 1px #000 solid;
+	background: #1f1f1f;
+	box-shadow: 0 1px 3px 0 rgba(0,0,0,0.6) inset;
+	color: #33b5e5;
+}
+
+/*#headbar_cast
+{
+	width: 38px;
+	height: 29px;
+	float: right;
+	margin: 35px 25px;
+	background-image: url(icons/gcast/cast_icon_idle.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+}
+#headbar_cast:after
+{
+	content: "";
+	clear: both;
+}*/
+
+#headbar_settings
+{
+	width: 15px;
+	height: 29px;
+	float: right;
+	position: relative;
+	margin-top: 35px;
+	margin-left: 30px;
+	margin-right: 15px;
+	cursor: pointer;
+	background-image: url(icons/settings.png);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+#headbar_settings:after
+{
+	content: "";
+	clear: both;
+}
+
+#headbar_settings_box
+{
+	display: none;
+	opacity: 0;
+	position: absolute;
+	width: auto;
+	height: auto;
+	right: 15px;
+	top: 70px;
+	background: #fafafa;
+	border: 1px #aaa solid;
+	border-radius: 2px;
+	z-index: 50;
+}
+
+#headbar_settings_box_options
+{
+	width: 100%;
+	height: auto;
+}
+
+#headbar_settings_box_options tr td
+{
+	padding: 10px;
+	font-family: 'Open Sans', 'Segoe UI Light', 'Segoe UI', Ubuntu, Arial, Helvetica, sans-serif;
+	font-weight: 300;
+	font-size: 15px;
+	color: #282828;
+	white-space: nowrap;
+	cursor: pointer;
+}
+#headbar_settings_box_options tr:hover
+{
+	background: rgba(51,181,229, 0.3);
+	transition: background 0.2s;
+}
+
+#headbar_seek
+{
+	width: 0%;
+	height: 2px;
+	margin-top: 98px;
+	background: #33b5e5;
+	position: absolute;
+	float: left;
+}
+#heabar_seek:after
+{
+	content: " ";
+	clear: both;
+}
+
+#timeline
+{
+	width: 90%;
+	height: 150px;
+	margin: auto;
+	background: #282828;
+	box-shadow: 0 5px 3px 1px rgba(0,0,0, 0.3), 0 5px 25px 1px rgba(0,0,0, 0.3) inset;
+	z-index: 5;
+	position: relative;
+	display: none;
+	overflow: auto;
+}
+
+#timeline_cardline
+{
+	width: 100%;
+	height: 140px;
+	padding: 10px 0 0 0;
+	position: absolute;
+}
+#timeline_cardline:before
+{
+	content: "";
+	height: 150px;
+	width: 10px;
+	top: 0;
+	left: 0;
+	position: absolute;
+	z-index: 4;
+	background: linear-gradient(to left, rgba(40,40,40,0) 0%, rgba(40,40,40,1) 100%);
+}
+#timeline_cardline:after
+{
+	content: "";
+	height: 150px;
+	width: 10px;
+	top: 0;
+	right: 0;
+	position: absolute;
+	background: linear-gradient(to right, rgba(40,40,40,0) 0%, rgba(40,40,40,1) 100%);
+}
+
+#site-content
+{
+	width: 100%;
+	height: auto;
+	margin: auto;
+	padding-top: 175px;
+	padding-bottom: 50px;
+	top: 100px;
+	position: absolute;
+	z-index: 1;
+}
+
+#search-container
+{
+	width: 750px;
+	min-height: 500px;
+	height: auto;
+	margin: auto;
+	background: rgba(255,255,255, 0.8);
+	border-radius: 3px;
+	box-shadow: 0 5px 10px 1px rgba(0,0,0, 0.3);
+}
+
+#search-container_box
+{
+	width: 748px;
+	height: 150px;
+	position: relative;
+	background: linear-gradient(to top, #eaeaea, #fff 50%);
+	border-radius: 3px;
+	border: 1px #ddd solid;
+	box-shadow: 0 2px 8px 0 rgba(0,0,0, 0.2);
+}
+
+#search-container_box_wrapper
+{
+	width: 700px;
+	height: 40px;
+	margin: 55px 24px 55px 24px;
+	font-size: 0;
+}
+
+#search-string
+{
+	width: 642px;
+	height: 32px;
+	padding: 3px;
+	background: #fff;
+	border: 1px #bbb solid;
+	box-shadow: 0 1px 3px 0 #ddd inset;
+}
+#search-string:hover
+{
+	border-color: #33b5e5;
+}
+
+#search-submit
+{
+	width: 40px;
+	height: 40px;
+	margin-left: 10px;
+	padding: 3px;
+	background-color: #fff;
+	cursor: pointer;
+	border: 1px #bbb solid;
+	background-image: url(icons/search_normal.png);
+	background-position: center center;
+	background-repeat: no-repeat;
+	box-shadow: 0 1px 2px 0 rgba(0,0,0, 0.15);
+}
+#search-submit:hover
+{
+	background-image: url(icons/search_hover.png);
+	transition: background-image 0.2s;
+	box-shadow: 0 1px 2px 0 rgba(0,0,0, 0.15) inset;
+}
+
+#suggestions
+{
+	width: 650px;
+	max-height: 320px;
+	margin: 25px 50px;
+	display: none;
+}
+#suggestions tr td
+{
+	height: 30px;
+	padding: 0 0 0 5px;
+	max-width: 650px;
+	font-family: 'Open Sans', 'Segoe UI Light', 'Segoe UI', Ubuntu, Arial, Helvetica, sans-serif;
+	font-weight: 400;
+	font-size: 20px;
+	color: #282828;
+	border-bottom: 1px rgba(0,0,0,0.15) solid;
+	cursor: pointer;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+#suggestions tr td:hover
+{
+	background: rgba(51,181,229, 0.3);
+	transition: background 0.2s;
+}
+
+#footer
+{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: 25px;
+	background: #fff;
+	border-top: 1px #ddd solid;
+	vertical-align: middle;
+	z-index: 10;
+}
+
+/* BY CLASS */
+.selected
+{
+	background: rgba(0,0,0, 0.15);
+}

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="author" content="KeyLimePie"/>
+		<meta name="keywords" content="chatsounds,meta,struct,construct,garrys,mod,gmod,garry,keylimepie,potcfdk"/>
+        <meta name="description" content="Chatsounds online - explore thousands of sound samples with a simple text input!"/>
+        
+        <title>Chatsounds</title>
+        <link rel="stylesheet" type="text/css" href="common.css">
+        <link rel="stylesheet" type="text/css" href="playerbox.css">
+        <link rel="stylesheet" type="text/css" href="card.css">
+        <link rel="stylesheet" type="text/css" href="msa.css">
+        <link rel="stylesheet" type="text/css" href="overlay.css">
+        <link rel="stylesheet" type="text/css" href="scrollbar/jquery.mCustomScrollbar.css">
+        <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600'> <!-- Google Fonts -->
+		<link rel="icon" type="image/x-icon" href="favicon.ico"/>
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+        <script src="init.js"></script>
+    </head>
+    
+    <body>
+    	<noscript>
+        <div class="overlay_nojs">
+        	<div id="notification_nojs">
+            	<div id="notification_textfield_nojs">
+                	<p id="notification_message_nojs">JavaScript is disabled</p>
+                    <p id="notification_detail_nojs">Your browser has disabled JavaScript.<br />However, this site needs JavaScript to work.<br />Please activate JavaScript in your browser.</p>
+                </div>
+                <div id="notification_footerbanner_nojs"></div>
+            </div>
+        </div>
+        </noscript>
+        
+        <div id="msa_overlay" onClick="msaObj.disappear ()">
+        	<h3 id="msa_overlay_head">MSA DATA BROADCASTING</h3>
+            <div id="msa_overlay_content">
+            	
+                <div id="msa_overlay_console">
+                </div>
+            </div>
+            <audio id="msa_dialer">
+            	<source id="msa_dialer_src" src="https://garrysmod-chatsounds.googlecode.com/svn/trunk/sound/chatsounds/autoadd/misc/dialup1.ogg" type="audio/ogg" />
+            </audio>
+            <audio id="msa_speaker">
+            	<source id="msa_speaker_src" src="" type="audio/ogg"/>
+            </audio>
+        </div>
+        <div class="overlay" id="overlay_help">
+            <div class="overlay_exit" style="left: 50%; top: 50%; margin: -265px auto auto -465px" title="Close help" onClick="hideHelp()"></div>
+            <div id="overlay_help_container">
+                <h3>help</h3>
+                <div class="help_entry">
+                	<h4>first steps</h4>
+                    <p class="help_entry_text"><span style="color: #aaa;">Welcome to Chatsounds!</span><br />Chatsounds plays samples based on your text input! Just type in a word or a sentence and see what happens. You will automatically get sample suggestions in the list below the input box.<br />Navigate in that list with <i>arrow key up/down</i> and add it to your input with <i>arrow key right</i> or <i>enter</i>. You can <i>click</i> on a suggestion to add it as well.</p>
+                    <p class="help_entry_example"></p>
+                </div>
+                <div class="help_entry">
+                	<h4>#</h4>
+                    <p class="help_entry_text">Most times Chatsounds offers more than one sample for a word. You can select a specific one with "#". Otherwise Chatsounds will select a random one.</p>
+                    <p class="help_entry_example">hello#3</p>
+                </div>
+                <div class="help_entry">
+                	<h4>*</h4>
+                    <p class="help_entry_text">If you want to repeat a sample you can do it with "*".</p>
+                    <p class="help_entry_example">yoyoko onosoco*4<br />hello#2*10</p>
+                </div>
+                <div class="help_entry">
+                	<h4>multiple samples</h4>
+                    <p class="help_entry_text">With Chatsounds you can create a queue of samples to play. Simply separate your words with a single ',' .</p>
+                    <p class="help_entry_example">hello#1,gaben,adventures of gaben*2</p>
+                </div>
+                <div class="help_entry">
+                	<h4>random</h4>
+                    <p class="help_entry_text">If you do not have any idea what sample you would like to hear you can type in "random". Chatsounds will then look for a random one.</p>
+                    <p class="help_entry_example">random<br />yolomofo hellomoto,random,dont forget kawaii*2,random*10</p>
+                </div>
+            </div>
+        </div>
+        <div class="overlay" id="overlay_setBG">
+        	<div id="overlay_setBG_container">
+            	<div class="overlay_exit" title="Close this window" onClick="hideBGForm()"></div>
+            	<div id="overlay_setBG_container_content">
+                	<p class="notification_message">Set a custom background</p>
+                    <div id="overlay_setBG_container_input">
+                        <form id="bg_input_form" action="JavaScript:setBG ()">
+                            <input id="bg_input_text" type="text" autocomplete="off" placeholder="Enter your image url...">
+                            <input id="bg_input_button" type="submit" value="Set">
+                            <br />
+                            <div id="bg_input_form_cookies">
+                                <input type="checkbox" id="bg_input_cookies" form="bg_input_form">
+                                <label for="bg_input_cookies" title="This service uses cookies.">Remember this background</label>
+                            </div>
+                        </form>
+                    </div>
+                    <p id="cookie_disclaimer">This service uses cookies. <span id ="cookie_disclaimer_more" onClick="cookieDiscl ()">more...</span></p>
+                </div>
+                <div id="overlay_setBG_container_footer">
+                	<p>A blank input means default.</p>
+                </div>
+            </div>
+        </div>
+        <div class="overlay" id="overlay_notification"></div>
+        <div id="headbar">
+        	<div id="headbar_h2_w">
+            	<h2 title="red-coloured means it's loading...">CHATSOUNDS</h2>
+            </div>
+            <div id="playerbox">
+                <div id="playerbox_controls">
+                	<div class="playerbox_button" id="playerbox_controls_replay" title="Replay queue" onClick="machine.jukebox.replayQueue ()"></div>
+                    <div class="playerbox_button" id="playerbox_controls_play" title="Play/Pause" onClick="machine.jukebox.ui.playToggle ()"></div>
+                    <div class="playerbox_button" id="playerbox_controls_skip" title="Skip" onClick="machine.jukebox.skipSample ()"></div>
+                </div>
+                <section id="playerbox_volume">
+                    <span id="playerbox_volume_tooltip"></span>
+                    <div id="playerbox_volume_slider"></div>
+                    <span id="playerbox_volume_volume" title="Mute/Unmute" onClick="machine.jukebox.toggleMute ()"></span>
+                </section>
+            </div>
+            <div id="headbar_settings" onClick="showSettings ()"></div>
+            <div id="headbar_settings_box">
+            	<table id="headbar_settings_box_options">
+                	<tbody>
+                    	<tr>
+                        	<td class="settings_options" onClick="showBGForm ()">Custom background</td>
+                        </tr>
+                        <tr>
+                        	<td class="settings_options" onClick="showHelp ()">Help</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <div id="headbar_cast" title="Google Chromecast support in development..."></div> -->
+            <div id="headbar_sharelink_w">
+            	<input id="headbar_sharelink_shorten" type="button" onClick="machine.setShorty ()" value="Shorty!" title="Get a shorten bit.ly-URL of this link"/>
+                <input id="headbar_sharelink_link" type="text" readonly onClick="this.select ()"/> 
+            </div>
+            <div id="headbar_seek"></div>
+        </div>
+        <div id="timeline" style="height: 0; opacity: 0;">
+        	<div id="timeline_cardline">
+            </div>
+        </div>
+        <div id="site-content">
+        	<div id="search-container">
+            	<div id="search-container_box">
+                    <div id="search-container_box_wrapper">
+                        <form style="width: 100%; height: 100%;" id="search-form" action="JavaScript:machine.action ()">
+                            <input type="text" id="search-string" autofocus autocomplete="off" placeholder="Enter your search term..." value="" required/>
+                            <input type="submit" id="search-submit" value="&nbsp;"/>
+                        </form>
+                    </div>
+                </div>
+                <table id="suggestions">
+                	<tbody>
+                    	<tr>
+                        	<td id="td-0" class="td-entry"></td>
+                        </tr>
+                        <tr>
+                        	<td id="td-1" class="td-entry"></td>
+                        </tr>
+                        <tr>
+                        	<td id="td-2" class="td-entry"></td>
+                        </tr>
+                        <tr>
+                        	<td id="td-3" class="td-entry"></td>
+                        </tr>
+                        <tr>
+                        	<td id="td-4" class="td-entry"></td>
+                        </tr>
+                        <tr>
+                        	<td id="td-5" class="td-entry"></td>
+                        </tr>
+                        <tr>
+                        	<td id="td-6" class="td-entry"></td>
+                        </tr>
+                        <tr>
+                        	<td id="td-7" class="td-entry"></td>
+                        </tr>
+                        <tr>
+                        	<td id="td-8" class="td-entry"></td>
+                        </tr>
+                    </tbody>
+                </table>
+        	</div>
+        </div>
+        <audio id="audio-element">
+        	<source id="audio-src" src="" type="audio/ogg"/>
+        </audio>
+        <audio id="audio-element-cache">
+        	<source id="audio-src-cache" src="" type="audio/ogg"/>
+        </audio>
+        <div id="footer">
+        	<table style="width: 100%">
+            	<tbody>
+                    <tr>
+                        <td>
+                            <p style="font-size: 12px; float: left; margin: 0;" id="footer_table_names">Project by <b>KeyLimePie</b></p>
+                        </td>
+                        <td>
+                        	<p id="footer_revision" style="font-size: 12px; float: right; margin: 0;">Chatsounds SVN Revision </p>
+                        </td>
+                        <td style="width: 225px; font-size: 0;">
+                        	<a href="http://jigsaw.w3.org/css-validator/validator?uri=http://chatsounds.threekelv.in/" target="_blank">
+                            	<img src="icons/css3.png" title="CSS3 confirmed" alt="W3-validated CSS3" />
+                            </a>
+                            <a href="http://validator.w3.org/check?uri=http%3A%2F%2Fchatsounds.threekelv.in%2F" target="_blank">
+                            	<img src="icons/html5.png" title="HTML5 confirmed" alt="W3-validated HTML5" />
+                            </a>
+                            <a href="https://www.youtube.com/watch?v=vNdqdb7z89g" target="_blank">
+                            	<img src="icons/hl3.png" title="Half-Life 3 confirmed" alt="It's right here!" />
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+    <script src="Notification.js"></script>
+	<script src="scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="msa.js"></script>
+    <script src="style.js"></script>
+    <!-- <script src="gcast.js"></script> -->
+    <script src="Samplebase.js"></script>
+    <script src="Sample.js"></script>
+    <script src="JukeboxUI.js"></script>
+	<script src="Jukebox.js"></script>
+    <script src="Card.js"></script>
+    <script src="URLParameter.js"></script>
+	<script src="SampleMachine.js"></script>
+    </body>
+</html>
