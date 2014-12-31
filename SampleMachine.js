@@ -232,58 +232,53 @@ SampleMachine.prototype.search = function (string)
 	return results;
 }
 
-//* 
-SampleMachine.prototype.makeTheBestOfIt = function (input)
-{
-	var index = 0;
-	var startPos = 0;
-	var splitted = input.split(" ");
-	
-	do
-	{
-		var string = "";
-		
-		for (var x = startPos; x < splitted.length; x++)
-		{
-			if ( $.isEmptyObject(this.search (string.concat(" ", splitted[x]).trim())) )
-			{
-				break;
-			}
-			else
-			{
-				index = x;
-				string = string.concat(" ", splitted[x]).trim();
-			}
-		}
-	
-		console.log(startPos + " to " + index + ": " + string);
-	
-		startPos = ++index;
-	
-	} while (startPos < splitted.length);
-}
-
 //* takes every rawInput, looks for matching samples and creates a Sample object in jukebox
 SampleMachine.prototype.makeQueue = function ()
 {
-	for (var x = 0; x < this.rawInput.length; x++)
+	for(var x = 0; x < this.rawInput.length; x++)
 	{
-		if (this.rawInput[x].name == "random")
+		if(this.rawInput[x].name == "random")
 			this.rawInput[x].name = this.getRandom ();
 
-		var matches = this.getMatches (this.rawInput[x].name);
-		if (!$.isEmptyObject(matches))
-		{
-			var index = this.getReliableExemplarOption (this.rawInput[x], matches);
-			var repetitions = this.rawInput[x][this.OPTIONSWORD[1]] == "" ? 1 : this.rawInput[x][this.OPTIONSWORD[1]];
-			
-			this.addSample (new Sample (matches[index]["name"], matches[index]["path"], index + 1, repetitions, x));
-			this.jukebox.insert (this.samples[this.samples.length - 1]);
-		}
-		else
-		{
-			
-		}
+		var input = rawInput[x].name;
+		var rest = "";
+
+
+			var splitted = input.split(" ");
+			//it kinda works like longest-matching prefix
+			for(var a = splitted.length; a > 0; a--)
+			{
+				var assembledString = "";
+				for(var b = 0; b < a; b++)
+				{
+					assembledString.concat(splitted[b]," ");
+				}
+				assembledString = assembledString.trim();
+				
+				var matches = this.getMatches(assembledString);
+				
+				if(!$.isEmptyObject(matches))
+				{
+					var index = this.getReliableExemplarOption(this.rawInput[x], matches);
+					var repetitions = this.rawInput[x][this.OPTIONSWORD[1]] == "" ? 1 : this.rawInput[x][this.OPTIONSWORD[1]];
+					
+					this.addSample(new Sample(matches[index]["name"], matches[index]["path"], index + 1, repetitions, x));
+					this.jukebox.insert(this.samples[this.samples.length - 1]);
+					
+					//!!!!!!!!!!
+					if(a == splitted.length)
+						break;
+				}
+				
+				rest = "";
+				for(var b = 0; b < splitted.length - a; b++)
+				{
+					rest.concat(splitted[splitted.length - b]," ");
+				}
+				rest = rest.trim();
+				// Problem: rest muss wieder abgesucht werden wie "splitted" -> wie aufrufen?; außerdem: Attribute wie Wiederholungen müssen neu zugeordnet werden
+			}
+
 	}
 }
 
