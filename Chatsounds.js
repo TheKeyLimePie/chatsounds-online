@@ -49,7 +49,7 @@ function Chatsounds()
 }
 
 //* centre of chatsounds
-SampleMachine.prototype.action = function()
+Chatsounds.prototype.action = function()
 {
 	this.jukebox.clearQueue();
 	this.clearSamples();
@@ -62,6 +62,7 @@ SampleMachine.prototype.action = function()
 		showLink(1, this.generateLink ());
 	this.jukebox.startQueue();
 //	this.cacheSample (0, this.jukebox.startQueue ());
+}
 
 Chatsounds.prototype.clearSamples = function()
 {
