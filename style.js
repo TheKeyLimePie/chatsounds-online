@@ -57,7 +57,7 @@ function sliderInit ()
 		{
 			var tooltip_value = slider.slider('value');
 			var tooltip_value_percent = $("#playerbox_volume_slider").innerWidth() / 100;
-			machine.jukebox.setVolume(tooltip_value/100);
+			cs.jukebox.setVolume(tooltip_value/100);
 			
 			var volume = $("#playerbox_volume_volume");
 			tooltip.css("left", tooltip_value*tooltip_value_percent).text(ui.value);
@@ -118,12 +118,12 @@ function liveSearchManager (e)
 {
 	if ( (e.which == 8) || (e.which == 46) || (e.which >= 48 && e.which <= 90) || (e.which >= 96 && e.which <=105) )//8: backspace, 46: delete, 48-90: abc...123..., 96-105: keypad 0-9
 	{
-		var string = machine.getInput().split(",");
-		machine.liveSearch(string[string.length - 1]);
+		var string = cs.getInput().split(",");
+		cs.liveSearch(string[string.length - 1]);
 	}
 	else if ( (e.which == 188) )							//188: comma
 		showSugg([]);
-	else if (e.which == 39 && machine.getInput().length)	//39: arrow key right
+	else if (e.which == 39 && cs.getInput().length)	//39: arrow key right
 	{
 		if ($(".selected").length > 0)
 			takeSugg ($(".selected"));
@@ -133,7 +133,7 @@ function liveSearchManager (e)
 //* handles <input> input related to arrow key navigation
 function listNavigator (e)
 {
-	if (e.which == 40 && machine.getInput().length)	//40: arrow key down
+	if (e.which == 40 && cs.getInput().length)	//40: arrow key down
 	{
 		if ($(".selected").length > 0)
 		{
@@ -149,7 +149,7 @@ function listNavigator (e)
 		else
 			$("#suggestions tr").first().addClass("selected");
 	}
-	else if (e.which == 38 && machine.getInput().length)	//38: arrow key up
+	else if (e.which == 38 && cs.getInput().length)	//38: arrow key up
 	{
 		if ($(".selected").length > 0)
 		{
@@ -180,7 +180,7 @@ function listNavigator (e)
 //* adds clicked suggestion to input
 function takeSugg (trObject)
 {
-	var value = machine.getInput();
+	var value = cs.getInput();
 
 	value = value.split(",");
 
@@ -192,7 +192,7 @@ function takeSugg (trObject)
 	
 	input = input.concat(trObject.children().text());
 	$(trObject).removeClass("selected");
-	machine.setInput(input);
+	cs.setInput(input);
 }
 
 //* shows/hides sharelink box and sets value
@@ -226,7 +226,7 @@ function changeBG (url)
 		$("body").css("background-image", "url(" + url + ")");
 		
 		if ($("#bg_input_cookies").is(":checked"))	//cookie is set here to be sure that the url is valid
-			machine.setCookie ("bg",url, 10080);	//1 week
+			cs.setCookie ("bg",url, 10080);	//1 week
 	}
 }
 
@@ -240,7 +240,7 @@ function specialAnnouncement ()
 	$("#search-string").val("birthday today,celebrate#2,its a celebration,nyugga,trip");
 	window.JSONDB.done( function ()
 	{
-	   machine.action (); 
+	   cs.action (); 
 	});	
 }
 
@@ -320,7 +320,7 @@ function setBG ()
 	{
 		$("body").css("background-image", "url(bg.jpg)");
 		if ($("#bg_input_cookies").is(":checked"))
-			machine.setCookie("bg", " ", -5);
+			cs.setCookie("bg", " ", -5);
 	}
 	else
 	{

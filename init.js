@@ -47,47 +47,47 @@ $(window).load( function ()
 		  return;
 	  }
 
-	  //object of SampleMachine
-	  machine = new SampleMachine();
+	  //object of Samplecs
+	  cs = new Chatsounds();
 	  //get JSON with samples
-	  machine.sampleDB.updateDB();
+	  cs.sampleDB.updateDB();
 	  //set default volume
-	  machine.jukebox.setVolume(0.5);
+	  cs.jukebox.setVolume(0.5);
 	  //get URL parameters
-	  machine.parameters.updateParameters();
+	  cs.parameters.updateParameters();
 	  //when soundlist.json was loaded -> useParameters()
 
 
 	  window.JSONDB.done( function ()
 	  {
-		  machine.parameters.useParameters();
+		  cs.parameters.useParameters();
   });
 	  
-	  if (machine.getCookie("bg") != -1)
+	  if (cs.getCookie("bg") != -1)
 	  {
-		  var url = machine.getCookie("bg");
+		  var url = cs.getCookie("bg");
 		  window.notiBG = new Notification ("Loading custom background", url, false);
 		  window.notiBG.init ();
 		  $("#bg_input_text").val(url);
 		  changeBG (url);
 	  }
 	  
-	  MSA = window.setTimeout(function () {msaObj.appear()}, 600000);
+	  //MSA = window.setTimeout(function () {msaObj.appear()}, 600000);
 	  
 	  // character input, backspace, delete, comma, semicolon, arrow key right handled here
-	  $(machine.INPUT).keyup( function (e)
+	  $(cs.INPUT).keyup( function (e)
 	  {
 		  liveSearchManager (e);
 	  });
 	  
 	  // arrow key up/down handled here
-	  $(machine.INPUT).keydown(function(e)
+	  $(cs.INPUT).keydown(function(e)
 	  {
       		listNavigator (e);
       });
 	  
 	  // ENTER is handled here (if ENTER was pressed on a selected element)
-	  $(machine.INPUT).keypress(function(e)
+	  $(cs.INPUT).keypress(function(e)
 	  {
         	if (e.which == 13 && $(".selected").length)
 				takeSugg($(".selected"));
@@ -118,37 +118,37 @@ $(window).load( function ()
 	  $("#suggestions tr").on("click", function ()
 	  {
 		  takeSugg ($(this));
-		  machine.action ();
+		  cs.action ();
 	  });
 	  
 	  $("#timeline_cardline").on("click", ".card", function ()
 	  {
 		  var index = $(this).attr("id").substr(5);
 		  console.log("Manual choice: " + index);
-		  machine.jukebox.playSample (index);
+		  cs.jukebox.playSample (index);
 	  });
 	  
-	  $(machine.jukebox.audioelem).on("canplay", function ()
+	  $(cs.jukebox.audioelem).on("canplay", function ()
 	  {
 		  $("h2").animate({color: "#33b5e5"}, 100);
 	  });
 	  
-	  $(machine.jukebox.audioelem).on("play", function ()
+	  $(cs.jukebox.audioelem).on("play", function ()
 	  {
-		  machine.jukebox.ui.updateSeek();
+		  cs.jukebox.ui.updateSeek();
 	  });
 	  
-	  $(machine.jukebox.audioelem).on("ended", function ()
+	  $(cs.jukebox.audioelem).on("ended", function ()
 	  {
-		  machine.jukebox.ui.playIcon("play");
-		  if (machine.jukebox.repetitions > 1)
+		  cs.jukebox.ui.playIcon("play");
+		  if (cs.jukebox.repetitions > 1)
 		  {
-			  machine.jukebox.repetitions--;
-			  machine.jukebox.play ();
+			  cs.jukebox.repetitions--;
+			  cs.jukebox.play ();
 		  }
-		   else if (parseInt(machine.jukebox.playing) < machine.jukebox.queue.length - 1)
+		   else if (parseInt(cs.jukebox.playing) < cs.jukebox.queue.length - 1)
 		  {
-			  machine.jukebox.playSample (parseInt(machine.jukebox.playing) + 1);
+			  cs.jukebox.playSample (parseInt(cs.jukebox.playing) + 1);
 		  }
 	  });
   });

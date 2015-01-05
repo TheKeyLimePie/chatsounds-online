@@ -104,6 +104,6 @@ JukeboxUI.prototype.updateSeek = function ()
 	{
 		var range = (document.getElementById(this.audioelem.substr(1)).currentTime / document.getElementById(this.audioelem.substr(1)).duration) * 100;
 		$(this.seek).css("width", range + "%");
-		requestAnimationFrame(machine.jukebox.ui.updateSeek.bind(this));
+		requestAnimationFrame(cs.jukebox.ui.updateSeek.bind(this));
 	}
 }

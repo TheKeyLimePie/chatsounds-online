@@ -60,14 +60,14 @@ URLParameter.prototype.handleVolume = function ()
 	
 	if (!isNaN(vol) && vol > 0 && vol <= 1)
 	{
-		machine.jukebox.setVolume (vol);
-		var slider = machine.VOLUMESLIDER;
+		cs.jukebox.setVolume (vol);
+		var slider = cs.VOLUMESLIDER;
 		$(slider).slider("option", "value", vol*100);
 		console.log("URL: Volume set to " + vol);
 	}
 	else if (vol == 0)
 	{
-		machine.jukebox.toggleMute ();
+		cs.jukebox.toggleMute ();
 		console.log("URL: Sound muted");
 	}
 	else
@@ -76,7 +76,7 @@ URLParameter.prototype.handleVolume = function ()
 	}
 }
 
-//* looks for an input string, decodes it, puts it into the input and starts SampleMachine.action() via form
+//* looks for an input string, decodes it, puts it into the input and starts Samplecs.action() via form
 URLParameter.prototype.handleString = function ()
 {
 	var string = this.getParameter(this.PARAMETERS[0]);
@@ -87,18 +87,18 @@ URLParameter.prototype.handleString = function ()
 	}
 	var decodedString = decodeURIComponent(string);
 	console.log("URL: Input set to: " + decodedString);
-	machine.setInput (decodedString);
+	cs.setInput (decodedString);
 	document.getElementById("search-form").submit();	
 }
 
-URLParameter.prototype.handleMSA = function ()
+/*URLParameter.prototype.handleMSA = function ()
 {
 	if (this.getParameter("y") == "nospy")
 	{
 		window.clearTimeout(MSA);
 		console.log("MSA defeated!");
 	}
-}
+}*/
 
 //* calls functions for different URL parameters
 URLParameter.prototype.useParameters = function ()
@@ -111,7 +111,7 @@ URLParameter.prototype.useParameters = function ()
 			
 			case 's': URLParameter.prototype.handleString.call(this); break;
 			
-			case 'y': URLParameter.prototype.handleMSA.call(this); break;
+			//case 'y': URLParameter.prototype.handleMSA.call(this); break;
 		}
 	}
 }
