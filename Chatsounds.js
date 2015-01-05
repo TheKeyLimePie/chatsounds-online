@@ -150,7 +150,7 @@ Chatsounds.prototype.handleInput = function()
 	var validatedInput = new Array();
 	for(var x = 0; x < this.handledInput.length; x++)
 	{
-		var validated = this.validate(handledInput[x]);
+		var validated = this.validate(this.handledInput[x]);
 		validatedInput.push(validated);
 	}
 	
@@ -264,7 +264,7 @@ Chatsounds.prototype.validate = function(handledInput)
 		{
 			var ret = new Array();
 			ret.push(value);
-			var restRet = validate(restValue);
+			var restRet = this.validate(restValue);
 			if($.isEmptyObject(restRet))
 			{
 				for(var a = 0; a < this.PARAMETERWORD.length; a++)
@@ -278,7 +278,7 @@ Chatsounds.prototype.validate = function(handledInput)
 		}
 	}
 	
-	return (rest = "" ? new Object() : validate(restValue));
+	return (rest = "" ? new Object() : this.validate(restValue));
 }
 
 //* takes every handledInput, looks for matching samples and creates a Sample object in jukebox
