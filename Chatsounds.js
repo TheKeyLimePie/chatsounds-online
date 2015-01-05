@@ -39,13 +39,13 @@ function Chatsounds()
 	this.SEEK = "#headbar_seek";
 	this.TIMELINE = "#timeline_cardline";
 	
-	this.handledInput = new Array ();							//handled input is saved here; array of objects
-	this.sampleDB = new Samplebase ();							//object of Samplebase
-	this.parameters = new URLParameter ();						//object of URLParameter
+	this.handledInput = new Array();							//handled input is saved here; array of objects
+	this.sampleDB = new Samplebase();							//object of Samplebase
+	this.parameters = new URLParameter();						//object of URLParameter
 	//Note: Use Decorator pattern in future
-	this.jukebox = new Jukebox (this.AUDIO, this.AUDIOSRC, this.SVNPATH, this.PLAYPAUSE, this.SKIP, this.REPLAY, this.VOLUMESLIDER, this.VOLUME, this.SEEK, this.TIMELINE);
-	this.topResults = new Array ();								//shown in suggestions list
-	this.samples = new Array ();								//Sample objects are saved here
+	this.jukebox = new Jukebox(this.AUDIO, this.AUDIOSRC, this.SVNPATH, this.PLAYPAUSE, this.SKIP, this.REPLAY, this.VOLUMESLIDER, this.VOLUME, this.SEEK, this.TIMELINE);
+	this.topResults = new Array();								//shown in suggestions list
+	this.samples = new Array();									//Sample objects are saved here
 }
 
 //* centre of chatsounds
@@ -151,7 +151,10 @@ Chatsounds.prototype.handleInput = function()
 	for(var x = 0; x < this.handledInput.length; x++)
 	{
 		var validated = this.validate(this.handledInput[x]);
-		validatedInput.push(validated);
+		for(var y = 0; y < validated.length; y++)
+		{
+			validatedInput.push(validated[y]);
+		}
 	}
 	
 	this.handledInput = validatedInput;
@@ -173,9 +176,9 @@ Chatsounds.prototype.getMatches = function(input)
 //* checks if the #exemplar# parameter is valid and returns an index for possible samples
 Chatsounds.prototype.checkItem = function(handledInput, matches)
 {
-	var item = handledInput[this.OPTIONSWORD[0]];
+	var item = handledInput[this.PARAMETERWORD[0]];
 	
-	if ($.isEmptyObject(handledInput[this.OPTIONSWORD[0]]) || item < 1)
+	if ($.isEmptyObject(handledInput[this.PARAMETERWORD[0]]) || item < 1)
 		return parseInt(Math.random()*matches.length);
 	else
 	{
@@ -278,7 +281,7 @@ Chatsounds.prototype.validate = function(handledInput)
 		}
 	}
 	
-	return (rest = "" ? new Object() : this.validate(restValue));
+	return (rest == "" ? new Object() : this.validate(restValue));
 }
 
 //* takes every handledInput, looks for matching samples and creates a Sample object in jukebox
@@ -295,7 +298,7 @@ Chatsounds.prototype.makeQueue = function()
 			var index = this.checkItem(this.handledInput[x], matches);
 			var repetitions = this.handledInput[x][this.PARAMETERWORD[1]] == "" ? 1 : this.handledInput[x][this.PARAMETERWORD[1]];
 			
-			this.addSample (new Sample(matches[index]["name"], matches[index]["path"], index + 1, repetitions, x));
+			this.addSample(new Sample(matches[index]["name"], matches[index]["path"], index + 1, repetitions, x));
 			this.jukebox.insert(this.samples[this.samples.length - 1]);
 		}
 	}
