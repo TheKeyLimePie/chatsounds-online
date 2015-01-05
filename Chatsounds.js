@@ -58,7 +58,7 @@ Chatsounds.prototype.action = function()
 	this.handleInput();
 	this.makeQueue();
 	this.setInput("");
-	if (this.samples.length > 0)
+	if(this.samples.length > 0)
 		showLink(1, this.generateLink ());
 	this.jukebox.startQueue();
 //	this.cacheSample (0, this.jukebox.startQueue ());
@@ -89,7 +89,7 @@ Chatsounds.prototype.setInput = function(string)
 //* replaces parameters in a request string like '#' or '*' -> avoid reg. expr.
 Chatsounds.prototype.replaceParameters = function(string)
 {
-	for (var x = 0; x < this.PARAMETER.length; x++)
+	for(var x = 0; x < this.PARAMETER.length; x++)
 	{
 		string = string.replace(this.PARAMETER[x], this.PARAMETERWORD[x]);
 	}
@@ -100,7 +100,7 @@ Chatsounds.prototype.replaceParameters = function(string)
 Chatsounds.prototype.getName = function(string)
 {
 	var limit = string.length;
-	for (var x = 0; x < this.PARAMETERWORD.length; x++)
+	for(var x = 0; x < this.PARAMETERWORD.length; x++)
 	{
 		var index = string.search(this.PARAMETERWORD[x]) >= 0 ? string.search(this.PARAMETERWORD[x]) : index;
 		limit = limit > index ? index : limit;
@@ -112,10 +112,10 @@ Chatsounds.prototype.getName = function(string)
 Chatsounds.prototype.getParameter = function(string, param)
 {
 	var value = "-1";
-	if (string.search(param) > -1)
+	if(string.search(param) > -1)
 	{
 		value = "";
-		for (var x = string.search(param) + param.length; !isNaN(string.charAt(x)) && string.charAt(x) != ""; x++)	//as long as character at y is a number -> implies that params can be numbers only
+		for(var x = string.search(param) + param.length; !isNaN(string.charAt(x)) && string.charAt(x) != ""; x++)	//as long as character at y is a number -> implies that params can be numbers only
 		{
 			value = value.concat(string.charAt(x));
 		}
@@ -132,14 +132,14 @@ Chatsounds.prototype.handleInput = function()
 
 	var splittedInput = input.split(",");
 		
-	for (var x = 0; x < splittedInput.length; x++)
+	for(var x = 0; x < splittedInput.length; x++)
 	{
 		splittedInput[x] = this.replaceParameters(splittedInput[x]);
 		
 		var inputObject = new Object ();
 		inputObject.name = this.getName(splittedInput[x]);
 		
-		for (var y = 0; y < this.PARAMETERWORD.length; y++)
+		for(var y = 0; y < this.PARAMETERWORD.length; y++)
 		{
 			inputObject[this.PARAMETERWORD[y]] = this.getParameter(splittedInput[x], this.PARAMETERWORD[y]) == -1 ? 1 : this.getParameter(splittedInput[x], this.PARAMETERWORD[y]);
 		}
@@ -165,9 +165,9 @@ Chatsounds.prototype.getMatches = function(input)
 {
 	var equal = new Array ();
 	var results = this.search(input);
-	for (var x = 0; x < results.length; x++)
+	for(var x = 0; x < results.length; x++)
 	{
-		if (input == results[x].name)
+		if(input == results[x].name)
 			equal.push(results[x]);
 	}
 	return equal;
@@ -182,9 +182,9 @@ Chatsounds.prototype.checkItem = function(handledInput, matches)
 		return parseInt(Math.random()*matches.length);
 	else
 	{
-		if (xItem <= matches.length && xItem > 0)
+		if(xItem <= matches.length && xItem > 0)
 			return xItem - 1;
-		else if (xItem > matches.length)
+		else if(xItem > matches.length)
 			return matches.length - 1;
 		else
 			return -1;
@@ -207,13 +207,13 @@ Chatsounds.prototype.search = function(string)
 {
 	var samples = this.sampleDB.getDB();
 	var results = new Array();
-	for (var x = 0; x < samples.length; x++)
+	for(var x = 0; x < samples.length; x++)
 	{
-		$.each(samples[x], function (key, value)
+		$.each(samples[x], function(key, value)
 		{
-			if (key.search(string) > -1)
+			if(key.search(string) > -1)
 			{
-				for (var y = 0; y < value.length; y++)
+				for(var y = 0; y < value.length; y++)
 				{	
 					var sample = new Object();
 					sample.name = key;
@@ -228,25 +228,33 @@ Chatsounds.prototype.search = function(string)
 	return results;
 }
 
+//* it works like longest-matching prefix: it looks for the longest possible sample name; "hello my name is gaben" -> "hello my name is" -> "hello my name" -> ...; stops with shortening when a matching sample was found and starts a recursion with the rest term
 Chatsounds.prototype.validate = function(handledInput)
 {
 	var input = handledInput.name;
 	var rest = "";
 	var words = input.split(" ");
 	
-	//it works like longest-matching prefix: it looks for the longest possible sample name; "hello my name is gaben" -> "hello my name is" -> "hello my name" -> ...; stops with shortening when a matching sample was found and starts a recursion with the rest term
+	//starts with full length, shortens the string
 	for(var x = words.length; x > 0; x--)
 	{
 		var mergedString = "";
+		//"fills up" the string until limit is reached
 		for(var y = 0; y < x; y++)
 		{
 			mergedString = mergedString.concat(words[y], " ");
 		}
 		var mergedString = mergedString.trim();
 		
+		//random feature
+		if(mergedString == "random")
+			mergedString = this.getRandomSample();
+			
 		var matches = this.getMatches(mergedString);
 		
 		rest = "";
+		
+		//remaining string - "this is a test" -> "this is" => "a test"
 		for(var a = 0; a < words.length - x; a++)
 		{
 			rest = rest.concat(words[x+a], " ");
@@ -257,6 +265,8 @@ Chatsounds.prototype.validate = function(handledInput)
 		var restValue = new Object();
 		value.name = mergedString;
 		restValue.name = rest;
+		
+		//assign parameters (e.g. item number, repetitions,...) to the remaining string
 		for(var z = 0; z < this.PARAMETERWORD.length; z++)
 		{
 			value[this.PARAMETERWORD[z]] = 1;
@@ -268,6 +278,8 @@ Chatsounds.prototype.validate = function(handledInput)
 			var ret = new Array();
 			ret.push(value);
 			var restRet = this.validate(restValue);
+			
+			//if the remaining string doesn't give any results then return the merged string only
 			if($.isEmptyObject(restRet))
 			{
 				for(var a = 0; a < this.PARAMETERWORD.length; a++)
@@ -289,9 +301,6 @@ Chatsounds.prototype.makeQueue = function()
 {
 	for(var x = 0; x < this.handledInput.length; x++)
 	{
-		if(this.handledInput[x].name == "random")
-			this.handledInput[x].name = this.getRandomSample();
-
 		var matches = this.getMatches(this.handledInput[x].name);
 		if(!$.isEmptyObject(matches))
 		{
@@ -304,7 +313,8 @@ Chatsounds.prototype.makeQueue = function()
 	}
 }
 
-//##########################################################################################
+//################################# UI STUFF #################################
+
 //* receives input string, requests matches with input string ( this.search() ) and saves found names in this.topResults
 Chatsounds.prototype.liveSearch = function(string)
 {
@@ -386,11 +396,11 @@ Chatsounds.prototype.getCookie = function(string)
 {
 	var cookies = document.cookie;
 	var cookies = cookies.split(";");
-	for (var x = 0; x < cookies.length; x++)
+	for(var x = 0; x < cookies.length; x++)
 	{
 		cookies[x] = cookies[x].trim();
 		var index = cookies[x].search(string);
-		if (index == 0)
+		if(index == 0)
 		{
 			return cookies[x].substring(string.length + 1);
 		}
@@ -402,7 +412,7 @@ Chatsounds.prototype.getCookie = function(string)
 Chatsounds.prototype.setCookie = function(name, value, duration)
 {
 	var d = new Date ();
-	d.setMinutes (d.getMinutes() + duration);
+	d.setMinutes(d.getMinutes() + duration);
 	var cookie = name.concat("=",value,"; expires=", d.toUTCString());
 	document.cookie = cookie;
 }
