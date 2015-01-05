@@ -109,14 +109,14 @@
             </div>
             <div id="playerbox">
                 <div id="playerbox_controls">
-                	<div class="playerbox_button" id="playerbox_controls_replay" title="Replay queue" onClick="machine.jukebox.replayQueue ()"></div>
-                    <div class="playerbox_button" id="playerbox_controls_play" title="Play/Pause" onClick="machine.jukebox.ui.playToggle ()"></div>
-                    <div class="playerbox_button" id="playerbox_controls_skip" title="Skip" onClick="machine.jukebox.skipSample ()"></div>
+                	<div class="playerbox_button" id="playerbox_controls_replay" title="Replay queue" onClick="cs.jukebox.replayQueue ()"></div>
+                    <div class="playerbox_button" id="playerbox_controls_play" title="Play/Pause" onClick="cs.jukebox.ui.playToggle ()"></div>
+                    <div class="playerbox_button" id="playerbox_controls_skip" title="Skip" onClick="cs.jukebox.skipSample ()"></div>
                 </div>
                 <section id="playerbox_volume">
                     <span id="playerbox_volume_tooltip"></span>
                     <div id="playerbox_volume_slider"></div>
-                    <span id="playerbox_volume_volume" title="Mute/Unmute" onClick="machine.jukebox.toggleMute ()"></span>
+                    <span id="playerbox_volume_volume" title="Mute/Unmute" onClick="cs.jukebox.toggleMute ()"></span>
                 </section>
             </div>
             <div id="headbar_settings" onClick="showSettings ()"></div>
@@ -133,7 +133,7 @@
                 </table>
             </div>
             <div id="headbar_sharelink_w">
-            	<input id="headbar_sharelink_shorten" type="button" onClick="machine.setShorty ()" value="Shorty!" title="Get a shorten bit.ly-URL of this link"/>
+            	<input id="headbar_sharelink_shorten" type="button" onClick="cs.setShorty ()" value="Shorty!" title="Get a shorten bit.ly-URL of this link"/>
                 <input id="headbar_sharelink_link" type="text" readonly onClick="this.select ()"/> 
             </div>
             <div id="headbar_seek"></div>
@@ -146,7 +146,7 @@
         	<div id="search-container">
             	<div id="search-container_box">
                     <div id="search-container_box_wrapper">
-                        <form style="width: 100%; height: 100%;" id="search-form" action="JavaScript:machine.action ()">
+                        <form style="width: 100%; height: 100%;" id="search-form" action="JavaScript:cs.action ()">
                             <input type="text" id="search-string" autofocus autocomplete="off" placeholder="Enter your search term..." value="" required/>
                             <input type="submit" id="search-submit" value="&nbsp;"/>
                         </form>
