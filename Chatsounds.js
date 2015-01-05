@@ -28,7 +28,7 @@ function Chatsounds()
 	this.URL = "http://chatsounds.3kelv.in/";
 	
 	this.PARAMETER = ["#","*"];				
-	this.PARAMETERWORD = ["#item#","#repeat#"];
+	this.PARAMETERWORD = ["#xItem#","#repeat#"];
 	
 	//UI REFERENCES
 	this.PLAYPAUSE = "#playerbox_controls_play";
@@ -96,7 +96,7 @@ Chatsounds.prototype.replaceParameters = function(string)
 	return string;
 }
 
-//* extracts the sample name out of a request string; "hello#exemplar#2#repeat#4" -> "hello"
+//* extracts the sample name out of a request string; "hello#xItem#2#repeat#4" -> "hello"
 Chatsounds.prototype.getName = function(string)
 {
 	var limit = string.length;
@@ -108,7 +108,7 @@ Chatsounds.prototype.getName = function(string)
 	return string.substring(0, limit).trim();
 }
 
-//* returns a specific parameter value of a request string; "hello#exemplar#2#repeat#4", "#exemplar#" -> "2"
+//* returns a specific parameter value of a request string; "hello#xItem#2#repeat#4", "#xItem#" -> "2"
 Chatsounds.prototype.getParameter = function(string, param)
 {
 	var value = "-1";
@@ -123,7 +123,7 @@ Chatsounds.prototype.getParameter = function(string, param)
 	return value;
 }
 
-//* gets input, splits it to single sample requests, replaces options, creates an object in this.handledInput for every request string with ordered attributes ("name", "#exemplar#",...)
+//* gets input, splits it to single sample requests, replaces options, creates an object in this.handledInput for every request string with ordered attributes ("name", "#xItem#",...)
 Chatsounds.prototype.handleInput = function()
 {
 	this.handledInput = [];
@@ -173,18 +173,18 @@ Chatsounds.prototype.getMatches = function(input)
 	return equal;
 }
 
-//* checks if the #exemplar# parameter is valid and returns an index for possible samples
+//* checks if the #xItem# parameter is valid and returns an index for possible samples
 Chatsounds.prototype.checkItem = function(handledInput, matches)
 {
-	var item = handledInput[this.PARAMETERWORD[0]];
+	var xItem = handledInput[this.PARAMETERWORD[0]];
 	
-	if ($.isEmptyObject(handledInput[this.PARAMETERWORD[0]]) || item < 1)
+	if ($.isEmptyObject(handledInput[this.PARAMETERWORD[0]]) || xItem < 1)
 		return parseInt(Math.random()*matches.length);
 	else
 	{
-		if (item <= matches.length && item > 0)
-			return item - 1;
-		else if (item > matches.length)
+		if (xItem <= matches.length && xItem > 0)
+			return xItem - 1;
+		else if (xItem > matches.length)
 			return matches.length - 1;
 		else
 			return -1;

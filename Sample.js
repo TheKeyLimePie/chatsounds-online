@@ -17,14 +17,14 @@
   Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 */
 
-function Sample (name, path, exemplar, repeat, index)
+function Sample (name, path, xItem, repeat, index)
 {
 	this.name = name;
 	this.path = path;
-	this.exemplar = exemplar;
+	this.xItem = xItem;
 	this.repeat = repeat;
 	this.index = index;
-	this.card = new Card (this.name, this.exemplar, this.repeat, this.index);
+	this.card = new Card (this.name, this.xItem, this.repeat, this.index);
 }
 
 Sample.prototype.getName = function ()
@@ -37,9 +37,9 @@ Sample.prototype.getPath = function ()
 	return this.path;
 }
 
-Sample.prototype.getExemplar = function ()
+Sample.prototype.getxItem = function ()
 {
-	return this.exemplar;
+	return this.xItem;
 }
 
 Sample.prototype.getRepeat = function ()
