@@ -34,6 +34,7 @@ function Chatsounds()
 	src.setAttribute("type", "audio/ogg");
 	src.setAttribute("src", "");
 	audio.appendChild(src);
+	document.body.appendChild(audio);
 	
 	this.PARAMETER = ["#","*"];				
 	this.PARAMETERWORD = ["#xItem#","#repeat#"];
