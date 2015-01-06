@@ -17,54 +17,52 @@
   Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 */
 
-function Card (name, exemplar, repeat, index)
+function Card(name, exemplar, repeat, index)
 {
 	this.title = name;
 	this.exemplar = exemplar;
 	this.repeat = repeat;
 	this.index = index;
-	
-	this.pattern =
-		["<div class=\"card\" id=\"card_",
-			"\">",
-			"<div class=\"card_title\">",
-				"<p class=\"card_name\">",
-				"</p>",
-			"</div>",
-			"<div class=\"card_meta\">",
-				"<table><tbody><tr><td class=\"card_exemplar\">#",
-				"</td><td class=\"card_repeat\">",
-				"x</td></tr></tbody></table>",
-			"</div>",
-		"</div>"];
 		
-	this.card = "";
+	this.card;
 }
 
 //* takes objects' attributes and merges them with pattern
-Card.prototype.assembleCard = function ()
+Card.prototype.assembleCard = function()
 {
-	this.card = this.card.concat(this.pattern[0], this.index);
-	for (var x = 1; x < 4; x++)
-	{
-		this.card = this.card.concat(this.pattern[x]);
-	}
-	this.card = this.card.concat(this.title);
-	for (var x = 4; x < 8; x++)
-	{
-		this.card = this.card.concat(this.pattern[x]);
-	}
-	this.card = this.card.concat(this.exemplar);
-	this.card = this.card.concat(this.pattern[8]);
-	this.card = this.card.concat(this.repeat);
-	for (var x = 9; x < this.pattern.length; x++)
-	{
-		this.card = this.card.concat(this.pattern[x]);
-	}
+	this.card = document.createElement("div");
+	var title = document.createElement("div");
+	var name = document.createElement("p");
+	var meta = document.createElement("div");
+	var table = document.createElement("table");
+	var tbody = document.createElement("tbody");
+	var tr = document.createElement("tr");
+	var td1 = document.createElement("td");
+	var td2 = document.createElement("td");
+	
+	this.card.setAttribute("class", "card");
+	this.card.setAttribute("id", "card_".concat(this.index));
+	title.setAttribute("class", "card_title");
+	name.setAttribute("class", "card_name");
+	name.innerHTML = this.title;
+	meta.setAttribute("class", "card_meta");
+	td1.setAttribute("class", "card_exemplar");
+	td1.innerHTML = "#".concat(this.exemplar);
+	td2.setAttribute("class", "card_repeat");
+	td2.innerHTML = this.repeat.concat("x");
+	
+	this.card.appendChild(title);
+	title.appendChild(name);
+	this.card.appendChild(meta);
+	meta.appendChild(table);
+	table.appendChild(tbody);
+	tbody.appendChild(tr);
+	tr.appendChild(td1);
+	tr.appendChild(td2);
 }
 
 //* returns card as String
-Card.prototype.getCard = function ()
+Card.prototype.getCard = function()
 {
 	return this.card;
 }
