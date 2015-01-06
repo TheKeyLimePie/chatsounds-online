@@ -18,12 +18,18 @@
 */
 
 //* "Class" attributes
-Notification.registered = new Array ();
+Notification.registered = new Array();
 Notification.made = 0;
 Notification.OVERLAY = "#overlay_notification";
 
+Notification.status = new Object();
+Notification.status.BLANK = 0;
+Notification.status.ERROR = 1;
+Notification.status.MSA = 2;
+Notification.status.KLP = 3;
+Notification.status.LOADING = 4;
 
-function Notification (head, details, closeable, icon)
+function Notification(head, details, closeable, icon)
 {
 	this.head = head;
 	this.details = details;
@@ -31,71 +37,67 @@ function Notification (head, details, closeable, icon)
 	this.icon = icon;
 
 	this.id = ++Notification.made;
-	
-	this.struct = ["<div class=\"notification\" id=\"not_","\">",
-					"<div class=\"overlay_exit\" title=\"Close this notification\"></div>",
-					"<div class=\"notification_textfield\">",
-						"<p class=\"notification_message\">",
-						"</p>",
-						"<p class=\"notification_detail\">",
-						"</p>",
-					"</div>",
-					"<div class=\"notification_footerbanner\"></div>",
-				"</div>"];
 }
 
-//* assembles HTML string with the object's attributes
-Notification.prototype.makeNot = function ()
+//* assembles HTML object with the object's attributes
+Notification.prototype.makeNot = function()
 {
-	string = this.struct[0].concat(this.id,this.struct[1]);
-	if (this.closeable)
-		string = string.concat(this.struct[2]);
+	var main = document.createElement("div");
+		main.setAttribute("class", "notification");
+		main.setAttribute("id", "not_".concat(this.id));
+	var exit = document.createElement("div");
+		exit.setAttribute("class", "overlay_exit");
+		exit.setAttribute("title", "Close this notification");
+	var field = document.createElement("div");
+		field.setAttribute("class", "notification_textfield");
+	var msg = document.createElement("p");
+		msg.setAttribute("class", "notification_message");
+		msg.innerHTML = this.head;
+	var details = document.createElement("p");
+		details.setAttribute("class", "notification_detail");
+		details.innerHTML = this.details;
+	var footer = document.createElement("div");
+		footer.setAttribute("class", "notification_footerbanner");
+		
+	main.appendChild(exit);
+	field.appendChild(msg);
+	field.appendChild(details);
+	main.appendChild(field);
+	main.appendChild(footer);
 	
-	for (var x = 3; x < 5; x++)
-	{
-		string = string.concat(this.struct[x]);
-	}
-	
-	string = string.concat(this.head, this.struct[5], this.struct[6], this.details);
-	
-	for (var x = 7; x < this.struct.length; x++)
-	{
-		string = string.concat(this.struct[x]);
-	}
-	
-	return string;
+	document.getElementById(this.OVERLAY.substr(1, this.OVERLAY.length)).appendChild(main);
 }
 
 //* sets the icon for the notification footer
-Notification.prototype.setIcon = function ()
+Notification.prototype.setIcon = function()
 {
 	var jqID = "#not_".concat(this.id, " > .notification_footerbanner");
-	switch (this.icon)
+	switch(this.icon)
 	{
 		case 0: $(jqID).css("background-image", "url(icons/blank.png)"); break;
 		
 		case 1: $(jqID).css("background-image", "url(icons/error.png)"); break;
 		
-		case 2: $(jqID).css("background-image", "url(icons/gcast/cast_icon_active.png)"); break;
+		case 2: $(jqID).css("background-image", "url(icons/MSA.png)"); break;
 		
-		case 3: $(jqID).css("background-image", "url(icons/MSA.png)"); break;
+		case 3: $(jqID).css("background-image", "url(icons/keylimepie_small.png)"); break;
 		
-		case 4: $(jqID).css("background-image", "url(icons/keylimepie_small.png)"); break;
+		case 4: $(jqID).css("background-image", "url(icons/loading.GIF)"); break;
 		
 		default: $(jqID).css("background-image", "url(icons/loading.GIF)"); break;	
 	}
 }
 
-//* places assembled notification into document, sets the icon and registeres the new notificatiob
-Notification.prototype.placeNot = function ()
+//* places notification into document, sets the icon and registeres the new notification
+Notification.prototype.placeNot = function()
 {
-	$(Notification.OVERLAY).append( this.makeNot () );
-	this.setIcon ();
+	this.makeNot();
+	this.setIcon();
 	Notification.registered.push(this);
 }
 
 //* displays the overlay when necessary and displays the notification
-Notification.prototype.showNot = function ()
+Notification.prototype.showNot = function()
 {
 	if ($(Notification.OVERLAY).css("display") != "block")
 		$(Notification.OVERLAY).css("display","block").show().animate({opacity:1},100);
@@ -105,23 +107,23 @@ Notification.prototype.showNot = function ()
 }
 
 //* use this method to display your notification after new Notification (...)
-Notification.prototype.init = function ()
+Notification.prototype.init = function()
 {
-	this.placeNot ();
-	this.showNot ();
+	this.placeNot();
+	this.showNot();
 }
 
 //* deletes the object and hides the overlay when no more notifications are shown
-Notification.prototype.deleteIt = function ()
+Notification.prototype.deleteIt = function()
 {
 	var item = Notification.registered.indexOf(this);
 	if (item != -1)
 		Notification.registered.splice(item, 1);
 	
-	$("#not_".concat(this.id)).animate({opacity:0},100, function ()
+	$("#not_".concat(this.id)).animate({opacity:0},100, function()
 	{
 		$(this).remove();
 		if (!Notification.registered.length)
-			$(Notification.OVERLAY).animate({opacity:0},100, function () {$(Notification.OVERLAY).hide()})
+			$(Notification.OVERLAY).animate({opacity:0},100, function() {$(Notification.OVERLAY).hide()})
 	});
 }

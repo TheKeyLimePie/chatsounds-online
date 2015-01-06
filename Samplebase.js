@@ -26,7 +26,7 @@ function Samplebase ()
 //* requests .json containing sample data from server (and sets revision), also calls URLParameter.useParameters() on success
 Samplebase.prototype.updateDB = function ()
 {
-	var notiJSON = new Notification ("Updating local sample database", "Please wait", false);
+	var notiJSON = new Notification ("Updating local sample database", "Please wait", false, Notification.status.LOADING);
 	notiJSON.init ();
 	var thisDB = this.db;
 	var thisRev = this.rev;
@@ -42,7 +42,7 @@ Samplebase.prototype.updateDB = function ()
 		{
 			if (thisDB.length == 0)
 			{
-				var notiJSONError = new Notification ("Retrieved no samples" , "Try to reload this site.<br />If this error persists please contact <a href='http://threekelv.in/keylimepie/'>KeyLimePie</a>.", false, 1);
+				var notiJSONError = new Notification ("Retrieved no samples" , "Try to reload this site.<br />If this error persists please contact <a href='http://threekelv.in/keylimepie/'>KeyLimePie</a>.", false, Notification.status.ERROR);
 				notiJSONError.init ();
 			}
 			else

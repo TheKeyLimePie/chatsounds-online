@@ -232,7 +232,7 @@ function changeBG (url)
 
 function specialAnnouncement ()
 {
-	specialNoti = new Notification("<span id=\"special_noti\">Happy Birthday Hendrik!</span>", "A happy birthday wishes KeyLimePie!<br /><br />To other visitors: You can ignore this :D", true, 4);
+	specialNoti = new Notification("<span id=\"special_noti\">Happy Birthday Hendrik!</span>", "A happy birthday wishes KeyLimePie!<br /><br />To other visitors: You can ignore this :D", true, Notification.status.KLP);
 	specialNoti.init();
 	$("h2").append("<span style=\"font-size: 25px\"> | Happy Birthday Hendrik!</span>");
 	lsd ();
@@ -326,7 +326,7 @@ function setBG ()
 	{
 		if (url.substring(0,4) != "http")
 				url = "http://".concat(url);
-		window.notiBG = new Notification ("Loading custom background", url, false);
+		window.notiBG = new Notification ("Loading custom background", url, false, Notification.status.LOADING);
 		window.notiBG.init ();
 		changeBG(url);
 	}
@@ -371,6 +371,6 @@ function hideCookieDiscl ()
 
 function cookieDiscl ()
 {
-	var notiCookie = new Notification ("Use of cookies","Cookies are text-snippets a website sends to a browser to save it locally.<br />We use them when you are using the<br /><br /><b>\"Remember this background\"</b>-feature<br />(the image url is saved with a cookie)<br /><br />Cookies are not used on default so if you do not check this box no cookies are saved.<br /><span style=\"font-size: 12px\">EU Directive 2002/58/EC</span>", true, 4);
+	var notiCookie = new Notification ("Use of cookies","Cookies are text-snippets a website sends to a browser to save it locally.<br />We use them when you are using the<br /><br /><b>\"Remember this background\"</b>-feature<br />(the image url is saved with a cookie)<br /><br />Cookies are not used on default so if you do not check this box no cookies are saved.<br /><span style=\"font-size: 12px\">EU Directive 2002/58/EC</span>", true, Notification.status.KLP);
 	notiCookie.init ();
 }

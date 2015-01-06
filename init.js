@@ -42,7 +42,7 @@ $(window).load( function ()
 	  var testAudio = document.createElement("audio");
 	  if (!testAudio.canPlayType("audio/ogg"))
 	  {
-		  var notiBrowser = new Notification ("Your browser is not compatible", "This site uses HTML5 technology.<br />Unfortunately, your browser does not support .ogg files.<br />Update your browser or use <a href='http://www.mozilla.org/firefox' target='_blank'>Firefox</a> or <a href='http://www.google.com/chrome' target='_blank'>Chrome</a>.", false, 1);
+		  var notiBrowser = new Notification ("Your browser is not compatible", "This site uses HTML5 technology.<br />Unfortunately, your browser does not support .ogg files.<br />Update your browser or use <a href='http://www.mozilla.org/firefox' target='_blank'>Firefox</a> or <a href='http://www.google.com/chrome' target='_blank'>Chrome</a>.", false, Notification.status.ERROR);
 		  notiBrowser.init ();
 		  return;
 	  }
@@ -67,7 +67,7 @@ $(window).load( function ()
 	  if (cs.getCookie("bg") != -1)
 	  {
 		  var url = cs.getCookie("bg");
-		  window.notiBG = new Notification ("Loading custom background", url, false);
+		  window.notiBG = new Notification ("Loading custom background", url, false, Notification.status.LOADING);
 		  window.notiBG.init ();
 		  $("#bg_input_text").val(url);
 		  changeBG (url);

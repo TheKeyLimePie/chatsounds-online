@@ -383,7 +383,7 @@ Chatsounds.prototype.getShorty = function(longUrl, handleFunction)
 	{
 		if(data.substr(0, 5) == "ERROR")
 		{
-			var error = new Notification("Oops", "We had a problem with bit.ly<br /><br />".concat(data.slice(6)), true, 1);
+			var error = new Notification("Oops", "We had a problem with bit.ly<br /><br />".concat(data.slice(6)), true, Notification.status.ERROR);
 			error.init();
 		}
 		else
