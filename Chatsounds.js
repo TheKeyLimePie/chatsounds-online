@@ -22,8 +22,6 @@ function Chatsounds()
 	this.INPUT = "#search-string";			//DOM ID of text input
 	this.AUDIO = "#audio-element";			//DOM ID of audio tag
 	this.AUDIOSRC = "#audio-src";			//DOM ID of audio source
-	this.CACHE = "#audio-element-cache";	//WIP
-	this.CACHESRC = "#audio-src-cache";		//WIP
 	this.SVNPATH = "https://garrysmod-chatsounds.googlecode.com/svn/trunk/sound/";
 	this.URL = "http://chatsounds.3kelv.in/";
 	
