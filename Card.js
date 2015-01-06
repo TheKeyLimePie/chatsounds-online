@@ -49,7 +49,7 @@ Card.prototype.assembleCard = function()
 	td1.setAttribute("class", "card_exemplar");
 	td1.innerHTML = "#".concat(this.exemplar);
 	td2.setAttribute("class", "card_repeat");
-	td2.innerHTML = this.repeat.concat("x");
+	td2.innerHTML = this.repeat.toString().concat("x");
 	
 	this.card.appendChild(title);
 	title.appendChild(name);
