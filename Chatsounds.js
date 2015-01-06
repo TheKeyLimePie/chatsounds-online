@@ -61,6 +61,7 @@ Chatsounds.prototype.action = function()
 	if(this.samples.length > 0)
 		showLink(1, this.generateLink ());
 	this.jukebox.startQueue();
+	$(this.INPUT).focus();
 //	this.cacheSample (0, this.jukebox.startQueue ());
 }
 

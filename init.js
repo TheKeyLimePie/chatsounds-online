@@ -60,6 +60,7 @@ $(window).load( function ()
 
 	  window.JSONDB.done( function ()
 	  {
+		  $(cs.INPUT).focus();
 		  cs.parameters.useParameters();
   });
 	  
