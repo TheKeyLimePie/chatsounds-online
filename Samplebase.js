@@ -17,37 +17,56 @@
   Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 */
 
-function Samplebase ()
+function Samplebase()
 {
-	this.db = new Array ();
+	this.db = new Array();
 	this.rev = [-1];
 }
 
 //* requests .json containing sample data from server (and sets revision), also calls URLParameter.useParameters() on success
-Samplebase.prototype.updateDB = function ()
+Samplebase.prototype.updateDB = function()
 {
-	var notiJSON = new Notification ("Updating local sample database", "Please wait", false, Notification.status.LOADING);
-	notiJSON.init ();
+	var notiJSON = new Notification("Updating local database", "Please wait</br></br><span id=\"json_progress\"></span>", false, Notification.status.LOADING);
+	notiJSON.init();
 	var thisDB = this.db;
 	var thisRev = this.rev;
 	var setRev = this.setRev;
 	
-	window.JSONDB = $.getJSON("soundlist.json", function (data)
-	{
-		$.each(data, function (key, value)
+	window.JSONDB = $.ajax({
+		type: "GET",
+		dataType: "json",
+		url: "soundlist.json",
+		xhr: function()
 		{
-			thisDB.push(value);
-		});
-	}).always(function ()
+			var xhr = new window.XMLHttpRequest();
+			xhr.addEventListener("progress", function(e)
+			{
+				if(e.lengthComputable)
+				{
+					var p = Math.round(e.loaded/e.total)*100;
+					$("#json_progress").html(p.toString().concat(" %"));
+				}
+			}, false);
+			return xhr;
+		}})
+		.done(function(data)
+		{
+			$.each(data, function(key, value)
+			{
+				thisDB.push(value);
+			});
+		})
+		.always(function()
 		{
 			if (thisDB.length == 0)
 			{
-				var notiJSONError = new Notification ("Retrieved no samples" , "Try to reload this site.<br />If this error persists please contact <a href='http://threekelv.in/keylimepie/'>KeyLimePie</a>.", false, Notification.status.ERROR);
-				notiJSONError.init ();
+				var notiJSONError = new Notification("Got no samples" , "Try to reload this site.<br />If this error persists please contact <a href='http://threekelv.in/keylimepie/'>KeyLimePie</a>.", false, Notification.status.ERROR);
+				notiJSONError.init();
 			}
 			else
-				notiJSON.deleteIt ();
-		});
+				notiJSON.deleteIt();
+		}
+	);
 	
 	$.get("revision", function(svn)
 	{
@@ -61,12 +80,12 @@ Samplebase.prototype.updateDB = function ()
 	});
 };
 
-Samplebase.prototype.getDB = function ()
+Samplebase.prototype.getDB = function()
 {
 	return this.db;
 };
 
-Samplebase.prototype.getRev = function ()
+Samplebase.prototype.getRev = function()
 {
 	return this.rev[0];
 };

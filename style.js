@@ -230,22 +230,8 @@ function changeBG (url)
 	}
 }
 
-function specialAnnouncement ()
-{
-	specialNoti = new Notification("<span id=\"special_noti\">Happy Birthday Hendrik!</span>", "A happy birthday wishes KeyLimePie!<br /><br />To other visitors: You can ignore this :D", true, Notification.status.KLP);
-	specialNoti.init();
-	$("h2").append("<span style=\"font-size: 25px\"> | Happy Birthday Hendrik!</span>");
-	lsd ();
-	$("body").css("background-image", "url(bg-special.jpg)");
-	$("#search-string").val("birthday today,celebrate#2,its a celebration,nyugga,trip");
-	window.JSONDB.done( function ()
-	{
-	   cs.action (); 
-	});	
-}
-
 //for special events
-function lsd ()
+function lsd()
 {
 	requestAnimationFrame(lsd);
     var d = new Date();
@@ -266,8 +252,10 @@ function gaben()
     gabenMove();
 	lsd();
     $("body").css("background-image", "url(valve.jpg)");
-    var gabeNotif = new Notification("PRAISE LORD GABEN!!!1!!11!", "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/bUo1PgKksgw?autoplay=1&loop=1&playlist=bUo1PgKksgw\" frameborder=\"0\" allowfullscreen></iframe>", true, Notification.status.KLP);
+    var gabeNotif = new Notification("PRAISE LORD GABEN!!!1!!11!", "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/bUo1PgKksgw?loop=1&playlist=bUo1PgKksgw\" frameborder=\"0\" allowfullscreen></iframe>", true, Notification.status.KLP);
 	gabeNotif.init();
+	$(cs.INPUT).val("gaben");
+	cs.action();
 }
 
 function gabenMove()
