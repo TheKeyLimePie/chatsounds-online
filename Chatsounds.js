@@ -136,7 +136,11 @@ Chatsounds.prototype.handleInput = function()
 	this.handledInput = [];
 
 	var input = this.getInput();
-
+	console.log("Read input: \"" + input + "\"");
+	var pattern = /(.[^#\*]+)(((#[0-9]+){1})((\*[0-9]+){1})|((\*[0-9]+){1})((#[0-9]+){1})|((\*[0-9]+){1})|((#[0-9]+){1}))/g;
+	var repl = "$&,";
+	input = input.replace(pattern, repl);
+	
 	var splittedInput = input.split(",");
 		
 	for(var x = 0; x < splittedInput.length; x++)
@@ -165,6 +169,12 @@ Chatsounds.prototype.handleInput = function()
 	}
 	
 	this.handledInput = validatedInput;
+	var s = "";
+	for(var x = 0; x < this.handledInput.length; x++)
+	{
+		s = s.concat(x + ":" + this.handledInput[x].name, "|");
+	}
+	console.log("Validated input: " + s);
 }
 
 //* returns matches (array of objects) where input string == results[x].name
