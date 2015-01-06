@@ -25,7 +25,7 @@ function slideTimeline (slideOut)	// true:= slide in, false:= slide out
 //* continously changes footer credits
 function changeFooter (x)
 {
-	var names = ["Project by <b>KeyLimePie</b>",".lua to .json converter: <b>PotcFdk</b>","Server hosting: <b>Techbot</b>"];
+	var names = ["Project by <b>KeyLimePie</b>",".lua to .json converter: <b>PotcFdk</b>","Server hosting: <b>Techbot</b>","Background image: <a href=\"http://vigorousart.blogspot.de/2014/11/80-google-material-design-hd-wallpapers.html\" target=\"blank\"><b>Vigorois Art</b></a>"];
 	$("#footer_table_names").animate({opacity: "0"}, 400, function(){
 		$("#footer_table_names").empty();
 		$("#footer_table_names").append(names[x%names.length]);
