@@ -43,7 +43,7 @@ function Chatsounds()
 	this.sampleDB = new Samplebase();							//object of Samplebase
 	this.parameters = new URLParameter();						//object of URLParameter
 	//Note: Use Decorator pattern in future
-	this.jukebox = new Jukebox(this.AUDIO, this.AUDIOSRC, this.SVNPATH, this.PLAYPAUSE, this.SKIP, this.REPLAY, this.VOLUMESLIDER, this.VOLUME, this.SEEK, this.TIMELINE);
+	this.jukebox = new Jukebox(this.INPUT, this.AUDIO, this.AUDIOSRC, this.SVNPATH, this.PLAYPAUSE, this.SKIP, this.REPLAY, this.VOLUMESLIDER, this.VOLUME, this.SEEK, this.TIMELINE);
 	this.topResults = new Array();								//shown in suggestions list
 	this.samples = new Array();									//Sample objects are saved here
 }
@@ -61,7 +61,6 @@ Chatsounds.prototype.action = function()
 	if(this.samples.length > 0)
 		showLink(1, this.generateLink ());
 	this.jukebox.startQueue();
-	$(this.INPUT).focus();
 //	this.cacheSample (0, this.jukebox.startQueue ());
 }
 

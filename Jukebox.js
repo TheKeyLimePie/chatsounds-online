@@ -17,8 +17,9 @@
   Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 */
 
-function Jukebox (audioelem, audiosrc, svnpath, playpause, skip, replay, volumeslider, volume, seek, timeline)
+function Jukebox (input, audioelem, audiosrc, svnpath, playpause, skip, replay, volumeslider, volume, seek, timeline)
 {
+	this.input = input;
 	this.audioelem = audioelem;
 	this.audiosrc = audiosrc;
 	this.svnpath = svnpath;
@@ -106,6 +107,8 @@ Jukebox.prototype.pause = function ()
 {
 	JukeboxUI.prototype.playIcon.call(this, "play");
 	document.getElementById(this.audioelem.substr(1)).pause();		//substr(1): ignore #
+	$(this.input).focus();
+	
 }
 
 //* sets volume of audio element

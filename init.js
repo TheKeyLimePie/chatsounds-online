@@ -131,6 +131,7 @@ $(window).load( function ()
 	  
 	  $(cs.jukebox.audioelem).on("canplay", function ()
 	  {
+		  $("h2").stop();
 		  $("h2").animate({color: "#33b5e5"}, 100);
 	  });
 	  
@@ -147,9 +148,11 @@ $(window).load( function ()
 			  cs.jukebox.repetitions--;
 			  cs.jukebox.play ();
 		  }
-		   else if (parseInt(cs.jukebox.playing) < cs.jukebox.queue.length - 1)
+		  else if (parseInt(cs.jukebox.playing) < cs.jukebox.queue.length - 1)
 		  {
 			  cs.jukebox.playSample (parseInt(cs.jukebox.playing) + 1);
 		  }
+		  else
+		  	$("#search-string").focus();
 	  });
   });
