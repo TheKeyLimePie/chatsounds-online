@@ -264,6 +264,7 @@ function gaben()
     gabe.setAttribute("id", "GABEN");
     document.body.appendChild(gabe);
     gabenMove();
+	lsd();
     $("body").css("background-image", "url(valve.jpg)");
     $(cs.INPUT).val("gaben*100");
     cs.action();
