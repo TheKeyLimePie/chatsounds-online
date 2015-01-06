@@ -27,6 +27,14 @@ function Chatsounds()
 	this.SVNPATH = "https://garrysmod-chatsounds.googlecode.com/svn/trunk/sound/";
 	this.URL = "http://chatsounds.3kelv.in/";
 	
+	var audio = document.createElement("audio");
+	audio.setAttribute("id", this.AUDIO.substr(1,this.AUDIO.length));
+	var src = document.createElement("source");
+	src.setAttribute("id", this.AUDIOSRC.substr(1,this.AUDIOSRC.length));
+	src.setAttribute("type", "audio/ogg");
+	src.setAttribute("src", "");
+	audio.appendChild(src);
+	
 	this.PARAMETER = ["#","*"];				
 	this.PARAMETERWORD = ["#xItem#","#repeat#"];
 	
