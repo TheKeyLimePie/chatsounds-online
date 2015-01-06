@@ -45,9 +45,12 @@ Notification.prototype.makeNot = function()
 	var main = document.createElement("div");
 		main.setAttribute("class", "notification");
 		main.setAttribute("id", "not_".concat(this.id));
-	var exit = document.createElement("div");
+	if(this.closeable)
+	{
+		var exit = document.createElement("div");
 		exit.setAttribute("class", "overlay_exit");
 		exit.setAttribute("title", "Close this notification");
+	}
 	var field = document.createElement("div");
 		field.setAttribute("class", "notification_textfield");
 	var msg = document.createElement("p");
@@ -58,14 +61,15 @@ Notification.prototype.makeNot = function()
 		details.innerHTML = this.details;
 	var footer = document.createElement("div");
 		footer.setAttribute("class", "notification_footerbanner");
-		
-	main.appendChild(exit);
+	
+	if(this.closeable)	
+		main.appendChild(exit);
 	field.appendChild(msg);
 	field.appendChild(details);
 	main.appendChild(field);
 	main.appendChild(footer);
 	
-	document.getElementById(this.OVERLAY.substr(1, this.OVERLAY.length)).appendChild(main);
+	document.getElementById(Notification.OVERLAY.substr(1, Notification.OVERLAY.length)).appendChild(main);
 }
 
 //* sets the icon for the notification footer
