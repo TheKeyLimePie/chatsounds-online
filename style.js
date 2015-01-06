@@ -249,7 +249,7 @@ function lsd ()
 {
 	requestAnimationFrame(lsd);
     var d = new Date();
-    var colval = parseInt(Math.abs(Math.sin(0.0005*d.valueOf()))*360);
+    var colval = d.getTime()*0.09 % 360;
     var col = "hsl(".concat(colval,",100%,60%)");
     $("h2").css("color", col);
     $("#headbar_seek").css("background", col);
@@ -266,8 +266,8 @@ function gaben()
     gabenMove();
 	lsd();
     $("body").css("background-image", "url(valve.jpg)");
-    $(cs.INPUT).val("gaben*100");
-    cs.action();
+    var gabeNotif = new Notification("PRAISE LORD GABEN!!!1!!11!", "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/bUo1PgKksgw?autoplay=1&loop=1&playlist=bUo1PgKksgw\" frameborder=\"0\" allowfullscreen></iframe>", true, Notification.status.KLP);
+	gabeNotif.init();
 }
 
 function gabenMove()
