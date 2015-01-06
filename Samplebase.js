@@ -43,7 +43,7 @@ Samplebase.prototype.updateDB = function()
 			{
 				if(e.lengthComputable)
 				{
-					var p = Math.round(e.loaded/e.total)*100;
+					var p = Math.round(e.loaded/e.total*100);
 					$("#json_progress").html(p.toString().concat(" %"));
 				}
 			}, false);
