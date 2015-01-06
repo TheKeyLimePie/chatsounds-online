@@ -175,6 +175,7 @@ a:hover
 {
 	width: 100%;
 	height: auto;
+	border-collapse: collapse;
 }
 
 #headbar_settings_box_options tr td
@@ -182,7 +183,6 @@ a:hover
 	padding: 10px;
 	font-family: 'Open Sans', 'Segoe UI Light', 'Segoe UI', Ubuntu, Arial, Helvetica, sans-serif;
 	font-weight: 300;
-	font-size: 15px;
 	color: #282828;
 	white-space: nowrap;
 	cursor: pointer;
@@ -371,4 +371,15 @@ a:hover
 .selected
 {
 	background: rgba(0,0,0, 0.15);
+}
+
+.settings_icons
+{
+	text-align: center;
+	font-size: 20px;
+}
+
+.settings_options
+{
+	font-size: 15px;
 }

@@ -376,3 +376,9 @@ function cookieDiscl ()
 	var notiCookie = new Notification ("Use of cookies","Cookies are text-snippets a website sends to a browser to save it locally.<br />We use them when you are using the<br /><br /><b>\"Remember this background\"</b>-feature<br />(the image url is saved with a cookie)<br /><br />Cookies are not used on default so if you do not check this box no cookies are saved.<br /><span style=\"font-size: 12px\">EU Directive 2002/58/EC</span>", true, Notification.status.KLP);
 	notiCookie.init ();
 }
+
+function openGitHub()
+{
+	var win = window.open("https://github.com/TheKeyLimePie/chatsounds-online", "_blank");
+	win.focus();
+}

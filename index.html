@@ -13,6 +13,7 @@
 <!--        <link rel="stylesheet" type="text/css" href="msa.css">-->
         <link rel="stylesheet" type="text/css" href="overlay.css">
         <link rel="stylesheet" type="text/css" href="scrollbar/jquery.mCustomScrollbar.css">
+        <link rel="stylesheet" type="text/css" href="foundation-icons/foundation-icons.css">
         <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600'> <!-- Google Fonts -->
 		<link rel="icon" type="image/x-icon" href="favicon.ico"/>
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
@@ -123,11 +124,17 @@
             <div id="headbar_settings_box">
             	<table id="headbar_settings_box_options">
                 	<tbody>
-                    	<tr>
-                        	<td class="settings_options" onClick="showBGForm ()">Custom background</td>
+                    	<tr onClick="showBGForm()">
+                        	<td class="fi-photo settings_icons"></td>
+                            <td class="settings_options">Custom background</td>
                         </tr>
-                        <tr>
-                        	<td class="settings_options" onClick="showHelp ()">Help</td>
+                        <tr onClick="showHelp()">
+                        	<td class="fi-info settings_icons"></td>
+                            <td class="settings_options" >Help</td>
+                        </tr>
+                        <tr onClick="openGitHub()">
+                            <td class="fi-social-github settings_icons"></td>
+                            <td class="settings_options">GitHub</td>
                         </tr>
                     </tbody>
                 </table>
