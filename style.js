@@ -254,15 +254,28 @@ function lsd ()
     $("h2").css("color", col);
     $("#headbar_seek").css("background", col);
     $(".ui-slider-range").css("background", col);
-	if (!$.isEmptyObject($("#special_noti")))
-	{
-		$("#special_noti").css("color", col);
-		var notiID = "#not_".concat(specialNoti.id);
-//		var sinMove = (Math.sin(d.valueOf()*0.001)*45).toString().concat("px");
-//		var cosMove = (Math.cos(d.valueOf()*0.001)*45).toString().concat("px");
-//		$(notiID).css("left", cosMove);
-//		$(notiID).css("top", sinMove);
-	}
+}
+
+function gaben()
+{
+	var gabe = document.createElement("img");
+    gabe.setAttribute("src", "gabe.png");
+    gabe.setAttribute("style", "position: fixed; bottom: 0; display: block;");
+    gabe.setAttribute("id", "GABEN");
+    document.body.appendChild(gabe);
+    gabenMove();
+    $("body").css("background-image", "url(valve.jpg)");
+    $(cs.INPUT).val("gaben*100");
+    cs.action();
+}
+
+function gabenMove()
+{
+	var maxWidth = ($(document).width() - 300)/2;
+    var t = new Date();
+    var v = maxWidth + Math.sin(t.getTime()*0.0004)*maxWidth;
+    $("#GABEN").css("left", v);
+    requestAnimationFrame(gabenMove);	
 }
 
 function showSettings ()

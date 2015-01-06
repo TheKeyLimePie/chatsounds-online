@@ -73,6 +73,7 @@ $(window).load( function ()
 		  changeBG (url);
 	  }
 	  
+	  GABE = window.setTimeout(function(){gaben();}, 600000);
 	  //MSA = window.setTimeout(function () {msaObj.appear()}, 600000);
 	  
 	  // character input, backspace, delete, comma, semicolon, arrow key right handled here
