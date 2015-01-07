@@ -74,8 +74,7 @@ $(window).load( function ()
 	  }
 	  
 	  GABE = window.setTimeout(function(){gaben();}, 900000);
-	  //MSA = window.setTimeout(function () {msaObj.appear()}, 600000);
-	  
+
 	  // character input, backspace, delete, comma, semicolon, arrow key right handled here
 	  $(cs.INPUT).keyup( function (e)
 	  {
