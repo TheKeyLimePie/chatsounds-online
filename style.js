@@ -1,4 +1,5 @@
 var LIST_LENGTH = 9;
+var names = ["Project by <b>KeyLimePie</b>",".lua to .json converter: <b>PotcFdk</b>","Server hosting: <b>Techbot</b>"];
 
 //* show the box where the sample cards are shown
 function slideTimeline (slideOut)	// true:= slide in, false:= slide out
@@ -23,10 +24,9 @@ function slideTimeline (slideOut)	// true:= slide in, false:= slide out
 }
 
 //* continously changes footer credits
-function changeFooter (x)
+function changeFooter(x)
 {
-	var names = ["Project by <b>KeyLimePie</b>",".lua to .json converter: <b>PotcFdk</b>","Server hosting: <b>Techbot</b>"];
-	if(x==0)
+	if(!x)
 	{
 		$.get("bgcredits.txt", function(data)
 		{
