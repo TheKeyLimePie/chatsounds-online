@@ -123,28 +123,23 @@ function showItems (x, MAX)
 }
 
 //* handles <input> input
-function liveSearchManager (e)
+function liveSearchManager(e)
 {
-	if ( (e.which == 8) || (e.which == 46) || (e.which >= 48 && e.which <= 90) || (e.which >= 96 && e.which <=105) )//8: backspace, 46: delete, 48-90: abc...123..., 96-105: keypad 0-9
+	if ((e.which == 8) || (e.which == 46) || (e.which >= 48 && e.which <= 90) || (e.which >= 96 && e.which <=105))//8: backspace, 46: delete, 48-90: abc...123..., 96-105: keypad 0-9
 	{
 		var string = cs.getInput().split(",");
 		cs.liveSearch(string[string.length - 1]);
 	}
-	else if ( (e.which == 188) )							//188: comma
+	else if(e.which == 188)							//188: comma
 		showSugg([]);
-	else if (e.which == 39 && cs.getInput().length)	//39: arrow key right
-	{
-		if ($(".selected").length > 0)
-			takeSugg ($(".selected"));
-	}
 }
 
 //* handles <input> input related to arrow key navigation
-function listNavigator (e)
+function listNavigator(e)
 {
-	if (e.which == 40 && cs.getInput().length)	//40: arrow key down
+	if(e.which == 40 && cs.getInput().length)	//40: arrow key down
 	{
-		if ($(".selected").length > 0)
+		if($(".selected").length > 0)
 		{
 			var current = $(".selected");
 			if (current.next().children().css("display") == "none")
@@ -158,12 +153,17 @@ function listNavigator (e)
 		else
 			$("#suggestions tr").first().addClass("selected");
 	}
-	else if (e.which == 38 && cs.getInput().length)	//38: arrow key up
+	else if(e.which == 39 || e.which == 9 && cs.getInput().length)	//39: arrow key right, 9: TAB key
 	{
 		if ($(".selected").length > 0)
+			takeSugg ($(".selected"));
+	}
+	else if(e.which == 38 && cs.getInput().length)	//38: arrow key up
+	{
+		if($(".selected").length > 0)
 		{
 			var current = $(".selected");
-			if (current.prev().children().css("display") == "none")
+			if(current.prev().children().css("display") == "none")
 			{
 				current.removeClass("selected");
 				return;

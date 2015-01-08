@@ -75,16 +75,20 @@ $(window).load( function ()
 	  
 	  GABE = window.setTimeout(function(){gaben();}, 900000);
 
-	  // character input, backspace, delete, comma, semicolon, arrow key right handled here
-	  $(cs.INPUT).keyup( function (e)
+	  // character input, backspace, delete, comma, semicolon handled here
+	  $(cs.INPUT).keyup(function(e)
 	  {
-		  liveSearchManager (e);
+			if(e.which == 9)	//TAB key
+				e.preventDefault();
+			liveSearchManager(e);
 	  });
 	  
-	  // arrow key up/down handled here
+	  // arrow key up/down/right handled here
 	  $(cs.INPUT).keydown(function(e)
 	  {
-      		listNavigator (e);
+			if(e.which == 9)	//TAB key
+				e.preventDefault();
+			listNavigator(e);
       });
 	  
 	  // ENTER is handled here (if ENTER was pressed on a selected element)
