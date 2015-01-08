@@ -271,8 +271,11 @@ function gabenMove()
 {
 	var maxWidth = ($(document).width() - 300)/2;
     var t = new Date();
-    var v = maxWidth + Math.sin(t.getTime()*0.0004)*maxWidth;
-    $("#GABEN").css("left", v);
+    var w = maxWidth + Math.sin(t.getTime()*0.0004)*maxWidth;
+    var jumpHeight = 10;
+    var h = Math.cos(t.getTime()*0.0004) * jumpHeight * Math.sin(t.getTime()*0.02);
+	$("#GABEN").css("left", w);
+	$("#GABEN").css("bottom", h);
     requestAnimationFrame(gabenMove);	
 }
 
