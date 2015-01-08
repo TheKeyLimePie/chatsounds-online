@@ -150,7 +150,8 @@ $(window).load( function ()
 		  if (cs.jukebox.repetitions > 1)
 		  {
 			  cs.jukebox.repetitions--;
-			  cs.jukebox.play ();
+			  cs.jukebox.play();
+			  cs.jukebox.ui.playIcon("pause");
 		  }
 		  else if (parseInt(cs.jukebox.playing) < cs.jukebox.queue.length - 1)
 		  {

@@ -72,10 +72,12 @@ JukeboxUI.prototype.playToggle = function ()
 	if (document.getElementById(this.audioelem.substr(1)).paused && document.getElementById(this.audioelem.substr(1)).duration > 0)
 	{
 		Jukebox.prototype.play.call(this);			//access method of Jukebox (parent object)
+		this.playIcon("pause");
 	}
 	else if (!document.getElementById(this.audioelem.substr(1)).paused)
 	{
 		Jukebox.prototype.pause.call(this);			//access method of Jukebox (parent object)
+		this.playIcon("play");
 	}
 	else
 		return;

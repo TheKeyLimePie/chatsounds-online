@@ -63,7 +63,8 @@ Jukebox.prototype.playSample = function (index)
 			this.setSrc (this.queue[index]);
 			JukeboxUI.prototype.slideToCard.call(this, index);
 			JukeboxUI.prototype.makeCardActive.call(this, index);
-			this.play ();
+			JukeboxUI.prototype.playIcon.call(this, "pause");
+			this.play();
 		}
 }
 
