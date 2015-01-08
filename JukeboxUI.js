@@ -19,6 +19,7 @@
 
 function JukeboxUI (input, audioelem, playpause, skip, replay, volumeslider, volume, seek, timeline)
 {
+	this.input = input;
 	this.audioelem = audioelem;
 	this.playpause = playpause;
 	this.skip = skip;
