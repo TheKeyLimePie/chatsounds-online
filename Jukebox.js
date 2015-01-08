@@ -34,7 +34,7 @@ function Jukebox (input, audioelem, audiosrc, svnpath, playpause, skip, replay, 
 	this.queue = new Array ();		//contains objects of Sample
 	this.playing;
 	this.repetitions;
-	this.ui = new JukeboxUI(this.audioelem, this.playpause, this.skip, this.replay, this.volumeslider, this.volume, this.seek, this.timeline);
+	this.ui = new JukeboxUI(this.input, this.audioelem, this.playpause, this.skip, this.replay, this.volumeslider, this.volume, this.seek, this.timeline);
 }
 
 Jukebox.prototype.clearQueue = function ()

@@ -17,7 +17,7 @@
   Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 */
 
-function JukeboxUI (audioelem, playpause, skip, replay, volumeslider, volume, seek, timeline)
+function JukeboxUI (input, audioelem, playpause, skip, replay, volumeslider, volume, seek, timeline)
 {
 	this.audioelem = audioelem;
 	this.playpause = playpause;
@@ -78,6 +78,7 @@ JukeboxUI.prototype.playToggle = function ()
 	{
 		Jukebox.prototype.pause.call(this);			//access method of Jukebox (parent object)
 		this.playIcon("play");
+		$(this.input).focus();
 	}
 	else
 		return;
