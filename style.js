@@ -174,10 +174,21 @@ function listNavigator(e)
 		else
 		{
 			var current = $("#suggestions tr").last();
-			if (current.children().css("display") != "none")
-				current.addClass("selected");
-			else
-				current = current.prev();
+			
+			var hasVisible = false;
+			var tds = $("#suggestions tr td");
+			for(var x = 0; x < tds.length; x++)
+			{
+				hasVisible = $(tds).css("display") != "none" | hasVisible;
+			}
+			
+			do
+			{
+				if (current.children().css("display") != "none")
+					current.addClass("selected");
+				else
+					current = current.prev();
+			}while($(".selected").length == 0 && hasVisible);
 		}
 	}
 }
