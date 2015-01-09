@@ -46,7 +46,13 @@ $(window).load( function ()
 		  notiBrowser.init ();
 		  return;
 	  }
-
+	  
+	  if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+	  {
+		  var notiMobile = new Notification("We're not ready for mobile devices", "It seems like you're using a mobile device such as Android or iOS. Unfortunately, Chatsounds online is not optimised for mobile devices. Sure, you can just go on if you want to but there might be some bugs...", true, Notification.status.ERROR);
+		  notiMobile.init();
+	  }
+		  
 	  //object of Samplecs
 	  cs = new Chatsounds();
 	  //get JSON with samples

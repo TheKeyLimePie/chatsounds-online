@@ -242,13 +242,15 @@ function changeBG (url)
 //for special events
 function lsd()
 {
-	requestAnimationFrame(lsd);
+	LSD = requestAnimationFrame(lsd);
     var d = new Date();
     var colval = d.getTime()*0.09 % 360;
     var col = "hsl(".concat(colval,",100%,60%)");
     $("h2").css("color", col);
     $("#headbar_seek").css("background", col);
     $(".ui-slider-range").css("background", col);
+	$("#search-string").css("color", col);
+	$("#suggestions tr td").css("color", col);
 }
 
 function gaben()
@@ -276,7 +278,7 @@ function gabenMove()
     var h = Math.cos(t.getTime()*0.0004) * jumpHeight * Math.sin(t.getTime()*0.02);
 	$("#GABEN").css("left", w);
 	$("#GABEN").css("bottom", h);
-    requestAnimationFrame(gabenMove);	
+    GABE = requestAnimationFrame(gabenMove);	
 }
 
 function showSettings ()
