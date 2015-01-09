@@ -174,14 +174,10 @@ function listNavigator(e)
 		else
 		{
 			var current = $("#suggestions tr").last();
-			do
-			{
-				if (current.children().css("display") != "none")
-					current.addClass("selected");
-				else
-					current = current.prev();
-			} while ($(".selected").length == 0);
-
+			if (current.children().css("display") != "none")
+				current.addClass("selected");
+			else
+				current = current.prev();
 		}
 	}
 }
