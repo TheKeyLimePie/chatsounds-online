@@ -111,20 +111,6 @@ $(window).load( function ()
 		   	   hideCookieDiscl ();
       });
 	  
-	  $(".overlay").on("click", ".overlay_exit", function (e)
-	  {
-		 var parentID = e.target.parentElement.id.substr(4);
-		 if (isNaN(parentID))
-		 	return;
-		 for (var x = 0; x < Notification.registered.length; x++)
-		 {
-			   if (Notification.registered[x].id == parentID)
-			   		Notification.registered[x].deleteIt();
-			   return;
-		 }
-		 console.log("Notification not found. Not able to delete it.");
-	  });
-	  
 	  $("#suggestions tr").on("click", function ()
 	  {
 		  takeSugg ($(this));

@@ -75,6 +75,20 @@ Notification.prototype.makeNot = function()
 	ovl.setAttribute("id", this.overlay.substr(1, this.overlay.length));
 	document.body.appendChild(ovl);
 	
+	$(this.overlay).on("click", ".overlay_exit", function(e)
+	{
+		var parentID = e.target.parentElement.id.substr(4);
+		if (isNaN(parentID))
+			return;
+		for (var x = 0; x < Notification.registered.length; x++)
+		{
+			if (Notification.registered[x].id == parentID)
+				Notification.registered[x].deleteIt();
+			return;
+		}
+		console.log("Notification not found. Not able to delete it.");
+	});
+	
 	document.getElementById(this.overlay.substr(1, this.overlay.length)).appendChild(main);
 }
 
@@ -130,10 +144,8 @@ Notification.prototype.deleteIt = function()
 	if (item != -1)
 		Notification.registered.splice(item, 1);
 	
-	$("#not_".concat(this.id)).animate({opacity:0},100, function()
+	$(this.overlay).animate({opacity:0},100, function()
 	{
 		$(this).remove();
-		if (!Notification.registered.length)
-			$(this.overlay).animate({opacity:0},100, function() {$(this.overlay).remove()})
 	});
 }
