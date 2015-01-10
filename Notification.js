@@ -21,6 +21,7 @@
 Notification.registered = new Array();
 Notification.made = 0;
 Notification.OVERLAY = "#overlay_notification";
+Notification.ZBASE = 10000;
 
 Notification.status = new Object();
 Notification.status.BLANK = 0;
@@ -73,6 +74,7 @@ Notification.prototype.makeNot = function()
 	ovl = document.createElement("div");
 	ovl.setAttribute("class", "overlay");
 	ovl.setAttribute("id", this.overlay.substr(1, this.overlay.length));
+	$(ovl).css("z-index", Notification.ZBASE + this.id);
 	$("body").prepend(ovl);
 	
 	$(this.overlay).on("click", ".overlay_exit", function(e)
@@ -84,7 +86,6 @@ Notification.prototype.makeNot = function()
 		{
 			if (Notification.registered[x].id == parentID)
 				Notification.registered[x].deleteIt();
-			return;
 		}
 		console.log("Notification not found. Not able to delete it.");
 	});
