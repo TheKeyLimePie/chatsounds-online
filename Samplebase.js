@@ -26,7 +26,7 @@ function Samplebase()
 //* requests .json containing sample data from server (and sets revision), also calls URLParameter.useParameters() on success
 Samplebase.prototype.updateDB = function()
 {
-	var notiJSON = new Notification("Updating local database", "Please wait</br></br><span id=\"json_progress\"></span>", false, Notification.status.LOADING);
+	var notiJSON = new Notification("Updating local index file", "Please wait</br></br><span id=\"json_progress\"></span>", false, Notification.status.LOADING);
 	notiJSON.init();
 	var thisDB = this.db;
 	var thisRev = this.rev;
@@ -72,7 +72,7 @@ Samplebase.prototype.updateDB = function()
 	{
 		thisRev[0] = svn;
 		$("#footer_revision").empty();
-		$("#footer_revision").append("Chatsounds SVN Revision ");
+		$("#footer_revision").append("Sound samples: SVN Revision ");
 		if (thisRev[0] == -1)
 			$("#footer_revision").append("-Google messed it up-");
 		else

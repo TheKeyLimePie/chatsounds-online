@@ -434,3 +434,14 @@ Chatsounds.prototype.setCookie = function(name, value, duration)
 	var cookie = name.concat("=",value,"; expires=", d.toUTCString());
 	document.cookie = cookie;
 }
+
+//* gets Git hash
+Chatsounds.prototype.getGitRev = function()
+{
+	$.get("getGitRev.php", function(data)
+	{
+		if(data.search("Unable to open file!") > -1)
+			return -1;
+		return data;
+	});
+}
