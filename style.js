@@ -59,6 +59,7 @@ function sliderInit ()
 		
 		start: function (event, ui)
 		{
+			tooltip.stop();
 			tooltip.fadeIn("fast");
 		},
 		
@@ -83,6 +84,7 @@ function sliderInit ()
 		
 		stop: function (event, ui)
 		{
+			tooltip.stop();
 			tooltip.fadeOut("fast");
 		}
 	});
