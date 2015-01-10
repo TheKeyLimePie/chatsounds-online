@@ -87,7 +87,6 @@ Notification.prototype.makeNot = function()
 			if (Notification.registered[x].id == parentID)
 				Notification.registered[x].deleteIt();
 		}
-		console.log("Notification not found. Not able to delete it.");
 	});
 	
 	document.getElementById(this.overlay.substr(1, this.overlay.length)).appendChild(main);
