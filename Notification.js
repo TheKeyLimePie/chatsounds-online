@@ -73,7 +73,7 @@ Notification.prototype.makeNot = function()
 	ovl = document.createElement("div");
 	ovl.setAttribute("class", "overlay");
 	ovl.setAttribute("id", this.overlay.substr(1, this.overlay.length));
-	document.getElementsByTagName("body").appendChild(ovl);
+	document.body.appendChild(ovl);
 	
 	document.getElementById(this.overlay.substr(1, this.overlay.length)).appendChild(main);
 }
