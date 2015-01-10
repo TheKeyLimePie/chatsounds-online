@@ -137,7 +137,8 @@ Chatsounds.prototype.handleInput = function()
 
 	var input = this.getInput();
 	console.log("Read input: \"" + input + "\"");
-	var pattern = /(.[^#\*]+)(((#[0-9]+){1})((\*[0-9]+){1})|((\*[0-9]+){1})((#[0-9]+){1})|((\*[0-9]+){1})|((#[0-9]+){1}))/g;
+	//insert a comma after each possible parameter -> avoids that validate "forgets" the rest after a parameter (validate gets handledInput)
+	var pattern = /((#)[0-9]+|(\*)[0-9]+)(?!\2\3)(#[0-9]+|\*[0-9]+)?/g;
 	var repl = "$&,";
 	input = input.replace(pattern, repl);
 	
