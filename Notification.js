@@ -73,7 +73,7 @@ Notification.prototype.makeNot = function()
 	ovl = document.createElement("div");
 	ovl.setAttribute("class", "overlay");
 	ovl.setAttribute("id", this.overlay.substr(1, this.overlay.length));
-	document.body.appendChild(ovl);
+	$("body").prepend(ovl);
 	
 	$(this.overlay).on("click", ".overlay_exit", function(e)
 	{
