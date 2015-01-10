@@ -308,10 +308,12 @@ label
 	width: 100%;
 	margin: 0;
 	border-top: 1px #ddd solid;
-	background-image: url("icons/loading.GIF");
 	background-color: #f8f8f8;
 	background-position: center center;
 	background-repeat: no-repeat;
+	font-size: 90px;
+	text-align: center;
+	vertical-align: middle;
 }
 
 .help_entry

@@ -444,9 +444,9 @@ function showAbout()
 function showLicenses()
 {
 	var licenses = new Array();
-	licenses.push("MIT: <a href=\"https://gist.github.com/paulirish/1579671\">requestAnimationFrame polyfill</a><br/><i>by Erik Möller, fixes from Paul Irish and Tino Zijdel</i>");
-	licenses.push("MIT: <a href=\"https://github.com/malihu/malihu-custom-scrollbar-plugin\">malihu custom scrollbar plugin</a><br/><i>by Manos Malihutsakis</i>");
-	licenses.push("GNU GPLv3: <a href=\"https://github.com/Falicon/BitlyPHP\">BitlyPHP</a><br/><i>by Kevin Marshall</i>");
+	licenses.push("MIT: <a target=\"_blank\" href=\"https://gist.github.com/paulirish/1579671\">requestAnimationFrame polyfill</a><br/><i>by Erik Möller, fixes from Paul Irish and Tino Zijdel</i>");
+	licenses.push("MIT: <a target=\"_blank\" href=\"https://github.com/malihu/malihu-custom-scrollbar-plugin\">malihu custom scrollbar plugin</a><br/><i>by Manos Malihutsakis</i>");
+	licenses.push("GNU GPLv3: <a target=\"_blank\" href=\"https://github.com/Falicon/BitlyPHP\">BitlyPHP</a><br/><i>by Kevin Marshall</i>");
 	
 	var details = "";
 	
@@ -455,6 +455,6 @@ function showLicenses()
 		details = details.concat(licenses[x], "<br/><br/>");
 	}
 	
-	var licenseoverview = new Notification("Software licenses", details, true, Notification.status.KLP);
+	var licenseoverview = new Notification("Software licenses", details, true, Notification.status.GITHUB);
 	licenseoverview.init();
 }

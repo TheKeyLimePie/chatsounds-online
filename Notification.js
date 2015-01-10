@@ -29,6 +29,7 @@ Notification.status.ERROR = 1;
 Notification.status.MSA = 2;
 Notification.status.KLP = 3;
 Notification.status.LOADING = 4;
+Notification.status.GITHUB = 5;
 
 function Notification(head, details, closeable, icon)
 {
@@ -107,6 +108,8 @@ Notification.prototype.setIcon = function()
 		case 3: $(jqID).css("background-image", "url(icons/keylimepie_small.png)"); break;
 		
 		case 4: $(jqID).css("background-image", "url(icons/loading.GIF)"); break;
+		
+		case 5: $(jqID).addClass("fi-social-github"); break;
 		
 		default: $(jqID).css("background-image", "url(icons/loading.GIF)"); break;	
 	}
