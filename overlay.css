@@ -128,19 +128,6 @@ label
 	margin: 10px auto;
 }
 
-#overlay_notification
-{
-	text-align: center;
-}
-
-#overlay_notification:before
-{
-	content: "";
-	height: 100%;
-	display: inline-block;
-	vertical-align: middle;
-}
-
 #bg_input_text
 {
 	width: 342px;
@@ -228,6 +215,19 @@ label
 	left: 0;
 	overflow-y: scroll;
 	overflow-x: hidden;
+	vertical-align: middle;
+}
+
+.overlay_notification
+{
+	text-align: center;
+}
+
+.overlay_notification:before
+{
+	content: "";
+	height: 100%;
+	display: inline-block;
 	vertical-align: middle;
 }
 

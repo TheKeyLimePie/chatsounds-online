@@ -72,7 +72,7 @@ Notification.prototype.makeNot = function()
 	main.appendChild(footer);
 	
 	ovl = document.createElement("div");
-	ovl.setAttribute("class", "overlay");
+	ovl.setAttribute("class", "overlay overlay_notification");
 	ovl.setAttribute("id", this.overlay.substr(1, this.overlay.length));
 	$(ovl).css("z-index", Notification.ZBASE + this.id);
 	$("body").prepend(ovl);
