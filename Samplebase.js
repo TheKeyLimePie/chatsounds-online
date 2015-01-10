@@ -30,7 +30,6 @@ Samplebase.prototype.updateDB = function()
 	notiJSON.init();
 	var thisDB = this.db;
 	var thisRev = this.rev;
-	var setRev = this.setRev;
 	
 	window.JSONDB = $.ajax({
 		type: "GET",

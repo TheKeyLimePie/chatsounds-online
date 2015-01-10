@@ -422,11 +422,21 @@ function showAbout()
 		var credits = "";
 		for(var x = 0; x < names.length; x++)
 		{
-			credits.concat(names[x],"<br/>");
+			credits = credits.concat(names[x],"<br/>");
 		}
-		var githash = cs.GIT;
-		var details = desc.concat("<br/><br/>", credits, "<br/>", "This site is based on Git: <br/><i>", githash, "</i><br/>", "Sounds samples are based on SVN: <br/><i>", cs.sampleDB.getRev(), "</i>");
-		var about = new Notification("Some infos", details, true, Notification.status.KLP);
-		about.init();
+		
+		var githash = "";
+		$.get("getGitRev.php", function(data)
+		{
+			if(data.search("Unable to open file!") > -1)
+				githash = "Unable to to access Git hash";
+			else
+				githash = data;
+		}).always(function()
+		{
+			var details = desc.concat("<br/><br/>", credits, "<br/>", "This site is based on Git: <br/><i>", githash, "</i><br/>", "Sounds samples are based on SVN: <br/><i>", cs.sampleDB.getRev(), "</i>");
+			var about = new Notification("Some infos", details, true, Notification.status.KLP);
+			about.init();
+		});
 	});
 }
