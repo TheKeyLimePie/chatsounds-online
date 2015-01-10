@@ -437,13 +437,21 @@ Chatsounds.prototype.setCookie = function(name, value, duration)
 }
 
 //* gets Git hash
-Chatsounds.prototype.updateGitRev = function()
+Chatsounds.prototype.updateGitRev = function(callback)
 {
 	$.get("getGitRev.php", function(data)
 	{
+		var git;
 		if(data.search("Unable to open file!") > -1)
-			this.GIT = "Unable to to access Git hash";
+			git = "Unable to to access Git hash";
 		else
-			this.GIT = data;
+			git = data;
+		
+		callback(git);
 	});
+}
+
+Chatsounds.prototype.setGit = function(val)
+{
+	this.GIT = val;
 }
