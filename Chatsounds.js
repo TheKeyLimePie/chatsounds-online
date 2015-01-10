@@ -24,6 +24,7 @@ function Chatsounds()
 	this.AUDIOSRC = "#audio-src";			//DOM ID of audio source
 	this.SVNPATH = "https://garrysmod-chatsounds.googlecode.com/svn/trunk/sound/";
 	this.URL = "http://chatsounds.3kelv.in/";
+	this.GIT = "";
 	
 	var audio = document.createElement("audio");
 	audio.setAttribute("id", this.AUDIO.substr(1,this.AUDIO.length));
@@ -436,12 +437,13 @@ Chatsounds.prototype.setCookie = function(name, value, duration)
 }
 
 //* gets Git hash
-Chatsounds.prototype.getGitRev = function()
+Chatsounds.prototype.updateGitRev = function()
 {
 	$.get("getGitRev.php", function(data)
 	{
 		if(data.search("Unable to open file!") > -1)
-			return -1;
-		return data;
+			this.GIT = "Unable to to access Git hash";
+		else
+			this.GIT = data;
 	});
 }

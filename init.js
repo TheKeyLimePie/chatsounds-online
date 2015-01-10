@@ -62,7 +62,8 @@ $(window).load( function ()
 	  //get URL parameters
 	  cs.parameters.updateParameters();
 	  //when soundlist.json was loaded -> useParameters()
-
+	  
+	  cs.updateGitRev();
 
 	  window.JSONDB.done( function ()
 	  {

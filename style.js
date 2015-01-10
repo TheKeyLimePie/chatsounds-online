@@ -417,14 +417,16 @@ function showAbout()
 	$.get("README.md", function(data)
 	{
 		desc = data.match(/^.[^=]+.+/gm)[1];
-	});
-	var credits = "";
-	for(var x = 0; x < names.length; x++)
+	}).always(function()
 	{
-		credits.concat(names[x],"<br/>");
-	}
-	var githash = cs.getGitRev();
-	var details = desc.concat(desc, "<br/><br/>", credits, "<br/>", "This site is based on Git: <br/><i>", githash, "</i><br/>", "Sounds samples are based on SVN: <br/><i>", cs.sampleDB.getRev(), "</i>");
-	var about = new Notification("Some infos", details, true, Notification.status.KLP);
-	about.init();
+		var credits = "";
+		for(var x = 0; x < names.length; x++)
+		{
+			credits.concat(names[x],"<br/>");
+		}
+		var githash = cs.GIT;
+		var details = desc.concat(desc, "<br/><br/>", credits, "<br/>", "This site is based on Git: <br/><i>", githash, "</i><br/>", "Sounds samples are based on SVN: <br/><i>", cs.sampleDB.getRev(), "</i>");
+		var about = new Notification("Some infos", details, true, Notification.status.KLP);
+		about.init();
+	});
 }
