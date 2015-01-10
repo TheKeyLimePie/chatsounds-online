@@ -35,8 +35,9 @@ function Notification(head, details, closeable, icon)
 	this.details = details;
 	this.closeable = closeable;
 	this.icon = icon;
-
+	
 	this.id = ++Notification.made;
+	this.overlay = Notification.OVERLAY.concat("_", this.id);
 }
 
 //* assembles HTML object with the object's attributes
@@ -69,7 +70,12 @@ Notification.prototype.makeNot = function()
 	main.appendChild(field);
 	main.appendChild(footer);
 	
-	document.getElementById(Notification.OVERLAY.substr(1, Notification.OVERLAY.length)).appendChild(main);
+	ovl = document.createElement("div");
+	ovl.setAttribute("class", "overlay");
+	ovl.setAttribute("id", this.overlay.substr(1, this.overlay.length));
+	document.getElementsByTagName("body").appendChild(ovl);
+	
+	document.getElementById(this.overlay.substr(1, this.overlay.length)).appendChild(main);
 }
 
 //* sets the icon for the notification footer
@@ -103,8 +109,8 @@ Notification.prototype.placeNot = function()
 //* displays the overlay when necessary and displays the notification
 Notification.prototype.showNot = function()
 {
-	if ($(Notification.OVERLAY).css("display") != "block")
-		$(Notification.OVERLAY).css("display","block").show().animate({opacity:1},100);
+	if ($(this.overlay).css("display") != "block")
+		$(this.overlay).css("display","block").show().animate({opacity:1},100);
 	if (!this.closable)
 		$("#not_" + this.id + "> notification_textfield:before").css("display", "none");
 	$("#not_" + this.id).css("display", "inline-block");
@@ -128,6 +134,6 @@ Notification.prototype.deleteIt = function()
 	{
 		$(this).remove();
 		if (!Notification.registered.length)
-			$(Notification.OVERLAY).animate({opacity:0},100, function() {$(Notification.OVERLAY).hide()})
+			$(this.overlay).animate({opacity:0},100, function() {$(this.overlay).remove()})
 	});
 }
