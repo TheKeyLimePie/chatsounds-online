@@ -425,7 +425,7 @@ function showAbout()
 			credits.concat(names[x],"<br/>");
 		}
 		var githash = cs.GIT;
-		var details = desc.concat(desc, "<br/><br/>", credits, "<br/>", "This site is based on Git: <br/><i>", githash, "</i><br/>", "Sounds samples are based on SVN: <br/><i>", cs.sampleDB.getRev(), "</i>");
+		var details = desc.concat("<br/><br/>", credits, "<br/>", "This site is based on Git: <br/><i>", githash, "</i><br/>", "Sounds samples are based on SVN: <br/><i>", cs.sampleDB.getRev(), "</i>");
 		var about = new Notification("Some infos", details, true, Notification.status.KLP);
 		about.init();
 	});
