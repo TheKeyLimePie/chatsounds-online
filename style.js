@@ -434,9 +434,26 @@ function showAbout()
 				githash = data;
 		}).always(function()
 		{
-			var details = desc.concat("<br/><br/>", credits, "<br/>", "This site is based on Git: <br/><i>", githash, "</i><br/>", "Sounds samples are based on SVN: <br/><i>", cs.sampleDB.getRev(), "</i>");
+			var details = desc.concat("<br/><br/>", credits, "<br/>", "<a href=\"javascript:showLicenses()\">Software licenses</a>", "<br/>This site is based on Git: <br/><i>", githash, "</i><br/>", "Sounds samples are based on SVN: <br/><i>", cs.sampleDB.getRev(), "</i>");
 			var about = new Notification("Some infos", details, true, Notification.status.KLP);
 			about.init();
 		});
 	});
+}
+
+function showLicenses()
+{
+	var licenses = new Array();
+	licenses.push("MIT: <a href=\"https://gist.github.com/paulirish/1579671\">requestAnimationFrame polyfill</a> <i>by Erik Möller, fixes from Paul Irish and Tino Zijdel</i>");
+	licenses.push("MIT: <a href=\"https://github.com/malihu/malihu-custom-scrollbar-plugin\">malihu custom scrollbar plugin</a> <i>by Manos Malihutsakis</i>");
+	licenses.push("GNU GPLv3: <a href=\"https://github.com/Falicon/BitlyPHP\">BitlyPHP</a> <i>by Kevin Marshall</i>");
+	
+	var details = "";
+	
+	for(var x = 0; x < licenses.length; x++)
+	{
+		details = details.concat(licenses[x], "<br/><br/>");
+	}
+	
+	var licenseoverview = new Notification("Software licenses", details, true, Notification.status.KLP)
 }
