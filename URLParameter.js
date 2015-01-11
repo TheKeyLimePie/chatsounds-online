@@ -19,7 +19,7 @@
 
 function URLParameter ()
 {
-	this.PARAMETERS = ["s","v","y"];		//supported URL parameters
+	this.PARAMETERS = ["s","v"];		//supported URL parameters
 	this.parameters = new Array ();		//extracted URL parameters
 }
 
@@ -91,15 +91,6 @@ URLParameter.prototype.handleString = function ()
 	document.getElementById("search-form").submit();	
 }
 
-/*URLParameter.prototype.handleMSA = function ()
-{
-	if (this.getParameter("y") == "nospy")
-	{
-		window.clearTimeout(MSA);
-		console.log("MSA defeated!");
-	}
-}*/
-
 //* calls functions for different URL parameters
 URLParameter.prototype.useParameters = function ()
 {
@@ -110,8 +101,6 @@ URLParameter.prototype.useParameters = function ()
 			case 'v': URLParameter.prototype.handleVolume.call(this); break;
 			
 			case 's': URLParameter.prototype.handleString.call(this); break;
-			
-			//case 'y': URLParameter.prototype.handleMSA.call(this); break;
 		}
 	}
 }

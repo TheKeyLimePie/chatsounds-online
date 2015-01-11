@@ -99,7 +99,7 @@ Notification.prototype.setIcon = function()
 	var jqID = "#not_".concat(this.id, " > .notification_footerbanner");
 	switch(this.icon)
 	{
-		case 0: $(jqID).css("background-image", "url(icons/blank.png)"); break;
+		case 0: break;
 		
 		case 1: $(jqID).css("background-image", "url(icons/error.png)"); break;
 		
