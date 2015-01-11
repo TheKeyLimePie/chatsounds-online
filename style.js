@@ -1,5 +1,5 @@
 var LIST_LENGTH = 9;
-var names = ["Project by <b>KeyLimePie</b>",".lua to .json converter: <b>PotcFdk</b>","Server hosting: <b>Techbot</b>"];
+var names = ["Project by <a href=\"http://3kv.in/~keylimepie/\" target=\"_blank\"><b>KeyLimePie</b></a>",".lua to .json converter: <b>PotcFdk</b>","Server hosting: <b>Techbot</b>"];
 
 //* show the box where the sample cards are shown
 function slideTimeline (slideOut)	// true:= slide in, false:= slide out
@@ -31,7 +31,7 @@ function changeFooter(x)
 		$.get("bgcredits.txt", function(data)
 		{
 			var credits = data.split("\n");
-			var string = "Background image: <a href=\"".concat(credits[1], "\" target=\"blank\"><b>", credits[0], "</b></a>");
+			var string = "Background image: <a href=\"".concat(credits[1], "\" target=\"_blank\"><b>", credits[0], "</b></a>");
 			names.push(string);
 		});
 	}
@@ -434,7 +434,7 @@ function showAbout()
 				githash = data;
 		}).always(function()
 		{
-			var details = desc.concat("<br/><br/>", credits, "<br/>", "<a href=\"javascript:showLicenses()\">Software licenses</a>", "<br/><br/>This site is based on Git: <br/><i>", githash, "</i><br/>", "Sounds samples are based on SVN: <br/><i>", cs.sampleDB.getRev(), "</i>");
+			var details = desc.concat("<br/><br/>", credits, "<br/>", "<a href=\"javascript:showLicenses()\">Software licenses</a>", "<br/><br/>This site is based on Git: <br/><i>", githash, "</i><br/>", "Sounds samples are based on SVN: <br/><a href=\"https://code.google.com/p/garrysmod-chatsounds/source/list\" target=\"_blank\"><i>", cs.sampleDB.getRev(), "</i></a>");
 			var about = new Notification("Some infos", details, true, Notification.status.KLP);
 			about.init();
 		});
