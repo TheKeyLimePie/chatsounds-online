@@ -51,9 +51,9 @@ $(window).load( function ()
 		  var notiMobile = new Notification("We're not ready for mobile devices", "It seems like you're using a mobile device such as Android or iOS. Unfortunately, Chatsounds online is not optimised for mobile devices. Sure, you can just go on if you want to but there might be some bugs...", true, Notification.status.ERROR);
 		  notiMobile.init();
 	  }
-	  else if(/Valve Source Client|Valve Steam GameOverlay|Valve|Steam/i.test(navigator.userAgent))
+	  else if(/Valve Source Client/i.test(navigator.userAgent))
 	  {
-		  var notiSteam = new Notification("Dude! Srsly?!", "Are you using Chatsounds online via some kind of Steam overlay thingy? C'mon man... Use a -good- browser for ultimate user experience!", true, Notification.status.ERROR);
+		  var notiSteam = new Notification("Dude! Srsly?!", "Are you using Chatsounds online via some kind of ingame overlay thingy?<br/>C'mon man... Use a <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\" title=\"Firefox\">good browser</a> for ultimate user experience!", true, Notification.status.ERROR);
 		  notiSteam.init();
 	  }
 	  
