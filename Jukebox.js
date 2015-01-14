@@ -17,7 +17,7 @@
   Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 */
 
-function Jukebox (input, audioelem, audiosrc, svnpath, playpause, skip, replay, volumeslider, volume, seek, timeline)
+function Jukebox(input, audioelem, audiosrc, svnpath, playpause, skip, replay, volumeslider, volume, seek, timeline)
 {
 	this.input = input;
 	this.audioelem = audioelem;
@@ -31,13 +31,12 @@ function Jukebox (input, audioelem, audiosrc, svnpath, playpause, skip, replay, 
 	this.seek = seek;
 	this.timeline = timeline;
 	
-	this.queue = new Array ();		//contains objects of Sample
+	this.queue = new Array();		//contains objects of Sample
 	this.playing;
 	this.repetitions;
-	this.ui = new JukeboxUI(this.input, this.audioelem, this.playpause, this.skip, this.replay, this.volumeslider, this.volume, this.seek, this.timeline);
 }
 
-Jukebox.prototype.clearQueue = function ()
+Jukebox.prototype.clearQueue = function()
 {
 	this.queue = [];
 }
@@ -49,79 +48,82 @@ Jukebox.prototype.insert = function (sample)
 }
 
 //* sets index/repetitions of current sample, sets source path, updates UI and plays sample
-Jukebox.prototype.playSample = function (index)
+Jukebox.prototype.playSample = function(index)
 {
-		if (index == -1)
+		if(index == -1)
 		{
 			this.playing = -1;
-			this.setSrc (new Sample ("NULL","NULL","NULL","NULL"));
+			this.setSrc(new Sample("NULL","NULL","NULL","NULL"));
 		}
 		else
 		{
 			this.playing = index;
 			this.repetitions = this.queue[index].getRepeat();
-			this.setSrc (this.queue[index]);
-			JukeboxUI.prototype.slideToCard.call(this, index);
-			JukeboxUI.prototype.makeCardActive.call(this, index);
-			JukeboxUI.prototype.playIcon.call(this, "pause");
+			this.setSrc(this.queue[index]);
+			this.slideToCard(index);
+			this.makeCardActive(index);
 			this.play();
 		}
 }
 
 //* initialises queue to play
-Jukebox.prototype.startQueue = function ()
+Jukebox.prototype.startQueue = function()
 {
-	if (this.queue.length == 0)
+	if (!this.queue.length)
 	{
 		console.log("Queue is empty");
 		$(this.seek).css("width", "0%");
-		JukeboxUI.prototype.showTimeline.call(this, this.queue);
-		this.playSample (-1);
+		this.showTimeline(this.queue);
+		this.playSample(-1);
 	}
 	else
 	{
-		JukeboxUI.prototype.showTimeline.call(this, this.queue);
-		this.playSample (0);
+		this.showTimeline(this.queue);
+		this.playSample(0);
 	}
 }
 
 //* sets source path of the audio element and activates loading indicator (headline turns red)
-Jukebox.prototype.setSrc = function (sample)
+Jukebox.prototype.setSrc = function(sample)
 {
-	var path = this.svnpath.concat(sample.getPath ());
-	console.log("Set path: " + sample.getPath ());
+	var path = this.svnpath.concat(sample.getPath());
+	console.log("Set path: " + sample.getPath());
 	$(this.audiosrc).attr("src", path);
 	$(this.audioelem).load();
 	if (sample.getPath() != "NULL")
+	{
+		$("h2").stop();
 		$("h2").animate({color: "#ff4444"}, 100);
+	}
+		
 }
 
 //* plays audio element
-Jukebox.prototype.play = function ()
+Jukebox.prototype.play = function()
 {
-	JukeboxUI.prototype.playIcon.call(this, "pause");
+	this.setPlayIcon("pause");
 	document.getElementById(this.audioelem.substr(1)).play();		//substr(1): ignore #
 }
 
 //* pauses audio element
-Jukebox.prototype.pause = function ()
+Jukebox.prototype.pause = function()
 {
-	JukeboxUI.prototype.playIcon.call(this, "play");
+	this.setPlayIcon("play");
 	document.getElementById(this.audioelem.substr(1)).pause();		//substr(1): ignore #
 	$(this.input).focus();
 	
 }
 
 //* sets volume of audio element
-Jukebox.prototype.setVolume = function (vol)
+Jukebox.prototype.setVolume = function(vol)
 {
 	document.getElementById(this.audioelem.substr(1)).volume = vol; 
 }
 
 //* mutes/unmutes audio and sets the volume icon
-Jukebox.prototype.toggleMute = function ()
+Jukebox.prototype.toggleMute = function()
 {
-	if (document.getElementById(this.audioelem.substr(1)).volume == 0)
+	if(document.getElementById(this.audioelem.substr(1)).volume == 0)
 	{
 		var vol = $(this.volumeslider).slider("value");
 		this.setVolume(vol / 100);
@@ -142,14 +144,89 @@ Jukebox.prototype.toggleMute = function ()
 }
 
 //* skips current sample
-Jukebox.prototype.skipSample = function ()
+Jukebox.prototype.skipSample = function()
 {
 	document.getElementById(this.audioelem.substr(1)).currentTime = document.getElementById(this.audioelem.substr(1)).duration;
 }
 
 //* replays queue
-Jukebox.prototype.replayQueue = function ()
+Jukebox.prototype.replayQueue = function()
 {
 	console.log("Replay queue");
-	this.playSample (0);
+	this.playSample(0);
+}
+
+//################################################
+
+//* scrolls to current sample card, needs index of Jukebox object
+Jukebox.prototype.slideToCard = function(index)
+{
+	var element = "#card_".concat(index);
+	$(this.timeline).mCustomScrollbar("scrollTo", element);
+}
+
+//!!!!!!!!!!!!!!!!!! USE CLASSES
+
+//* removes "active effects" (brighter background and different text color) from all cards and sets it to the current one
+Jukebox.prototype.makeCardActive = function(index)
+{
+	$(".card").css("background", "");
+	$(".card p").css("color", "");
+	$("#card_".concat(index)).animate({background: "#fff"}, "fast");
+	$("#card_".concat(index, " p")).animate({color: "#33b5e5"}, "fast");
+}
+
+//* removes cards from timeline and adds new cards, shows/hides timeline
+Jukebox.prototype.showTimeline = function(queue)
+{
+	$(this.timeline).empty();
+	if (!queue.length)
+		slideTimeline(0);
+	else
+	{
+		for(var x = 0; x < queue.length; x++)
+		{
+			$(this.timeline).append(queue[x].getCard());
+		}
+		slideTimeline(1);
+	}
+}
+
+//* plays/pauses audio
+Jukebox.prototype.playToggle = function()
+{
+	if(document.getElementById(this.audioelem.substr(1)).paused && document.getElementById(this.audioelem.substr(1)).duration > 0)
+		this.play();
+	else if(!document.getElementById(this.audioelem.substr(1)).paused)
+	{
+		this.pause();
+		$(this.input).focus();
+	}
+}
+
+//* sets play or pause icon when audio is paused/playing
+Jukebox.prototype.setPlayIcon = function(status)
+{
+	if (status == "play")
+		$(this.playpause).css("background-image", "url(icons/play_normal.png)");
+	else if (status == "pause")
+		$(this.playpause).css("background-image", "url(icons/pause_normal.png)");
+	else
+		return -1;
+}
+
+//* updates the seeker line of audio, recursive
+Jukebox.prototype.updateSeek = function()
+{
+	if(document.getElementById(this.audioelem.substr(1)).ended)
+		$(this.seek).css("width","100%");
+
+	else if(document.getElementById(this.audioelem.substr(1)).paused)
+		return;		
+	else
+	{
+		var range = (document.getElementById(this.audioelem.substr(1)).currentTime / document.getElementById(this.audioelem.substr(1)).duration) * 100;
+		$(this.seek).css("width", range + "%");
+		requestAnimationFrame(cs.jukebox.updateSeek.bind(this));	//this is not the best way
+	}
 }
