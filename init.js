@@ -128,18 +128,18 @@ $(window).load( function ()
 		  cs.jukebox.playSample (index);
 	  });
 	  
-	  $(cs.jukebox.audioelem).on("canplay", function ()
+	  $(cs.jukebox.AUDIOELEM).on("canplay", function ()
 	  {
 		  $("h2").stop();
 		  $("h2").animate({color: "#33b5e5"}, 100);
 	  });
 	  
-	  $(cs.jukebox.audioelem).on("play", function ()
+	  $(cs.jukebox.AUDIOELEM).on("play", function ()
 	  {
 		  cs.jukebox.updateSeek();
 	  });
 	  
-	  $(cs.jukebox.audioelem).on("ended", function ()
+	  $(cs.jukebox.AUDIOELEM).on("ended", function ()
 	  {
 		  cs.jukebox.setPlayIcon("play");
 		  if (cs.jukebox.repetitions > 1)
