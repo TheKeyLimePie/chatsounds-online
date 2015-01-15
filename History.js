@@ -21,17 +21,12 @@ function History()
 {
 	this.past = new Array();
 	this.future = new Array();
-	this.current;
 }
 
 History.prototype.push = function(object)
 {
-	if(!$.isEmptyObject(this.current))
-	{
-		this.past = this.past.concat(this.future.reverse());
-		this.past.push(this.current);
-	}
-	this.current = object;
+	this.past = this.past.concat(this.future.reverse());
+	this.past.push(this.current);
 }
 
 History.prototype.getPrev = function()
