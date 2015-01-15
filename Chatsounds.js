@@ -384,6 +384,11 @@ Chatsounds.prototype.applyHistoryLength = function()
 		$(this.BACKTXT).html(sizes[0]);
 		$(this.FORTHTXT).html(sizes[1]);
 	}
+	else
+	{
+		$(this.BACKTXT).html("");
+		$(this.FORTHTXT).html("");
+	}
 }
 
 //################################# UI STUFF #################################
