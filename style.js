@@ -264,6 +264,14 @@ function lsd()
 	$(".playerbox_text").css("color", col);
 }
 
+function checkGaben()
+{
+	if(document.getElementById("audio-element").ended)
+		gaben();
+	else
+		GABE = window.setTimeout(function(){checkGaben();}, 5000);
+}
+
 function gaben()
 {
 	var gabe = document.createElement("img");

@@ -82,7 +82,7 @@ $(window).load( function ()
 		  changeBG (url);
 	  }
 	  
-	  GABE = window.setTimeout(function(){gaben();}, 900000);
+	  GABE = window.setTimeout(function(){checkGaben();}, 900000);
 
 	  // character input, backspace, delete, comma, semicolon handled here
 	  $(cs.INPUT).keyup(function(e)
