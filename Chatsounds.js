@@ -23,7 +23,7 @@ function Chatsounds()
 	this.AUDIO = "#audio-element";			//DOM ID of audio tag
 	this.AUDIOSRC = "#audio-src";			//DOM ID of audio source
 	this.SVNPATH = "https://garrysmod-chatsounds.googlecode.com/svn/trunk/sound/";
-	this.URL = "http://chatsounds.3kelv.in/";
+	this.URL = "http://cs.3kv.in/";
 	
 	var audio = document.createElement("audio");
 	audio.setAttribute("id", this.AUDIO.substr(1,this.AUDIO.length));

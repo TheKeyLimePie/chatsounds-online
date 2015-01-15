@@ -30,10 +30,26 @@ function Jukebox(input, audioelem, audiosrc, svnpath, playpause, skip, replay, v
 	this.volume = volume;
 	this.seek = seek;
 	this.timeline = timeline;
+	this.history = new History();
 	
 	this.queue = new Array();		//contains objects of Sample
 	this.playing;
 	this.repetitions;
+}
+
+Jukebox.prototype.saveToHistory = function()
+{
+	this.history.push(this.queue);
+}
+
+Jukebox.prototype.historyBack = function()
+{
+	this.queue = this.history.getPrev();
+}
+
+Jukebox.prototype.historyForth = function()
+{
+	this.queue = this.history.getFollowing();
 }
 
 Jukebox.prototype.clearQueue = function()
@@ -42,7 +58,7 @@ Jukebox.prototype.clearQueue = function()
 }
 
 //* adds Sample object to queue
-Jukebox.prototype.insert = function (sample)
+Jukebox.prototype.insert = function(sample)
 {
 	this.queue.push(sample);
 }
@@ -155,8 +171,6 @@ Jukebox.prototype.replayQueue = function()
 	console.log("Replay queue");
 	this.playSample(0);
 }
-
-//################################################
 
 //* scrolls to current sample card, needs index of Jukebox object
 Jukebox.prototype.slideToCard = function(index)
