@@ -165,12 +165,10 @@ Jukebox.prototype.slideToCard = function(index)
 	$(this.timeline).mCustomScrollbar("scrollTo", element);
 }
 
-//* removes "active effects" (brighter background and different text color) from all cards and sets it to the current one
+//* removes "active effects" (different text color) from all cards and sets it to the current one
 Jukebox.prototype.makeCardActive = function(index)
 {
-	$(".card_active").removeClass("card_active", "fast");
-	$(".card_active_p").removeClass("card_active_p", "fast");
-	$("#card_".concat(index)).addClass("card_active", "fast");
+	$(".card_active_p").removeClass("card_active_p");
 	$("#card_".concat(index, " p")).addClass("card_active_p", "fast");
 }
 
