@@ -21,32 +21,44 @@ function History()
 {
 	this.past = new Array();
 	this.future = new Array();
+	this.current;
 }
 
 History.prototype.push = function(object)
 {
-	this.past = this.past.concat(this.future.reverse());
-	this.past.push(this.current);
+	if(!$.isEmptyObject(this.current))
+	{
+		this.past = this.past.concat(this.future.reverse());
+		this.past.push(this.current);
+	}
+	
+	this.current = object;
 }
 
 History.prototype.getPrev = function()
 {
-	var prev = this.past.pop();
-	if($.isEmptyObject(prev))
-		return -1;
-	
-	this.future.push(prev);
-	return prev;
+	if(!$.isEmptyObject(this.current) && !$.isEmptyObject(this.past))
+	{
+		this.future.push(this.current);
+		this.current = this.past.pop();
+		
+		return this.current;
+	}
+
+	return -1;
 }
 
 History.prototype.getFollowing = function()
 {
-	var following = this.future.pop();
-	if($.isEmptyObject(following))
-		return -1;
+	if(!$.isEmptyObject(this.current) && !$.isEmptyObject(this.future))
+	{
+		this.past.push(this.current);
+		this.current = this.future.pop();
+		
+		return this.current;
+	}
 	
-	this.past.push(following);
-	return following;
+	return -1;
 }
 
 History.prototype.getHistory = function()

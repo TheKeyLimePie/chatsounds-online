@@ -66,7 +66,11 @@ Chatsounds.prototype.action = function()
 	this.makeQueue();
 	this.setInput("");
 	if(this.samples.length > 0)
+	{
 		showLink(1, this.generateLink ());
+		this.jukebox.saveToHistory();
+	}
+		
 	this.jukebox.startQueue();
 	$(this.INPUT).blur();
 }
