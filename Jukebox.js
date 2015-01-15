@@ -171,7 +171,9 @@ Jukebox.prototype.slideToCard = function(index)
 Jukebox.prototype.makeCardActive = function(index)
 {
 	$(".card_active").removeClass("card_active", "fast");
+	$(".card_active_p").removeClass(".card_active_p", "fast");
 	$("#card_".concat(index)).addClass("card_active", "fast");
+	$("#card_".concat(index, " p")).addClass("card_active_p", "fast");
 }
 
 //* removes cards from timeline and adds new cards, shows/hides timeline
