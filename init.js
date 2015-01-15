@@ -152,6 +152,9 @@ $(window).load( function ()
 			  cs.jukebox.playSample (parseInt(cs.jukebox.playing) + 1);
 		  }
 		  else
-		  	$("#search-string").focus();
+		  {
+			  cs.jukebox.makeCardActive(-1);
+			  $("#search-string").focus();
+		  }	
 	  });
   });
