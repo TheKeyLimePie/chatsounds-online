@@ -50,11 +50,12 @@ function Chatsounds()
 	this.BACKTXT = "#playerbox_history_back";
 	this.FORTHTXT = "#playerbox_history_forth";
 	
+	this.history = new History();
 	this.handledInput = new Array();							//handled input is saved here; array of objects
 	this.sampleDB = new Samplebase();							//object of Samplebase
 	this.parameters = new URLParameter();						//object of URLParameter
 	//Note: Use Decorator pattern in future
-	this.jukebox = new Jukebox(this.INPUT, this.AUDIO, this.AUDIOSRC, this.SVNPATH, this.PLAYPAUSE, this.SKIP, this.REPLAY, this.BACK, this.FORTH, this.VOLUMESLIDER, this.VOLUME, this.SEEK, this.TIMELINE, this.BACKTXT, this.FORTHTXT);
+	this.jukebox = new Jukebox(this.INPUT, this.AUDIO, this.AUDIOSRC, this.SVNPATH, this.PLAYPAUSE, this.SKIP, this.REPLAY, this.BACK, this.FORTH, this.VOLUMESLIDER, this.VOLUME, this.SEEK, this.TIMELINE);
 	this.topResults = new Array();								//shown in suggestions list
 	this.samples = new Array();									//Sample objects are saved here
 }
@@ -71,8 +72,8 @@ Chatsounds.prototype.action = function()
 	this.setInput("");
 	if(this.samples.length > 0)
 	{
-		showLink(1, this.generateLink ());
-		this.jukebox.saveToHistory();
+		showLink(1, this.generateLink());
+		this.saveToHistory();
 	}
 		
 	this.jukebox.startQueue();
@@ -336,6 +337,52 @@ Chatsounds.prototype.makeQueue = function()
 			this.addSample(new Sample(matches[index]["name"], matches[index]["path"], index + 1, repetitions, x));
 			this.jukebox.insert(this.samples[this.samples.length - 1]);
 		}
+	}
+}
+
+//* adds current queue to history
+Chatsounds.prototype.saveToHistory = function()
+{
+	this.history.push(this.samples);
+	this.applyHistoryLength();
+}
+
+//* plays the previous queue
+Chatsounds.prototype.historyBack = function()
+{
+	this.samples = this.history.getPrev();
+	this.jukebox.clearQueue();
+	for(var x = 0; x < this.samples.length; x++)
+	{
+		this.jukebox.insert(this.samples[x]);
+	}
+	this.applyHistoryLength();
+	showLink(1, this.generateLink());
+	this.jukebox.startQueue(0);
+}
+
+//* plays the following queue
+Chatsounds.prototype.historyForth = function()
+{
+	this.samples = this.history.getFollowing();
+	this.jukebox.clearQueue();
+	for(var x = 0; x < this.samples.length; x++)
+	{
+		this.jukebox.insert(this.samples[x]);
+	}
+	this.applyHistoryLength();
+	showLink(1, this.generateLink());
+	this.jukebox.startQueue(0);
+}
+
+//* updates stack size infos to UI
+Chatsounds.prototype.applyHistoryLength = function()
+{
+	var sizes = this.history.getSizes();
+	if(sizes[0] != 0 || sizes[1] != 0) //you don't need this info as long as you haven't saved any history
+	{
+		$(this.BACKTXT).html(sizes[0]);
+		$(this.FORTHTXT).html(sizes[1]);
 	}
 }
 
