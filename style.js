@@ -269,7 +269,10 @@ function checkGaben()
 	if(document.getElementById("audio-element").ended)
 		gaben();
 	else
-		GABE = window.setTimeout(function(){checkGaben();}, 5000);
+	{
+		console.log("Guess I'm waiting like you do with HL3...");
+		GABE = window.setTimeout(function(){checkGaben();}, 10000);
+	}	
 }
 
 function gaben()
