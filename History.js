@@ -45,7 +45,8 @@ History.prototype.getPrev = function()
 		return this.current;
 	}
 
-	return -1;
+	this.current = -1;
+	return this.current;
 }
 
 History.prototype.getFollowing = function()
@@ -58,7 +59,8 @@ History.prototype.getFollowing = function()
 		return this.current;
 	}
 	
-	return -1;
+	this.current = -1;
+	return this.current;
 }
 
 History.prototype.getHistory = function()
