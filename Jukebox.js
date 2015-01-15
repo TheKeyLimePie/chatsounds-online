@@ -170,10 +170,8 @@ Jukebox.prototype.slideToCard = function(index)
 //* removes "active effects" (brighter background and different text color) from all cards and sets it to the current one
 Jukebox.prototype.makeCardActive = function(index)
 {
-	$(".card").css("background", "");
-	$(".card p").css("color", "");
-	$("#card_".concat(index)).animate({background: "#fff"}, "fast");
-	$("#card_".concat(index, " p")).animate({color: "#33b5e5"}, "fast");
+	$(".card_active").removeClass("card_active", "fast");
+	$("#card_".concat(index)).addClass("card_active", "fast");
 }
 
 //* removes cards from timeline and adds new cards, shows/hides timeline

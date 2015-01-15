@@ -69,3 +69,13 @@
 {
 	float: right;
 }
+
+.card_active
+{
+	background-color: #fff;
+}
+
+.card_active p
+{
+	color: #33b5e5;
+}
