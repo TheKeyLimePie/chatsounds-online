@@ -141,7 +141,7 @@ $(window).load( function ()
 	  
 	  $(cs.jukebox.audioelem).on("ended", function ()
 	  {
-		  cs.jukebox.ui.playIcon("play");
+		  cs.jukebox.playIcon("play");
 		  if (cs.jukebox.repetitions > 1)
 		  {
 			  cs.jukebox.repetitions--;
