@@ -29,7 +29,7 @@ History.prototype.push = function(object)
 	if(!$.isEmptyObject(this.current))
 	{
 		this.past = this.past.concat(this.future.reverse());
-		this.past.push(object);
+		this.past.push(current);
 	}
 	this.current = object;
 }
