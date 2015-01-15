@@ -76,3 +76,12 @@ History.prototype.getSizes = function()
 {
 	return [this.past.length, this.future.length];
 }
+
+//* wipes history stacks
+History.prototype.wipe = function()
+{
+	console.log("Wiping history");
+	this.past = new Array();
+	this.future = new Array();
+	this.current = new Array();
+}
