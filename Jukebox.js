@@ -165,13 +165,11 @@ Jukebox.prototype.slideToCard = function(index)
 	$(this.timeline).mCustomScrollbar("scrollTo", element);
 }
 
-//!!!!!!!!!!!!!!!!!! USE CLASSES
-
 //* removes "active effects" (brighter background and different text color) from all cards and sets it to the current one
 Jukebox.prototype.makeCardActive = function(index)
 {
 	$(".card_active").removeClass("card_active", "fast");
-	$(".card_active_p").removeClass(".card_active_p", "fast");
+	$(".card_active_p").removeClass("card_active_p", "fast");
 	$("#card_".concat(index)).addClass("card_active", "fast");
 	$("#card_".concat(index, " p")).addClass("card_active_p", "fast");
 }
@@ -227,6 +225,6 @@ Jukebox.prototype.updateSeek = function()
 	{
 		var range = (document.getElementById(this.audioelem.substr(1)).currentTime / document.getElementById(this.audioelem.substr(1)).duration) * 100;
 		$(this.seek).css("width", range + "%");
-		requestAnimationFrame(cs.jukebox.updateSeek.bind(this));	//this is not the best way
+		requestAnimationFrame(Jukebox.prototype.updateSeek.bind(this));
 	}
 }
