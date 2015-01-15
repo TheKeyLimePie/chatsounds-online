@@ -84,6 +84,22 @@ function sliderInit ()
 		
 		stop: function (event, ui)
 		{
+			var tooltip_value = slider.slider('value');
+			var tooltip_value_percent = $("#playerbox_volume_slider").innerWidth() / 100;
+			cs.jukebox.setVolume(tooltip_value/100);
+			
+			var volume = $("#playerbox_volume_volume");
+			tooltip.css("left", tooltip_value*tooltip_value_percent).text(ui.value);
+		
+			if (tooltip_value <= 25)
+				volume.css("background-position", "0 -15px");
+			else if (tooltip_value <= 50)
+				volume.css("background-position", "0 -30px");
+			else if (tooltip_value <= 75)
+				volume.css("background-position", "0 -45px");
+			else if (tooltip_value <= 100)
+				volume.css("background-position", "0 -60px");
+			
 			tooltip.stop();
 			tooltip.fadeOut("fast");
 		}
