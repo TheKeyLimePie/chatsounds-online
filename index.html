@@ -94,11 +94,13 @@
             </div>
             <div id="playerbox">
                 <div id="playerbox_controls">
+                	<p class="playerbox_text" id="playerbox_history_back"></p>
                 	<div class="playerbox_button fi-arrow-left" id="playerbox_controls_back" title="Previous queue" onClick="cs.jukebox.historyBack()"></div>
                 	<div class="playerbox_button fi-play-circle" id="playerbox_controls_replay" title="Replay queue" onClick="cs.jukebox.replayQueue()"></div>
                     <div class="playerbox_button fi-play" id="playerbox_controls_play" title="Play/Pause" onClick="cs.jukebox.playToggle()"></div>
                     <div class="playerbox_button fi-fast-forward" id="playerbox_controls_skip" title="Skip" onClick="cs.jukebox.skipSample()"></div>
                     <div class="playerbox_button fi-arrow-right" id="playerbox_controls_forth" title="Following queue" onClick="cs.jukebox.historyForth()"></div>
+                    <p class="playerbox_text" id="playerbox_history_forth"></p>
                 </div>
                 <section id="playerbox_volume">
                     <span id="playerbox_volume_tooltip"></span>

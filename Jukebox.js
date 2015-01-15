@@ -17,7 +17,7 @@
   Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 */
 
-function Jukebox(input, audioelem, audiosrc, svnpath, playpause, skip, replay, back, forth, volumeslider, volume, seek, timeline)
+function Jukebox(input, audioelem, audiosrc, svnpath, playpause, skip, replay, back, forth, volumeslider, volume, seek, timeline, backtxt, forthtxt)
 {
 	this.INPUT = input;
 	this.AUDIOELEM = audioelem;
@@ -32,6 +32,8 @@ function Jukebox(input, audioelem, audiosrc, svnpath, playpause, skip, replay, b
 	this.VOLUME = volume;
 	this.SEEK = seek;
 	this.TIMELINE = timeline;
+	this.BACKTXT = backtxt;
+	this.FORTHTXT = forthtxt;
 	
 	this.history = new History();
 	this.queue = new Array();		//contains objects of Sample
@@ -54,6 +56,13 @@ Jukebox.prototype.historyForth = function()
 {
 	this.queue = this.history.getFollowing();
 	this.startQueue(0);
+}
+
+Jukebox.prototype.applyHistoryLength = function()
+{
+	var sizes = this.history.getSizes();
+	$(this.BACKTXT).html(sizes[0]);
+	$(this.FORTHTXT).html(sizes[1]);
 }
 
 Jukebox.prototype.clearQueue = function()

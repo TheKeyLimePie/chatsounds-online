@@ -16,6 +16,16 @@
 	text-align: center;
 }
 
+#playerbox_history_back
+{
+	margin-right: 5px;
+}
+
+#playerbox_history_forth
+{
+	margin-left: 5px;
+}
+
 #playerbox_controls
 {
 	width: auto;
@@ -108,6 +118,13 @@
 	
 }
 /* BY CLASS */
+.playerbox_text
+{
+	font-size: 15px;
+	display: inline-block;
+	max-width: 30px;
+}
+
 .playerbox_button
 {
 	width: auto;

@@ -69,3 +69,9 @@ History.prototype.getHistory = function()
 {
 	return this.past.concat(this.future.reverse());
 }
+
+//* returns both stack sizes
+History.prototype.getSizes = function()
+{
+	return [this.past.length, this.future.length];
+}
