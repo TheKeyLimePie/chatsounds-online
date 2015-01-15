@@ -136,7 +136,7 @@ $(window).load( function ()
 	  
 	  $(cs.jukebox.audioelem).on("play", function ()
 	  {
-		  cs.jukebox.ui.updateSeek();
+		  cs.jukebox.updateSeek();
 	  });
 	  
 	  $(cs.jukebox.audioelem).on("ended", function ()
@@ -146,7 +146,6 @@ $(window).load( function ()
 		  {
 			  cs.jukebox.repetitions--;
 			  cs.jukebox.play();
-			  cs.jukebox.ui.playIcon("pause");
 		  }
 		  else if (parseInt(cs.jukebox.playing) < cs.jukebox.queue.length - 1)
 		  {
