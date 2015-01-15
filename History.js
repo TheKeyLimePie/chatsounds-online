@@ -21,7 +21,7 @@ function History()
 {
 	this.past = new Array(); //every queue before the current queue is here
 	this.future = new Array(); //everything after the current queue is here
-	this.current; //the current queue which is loaded in jukebox
+	this.current = new Array(); //the current queue which is loaded in jukebox
 }
 
 //* adds new sample array to the history stack; the current queue is saved in current
