@@ -142,7 +142,7 @@
 .playerbox_button:hover
 {
 	opacity: 0.9;
-	transition: opacity 0.9;
+	transition: opacity 0.2s;
 }
 
 .ui-slider-handle

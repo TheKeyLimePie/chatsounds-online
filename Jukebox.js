@@ -41,12 +41,14 @@ function Jukebox(input, audioelem, audiosrc, svnpath, playpause, skip, replay, b
 	this.repetitions;
 }
 
+//* adds current queue to history
 Jukebox.prototype.saveToHistory = function()
 {
 	this.history.push(this.queue);
 	this.applyHistoryLength();
 }
 
+//* plays the previous queue
 Jukebox.prototype.historyBack = function()
 {
 	this.queue = this.history.getPrev();
@@ -54,6 +56,7 @@ Jukebox.prototype.historyBack = function()
 	this.startQueue(0);
 }
 
+//* plays the following queue
 Jukebox.prototype.historyForth = function()
 {
 	this.queue = this.history.getFollowing();
@@ -61,11 +64,16 @@ Jukebox.prototype.historyForth = function()
 	this.startQueue(0);
 }
 
+//* updates stack size infos to UI
 Jukebox.prototype.applyHistoryLength = function()
 {
 	var sizes = this.history.getSizes();
-	$(this.BACKTXT).html(sizes[0]);
-	$(this.FORTHTXT).html(sizes[1]);
+	if(sizes[0] != 0 || sizes[1] != 0) //you don't need this info as long as you haven't saved any history
+	{
+		$(this.BACKTXT).html(sizes[0]);
+		$(this.FORTHTXT).html(sizes[1]);
+	}
+	
 }
 
 Jukebox.prototype.clearQueue = function()
