@@ -223,9 +223,16 @@ Jukebox.prototype.playToggle = function()
 Jukebox.prototype.setPlayIcon = function(status)
 {
 	if (status == "play")
-		$(this.PLAYPAUSE).switchClass("fi-pause", "fi-play");
+	{
+		$(this.PLAYPAUSE).removeClass("fi-pause")
+		$(this.PLAYPAUSE).addClass("fi-play");
+	}
+		
 	else if (status == "pause")
-		$(this.PLAYPAUSE).switchClass("fi-play", "fi-pause");
+	{
+		$(this.PLAYPAUSE).removeClass("fi-play");
+		$(this.PLAYPAUSE).addClass("fi-pause");
+	}
 	else
 		return -1;
 }

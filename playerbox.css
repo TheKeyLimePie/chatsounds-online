@@ -37,6 +37,7 @@
 
 #playerbox_controls_play
 {
+	width: 64px;
 }
 
 #playerbox_controls_skip
@@ -113,7 +114,7 @@
 	height: auto;
 	display: inline-block;
 	cursor: pointer;
-	margin-left: 25px;
+	margin-left: 20px;
 	color: #33b5e5;
 	opacity: 0.5;
 	vertical-align: middle;
