@@ -41,6 +41,8 @@ function Chatsounds()
 	this.PLAYPAUSE = "#playerbox_controls_play";
 	this.SKIP = "#playerbox_controls_skip";
 	this.REPLAY = "#playerbox_controls_replay";
+	this.BACK = "#playerbox_controls_back";
+	this.FORTH = "#playerbox_controls_forth";
 	this.VOLUMESLIDER = "#playerbox_volume_slider";
 	this.VOLUME = "#playerbox_volume_volume";
 	this.SEEK = "#headbar_seek";
@@ -50,7 +52,7 @@ function Chatsounds()
 	this.sampleDB = new Samplebase();							//object of Samplebase
 	this.parameters = new URLParameter();						//object of URLParameter
 	//Note: Use Decorator pattern in future
-	this.jukebox = new Jukebox(this.INPUT, this.AUDIO, this.AUDIOSRC, this.SVNPATH, this.PLAYPAUSE, this.SKIP, this.REPLAY, this.VOLUMESLIDER, this.VOLUME, this.SEEK, this.TIMELINE);
+	this.jukebox = new Jukebox(this.INPUT, this.AUDIO, this.AUDIOSRC, this.SVNPATH, this.PLAYPAUSE, this.SKIP, this.REPLAY, this.BACK, this.FORTH, this.VOLUMESLIDER, this.VOLUME, this.SEEK, this.TIMELINE);
 	this.topResults = new Array();								//shown in suggestions list
 	this.samples = new Array();									//Sample objects are saved here
 }

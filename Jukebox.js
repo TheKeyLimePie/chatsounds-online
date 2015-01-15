@@ -17,21 +17,23 @@
   Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 */
 
-function Jukebox(input, audioelem, audiosrc, svnpath, playpause, skip, replay, volumeslider, volume, seek, timeline)
+function Jukebox(input, audioelem, audiosrc, svnpath, playpause, skip, replay, back, forth, volumeslider, volume, seek, timeline)
 {
-	this.input = input;
-	this.audioelem = audioelem;
-	this.audiosrc = audiosrc;
-	this.svnpath = svnpath;
-	this.playpause = playpause;
-	this.skip = skip;
-	this.replay = replay;
-	this.volumeslider = volumeslider;
-	this.volume = volume;
-	this.seek = seek;
-	this.timeline = timeline;
-	this.history = new History();
+	this.INPUT = input;
+	this.AUDIOELEM = audioelem;
+	this.AUDIOSRC = audiosrc;
+	this.SVNPATH = svnpath;
+	this.PLAYPAUSE = playpause;
+	this.SKIP = skip;
+	this.REPLAY = replay;
+	this.BACK = back;
+	this.FORTH = forth;
+	this.VOLUMESLIDER = volumeslider;
+	this.VOLUME = volume;
+	this.SEEK = seek;
+	this.TIMELINE = timeline;
 	
+	this.history = new History();
 	this.queue = new Array();		//contains objects of Sample
 	this.playing;
 	this.repetitions;
@@ -90,7 +92,7 @@ Jukebox.prototype.startQueue = function()
 	if (!this.queue.length)
 	{
 		console.log("Queue is empty");
-		$(this.seek).css("width", "0%");
+		$(this.SEEK).css("width", "0%");
 		this.showTimeline(this.queue);
 		this.playSample(-1);
 	}
@@ -104,10 +106,10 @@ Jukebox.prototype.startQueue = function()
 //* sets source path of the audio element and activates loading indicator (headline turns red)
 Jukebox.prototype.setSrc = function(sample)
 {
-	var path = this.svnpath.concat(sample.getPath());
+	var path = this.SVNPATH.concat(sample.getPath());
 	console.log("Set path: " + sample.getPath());
-	$(this.audiosrc).attr("src", path);
-	$(this.audioelem).load();
+	$(this.AUDIOSRC).attr("src", path);
+	$(this.AUDIOELEM).load();
 	if (sample.getPath() != "NULL")
 	{
 		$("h2").stop();
@@ -120,51 +122,51 @@ Jukebox.prototype.setSrc = function(sample)
 Jukebox.prototype.play = function()
 {
 	this.setPlayIcon("pause");
-	document.getElementById(this.audioelem.substr(1)).play();		//substr(1): ignore #
+	document.getElementById(this.AUDIOELEM.substr(1)).play();		//substr(1): ignore #
 }
 
 //* pauses audio element
 Jukebox.prototype.pause = function()
 {
 	this.setPlayIcon("play");
-	document.getElementById(this.audioelem.substr(1)).pause();		//substr(1): ignore #
-	$(this.input).focus();
+	document.getElementById(this.AUDIOELEM.substr(1)).pause();		//substr(1): ignore #
+	$(this.INPUT).focus();
 	
 }
 
 //* sets volume of audio element
 Jukebox.prototype.setVolume = function(vol)
 {
-	document.getElementById(this.audioelem.substr(1)).volume = vol; 
+	document.getElementById(this.AUDIOELEM.substr(1)).volume = vol; 
 }
 
 //* mutes/unmutes audio and sets the volume icon
 Jukebox.prototype.toggleMute = function()
 {
-	if(document.getElementById(this.audioelem.substr(1)).volume == 0)
+	if(document.getElementById(this.AUDIOELEM.substr(1)).volume == 0)
 	{
-		var vol = $(this.volumeslider).slider("value");
+		var vol = $(this.VOLUMESLIDER).slider("value");
 		this.setVolume(vol / 100);
 		if (vol <= 25)
-			$(this.volume).css("background-position", "0 -15px");
+			$(this.VOLUME).css("background-position", "0 -15px");
 		else if (vol <= 50)
-			$(this.volume).css("background-position", "0 -30px");
+			$(this.VOLUME).css("background-position", "0 -30px");
 		else if (vol <= 75)
-			$(this.volume).css("background-position", "0 -45px");
+			$(this.VOLUME).css("background-position", "0 -45px");
 		else if (vol <= 100)
-			$(this.volume).css("background-position", "0 -60px");
+			$(this.VOLUME).css("background-position", "0 -60px");
 	}
 	else
 	{
 		this.setVolume(0);
-		$(this.volume).css("background-position", "0 0px");
+		$(this.VOLUME).css("background-position", "0 0px");
 	}
 }
 
 //* skips current sample
 Jukebox.prototype.skipSample = function()
 {
-	document.getElementById(this.audioelem.substr(1)).currentTime = document.getElementById(this.audioelem.substr(1)).duration;
+	document.getElementById(this.AUDIOELEM.substr(1)).currentTime = document.getElementById(this.AUDIOELEM.substr(1)).duration;
 }
 
 //* replays queue
@@ -178,7 +180,7 @@ Jukebox.prototype.replayQueue = function()
 Jukebox.prototype.slideToCard = function(index)
 {
 	var element = "#card_".concat(index);
-	$(this.timeline).mCustomScrollbar("scrollTo", element);
+	$(this.TIMELINE).mCustomScrollbar("scrollTo", element);
 }
 
 //* removes "active effects" (different text color) from all cards and sets it to the current one
@@ -192,14 +194,14 @@ Jukebox.prototype.makeCardActive = function(index)
 //* removes cards from timeline and adds new cards, shows/hides timeline
 Jukebox.prototype.showTimeline = function(queue)
 {
-	$(this.timeline).empty();
+	$(this.TIMELINE).empty();
 	if (!queue.length)
 		slideTimeline(0);
 	else
 	{
 		for(var x = 0; x < queue.length; x++)
 		{
-			$(this.timeline).append(queue[x].getCard());
+			$(this.TIMELINE).append(queue[x].getCard());
 		}
 		slideTimeline(1);
 	}
@@ -208,12 +210,12 @@ Jukebox.prototype.showTimeline = function(queue)
 //* plays/pauses audio
 Jukebox.prototype.playToggle = function()
 {
-	if(document.getElementById(this.audioelem.substr(1)).paused && document.getElementById(this.audioelem.substr(1)).duration > 0)
+	if(document.getElementById(this.AUDIOELEM.substr(1)).paused && document.getElementById(this.AUDIOELEM.substr(1)).duration > 0)
 		this.play();
-	else if(!document.getElementById(this.audioelem.substr(1)).paused)
+	else if(!document.getElementById(this.AUDIOELEM.substr(1)).paused)
 	{
 		this.pause();
-		$(this.input).focus();
+		$(this.INPUT).focus();
 	}
 }
 
@@ -221,9 +223,9 @@ Jukebox.prototype.playToggle = function()
 Jukebox.prototype.setPlayIcon = function(status)
 {
 	if (status == "play")
-		$(this.playpause).css("background-image", "url(icons/play_normal.png)");
+		$(this.PLAYPAUSE).switchClass("fi-pause", "fi-play");
 	else if (status == "pause")
-		$(this.playpause).css("background-image", "url(icons/pause_normal.png)");
+		$(this.PLAYPAUSE).switchClass("fi-play", "fi-pause");
 	else
 		return -1;
 }
@@ -231,15 +233,15 @@ Jukebox.prototype.setPlayIcon = function(status)
 //* updates the seeker line of audio, recursive
 Jukebox.prototype.updateSeek = function()
 {
-	if(document.getElementById(this.audioelem.substr(1)).ended)
-		$(this.seek).css("width","100%");
+	if(document.getElementById(this.AUDIOELEM.substr(1)).ended)
+		$(this.SEEK).css("width","100%");
 
-	else if(document.getElementById(this.audioelem.substr(1)).paused)
+	else if(document.getElementById(this.AUDIOELEM.substr(1)).paused)
 		return;		
 	else
 	{
-		var range = (document.getElementById(this.audioelem.substr(1)).currentTime / document.getElementById(this.audioelem.substr(1)).duration) * 100;
-		$(this.seek).css("width", range + "%");
+		var range = (document.getElementById(this.AUDIOELEM.substr(1)).currentTime / document.getElementById(this.AUDIOELEM.substr(1)).duration) * 100;
+		$(this.SEEK).css("width", range + "%");
 		requestAnimationFrame(Jukebox.prototype.updateSeek.bind(this));
 	}
 }

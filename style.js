@@ -260,6 +260,7 @@ function lsd()
     $(".ui-slider-range").css("background", col);
 	$("#search-string").css("color", col);
 	$("#suggestions tr td").css("color", col);
+	$(".playerbox_button").css("color", col);
 }
 
 function gaben()
