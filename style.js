@@ -261,6 +261,7 @@ function lsd()
 	$("#search-string").css("color", col);
 	$("#suggestions tr td").css("color", col);
 	$(".playerbox_button").css("color", col);
+	$(".playerbox_text").css("color", col);
 }
 
 function gaben()

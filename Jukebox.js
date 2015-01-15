@@ -44,17 +44,20 @@ function Jukebox(input, audioelem, audiosrc, svnpath, playpause, skip, replay, b
 Jukebox.prototype.saveToHistory = function()
 {
 	this.history.push(this.queue);
+	this.applyHistoryLength();
 }
 
 Jukebox.prototype.historyBack = function()
 {
 	this.queue = this.history.getPrev();
+	this.applyHistoryLength();
 	this.startQueue(0);
 }
 
 Jukebox.prototype.historyForth = function()
 {
 	this.queue = this.history.getFollowing();
+	this.applyHistoryLength();
 	this.startQueue(0);
 }
 
