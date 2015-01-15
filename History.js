@@ -29,9 +29,9 @@ History.prototype.push = function(object)
 {
 	if(!$.isEmptyObject(this.current))
 	{
+		this.past.push(this.current);
 		this.past = this.past.concat(this.future.reverse());
 		this.future = new Array();
-		this.past.push(this.current);
 	}
 	
 	this.current = object;
