@@ -45,11 +45,13 @@ Jukebox.prototype.saveToHistory = function()
 Jukebox.prototype.historyBack = function()
 {
 	this.queue = this.history.getPrev();
+	this.startQueue(0);
 }
 
 Jukebox.prototype.historyForth = function()
 {
 	this.queue = this.history.getFollowing();
+	this.startQueue(0);
 }
 
 Jukebox.prototype.clearQueue = function()

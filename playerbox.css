@@ -24,47 +24,29 @@
 	border-bottom: 1px #ccc solid;
 }
 
-#playerbox_controls_replay
+#playerbox_controls_back
 {
-	background-image: url(icons/replay_normal.png);
-	background-position: center center;
-	background-repeat: no-repeat;
-	opacity: 0.6;
-	transition: opacity 0.2s;
-}
-#playerbox_controls_replay:hover
-{
-	opacity: 1;
-	transition: opacity 0.2s;
+	font-size: 40px;
+	margin-left: 0;
 }
 
+#playerbox_controls_replay
+{
+	font-size: 50px;
+}
 
 #playerbox_controls_play
 {
-	background-image: url(icons/play_normal.png);
-	background-position: center center;
-	background-repeat: no-repeat;
-	opacity: 0.6;
-	transition: opacity 0.2s;
-}
-#playerbox_controls_play:hover
-{
-	opacity: 1;
-	transition: opacity 0.2s;
 }
 
 #playerbox_controls_skip
 {
-	background-image: url(icons/skip_normal.png);
-	background-position: center center;
-	background-repeat: no-repeat;
-	opacity: 0.6;
-	transition: opacity 0.2s;
+	font-size: 50px;
 }
-#playerbox_controls_skip:hover
+
+#playerbox_controls_forth
 {
-	opacity: 1;
-	transition: opacity 0.2s;
+	font-size: 40px;
 }
 
 #playerbox_volume
@@ -127,10 +109,21 @@
 /* BY CLASS */
 .playerbox_button
 {
-	width: 64px;
-	height: 64px;
+	width: auto;
+	height: auto;
 	display: inline-block;
 	cursor: pointer;
+	margin-left: 25px;
+	color: #33b5e5;
+	opacity: 0.5;
+	vertical-allign: middle;
+	font-size: 64px;
+}
+
+.playerbox_button:hover
+{
+	opacity: 0.9;
+	transition: opacity 0.9;
 }
 
 .ui-slider-handle
