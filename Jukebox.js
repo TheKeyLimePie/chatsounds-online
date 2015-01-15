@@ -32,8 +32,6 @@ function Jukebox(input, audioelem, audiosrc, svnpath, playpause, skip, replay, b
 	this.VOLUME = volume;
 	this.SEEK = seek;
 	this.TIMELINE = timeline;
-	this.BACKTXT = backtxt;
-	this.FORTHTXT = forthtxt;
 	
 	this.queue = new Array();		//contains objects of Sample
 	this.playing;
