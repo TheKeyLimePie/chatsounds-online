@@ -19,11 +19,12 @@
 
 function History()
 {
-	this.past = new Array();
-	this.future = new Array();
-	this.current;
+	this.past = new Array(); //every queue before the current queue is here
+	this.future = new Array(); //everything after the current queue is here
+	this.current; //the current queue which is loaded in jukebox
 }
 
+//* adds new sample array to the history stack; the current queue is saved in current
 History.prototype.push = function(object)
 {
 	if(!$.isEmptyObject(this.current))
@@ -35,6 +36,7 @@ History.prototype.push = function(object)
 	this.current = object;
 }
 
+//* returns the previous sample array; when the end is reached it will keep returning the last queue
 History.prototype.getPrev = function()
 {
 	if(!$.isEmptyObject(this.current) && !$.isEmptyObject(this.past))
@@ -45,10 +47,10 @@ History.prototype.getPrev = function()
 		return this.current;
 	}
 
-	this.current = -1;
 	return this.current;
 }
 
+//* returns the following sample array; when the end is reached it will keep returning the latest queue
 History.prototype.getFollowing = function()
 {
 	if(!$.isEmptyObject(this.current) && !$.isEmptyObject(this.future))
@@ -58,11 +60,11 @@ History.prototype.getFollowing = function()
 		
 		return this.current;
 	}
-	
-	this.current = -1;
+
 	return this.current;
 }
 
+//* returns the whole history
 History.prototype.getHistory = function()
 {
 	return this.past.concat(this.future.reverse());
