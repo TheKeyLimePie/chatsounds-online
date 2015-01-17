@@ -169,6 +169,7 @@ function liveSearchManager(e)
 	}
 	else if(e.which == 188) //188: comma
 	{
+		cs.setInput(cs.getInput().concat(" "));
 		cs.addLiveSearchPointer(cs.getInput().length);
 		showSugg([]);
 	}	
