@@ -240,10 +240,11 @@ function takeSugg(trObject)
 
 	var input = value.substring(0, cs.getLiveSearchPointer());
 	
-	input = input.concat(trObject.children().text());
+	input = input.concat(trObject.children().text(), " ");
 	
 	$(trObject).removeClass("selected");
 	cs.addLiveSearchPointer(input.length);
+	showSugg("");
 	cs.setInput(input);
 }
 

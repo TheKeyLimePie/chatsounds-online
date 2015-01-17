@@ -65,6 +65,7 @@ function Chatsounds()
 Chatsounds.prototype.action = function()
 {
 	this.jukebox.clearQueue();
+	this.clearLiveSearchPointer();
 	this.clearSamples();
 	showSugg([]);
 	showLink(0);
@@ -116,6 +117,11 @@ Chatsounds.prototype.addLiveSearchPointer = function(val)
 Chatsounds.prototype.revLiveSearchPointer = function()
 {
 	this.liveSearchPointer.pop();
+}
+
+Chatsounds.prototype.clearLiveSearchPointer = function()
+{
+	this.liveSearchPointer = new Array();
 }
 
 //* replaces parameters in a request string like '#' or '*' -> avoid reg. expr.
