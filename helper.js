@@ -74,7 +74,7 @@ function volumeSliderInit()
 	var tooltip = $("#playerbox_volume_tooltip");
 	tooltip.hide();
 
-	function checkPercent()
+	function checkPercent(ui)
 	{
 		var tooltip_value = slider.slider('value');
 		var tooltip_value_percent = $("#playerbox_volume_slider").innerWidth() / 100;
@@ -107,12 +107,12 @@ function volumeSliderInit()
 		
 		slide: function(event, ui)
 		{
-			checkPercent();
+			checkPercent(ui);
 		},
 		
 		stop: function(event, ui)
 		{
-			checkPercent();
+			checkPercent(ui);
 			
 			tooltip.stop();
 			tooltip.fadeOut("fast");
@@ -274,7 +274,7 @@ function changeBG(url)
 		$("body").css("background-image", "url(" + url + ")");
 		
 		if ($("#bg_input_cookies").is(":checked")) //cookie is set here to be sure that the url is valid
-			cs.setCookie ("bg",url, 10080); //1 week
+			cs.setCookie("bg",url, 10080); //1 week
 	}
 }
 
