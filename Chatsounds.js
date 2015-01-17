@@ -426,7 +426,7 @@ Chatsounds.prototype.liveSearch = function(string)
 	
 	this.topResults = [];
 	var results = this.search(string.trim());
-	results.sort(function(a, b){return a.length - b.length});
+	results.sort(function(a, b){return a.name.length - b.name.length});
 	
 	var added = 0;
 	for(var x = 0; x < results.length; x++)
