@@ -123,6 +123,7 @@ function volumeSliderInit()
 //* shows a list with suggestions based on input
 function showSugg(sampleNames)
 {	
+	$(".td-entry").stop();
 	$(".td-entry").hide();
 	$(".td-entry").empty();
 
