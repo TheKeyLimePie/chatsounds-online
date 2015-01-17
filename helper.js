@@ -164,7 +164,7 @@ function liveSearchManager(e)
 			cs.revLiveSearchPointer();
 		}
 		
-		var string = cs.getInput().substring(0, cs.getLiveSearchPointer());
+		var string = cs.getInput().substring(cs.getLiveSearchPointer(), cs.getInput().length);
 		cs.liveSearch(string);
 	}
 	else if(e.which == 188) //188: comma
@@ -238,15 +238,10 @@ function takeSugg(trObject)
 {
 	var value = cs.getInput();
 
-	value = value.split(",");
-
-	var input = "";
-	for(var x = 0; x < value.length - 1; x++)
-	{
-		input = input.concat(value[x], ",");
-	}
+	var input = value.substring(0, cs.getLiveSearchPointer());
 	
 	input = input.concat(trObject.children().text());
+	
 	$(trObject).removeClass("selected");
 	cs.addLiveSearchPointer(input.length);
 	cs.setInput(input);

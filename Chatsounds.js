@@ -113,7 +113,7 @@ Chatsounds.prototype.addLiveSearchPointer = function(val)
 	this.liveSearchPointer.push(val);
 }
 
-Chatsounds.prototype.revLiveSearchPoint = function()
+Chatsounds.prototype.revLiveSearchPointer = function()
 {
 	this.liveSearchPointer.pop();
 }
