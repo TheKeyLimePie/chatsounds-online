@@ -37,7 +37,7 @@ $(window).load( function ()
 	  //start credits loop in footer
 	  changeFooter(0);
 	  //initiate Volume slider
-	  sliderInit();
+	  volumeSliderInit();
 	  //tests if the browser supports .ogg files for HTML5 <audio>
 	  var testAudio = document.createElement("audio");
 	  if (!testAudio.canPlayType("audio/ogg"))
