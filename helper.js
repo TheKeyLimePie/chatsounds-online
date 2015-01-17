@@ -159,11 +159,19 @@ function liveSearchManager(e)
 {
 	if ((e.which == 8) || (e.which == 46) || (e.which >= 48 && e.which <= 90) || (e.which >= 96 && e.which <=105)) //8: backspace, 46: delete, 48-90: abc...123..., 96-105: keypad 0-9
 	{
-		var string = cs.getInput().split(",");
-		cs.liveSearch(string[string.length - 1]);
+		if(cs.getLiveSearchPointer() > cs.getInput().length)
+		{
+			cs.revLiveSearchPointer();
+		}
+		
+		var string = cs.getInput().substring(0, cs.getLiveSearchPointer());
+		cs.liveSearch(string);
 	}
 	else if(e.which == 188) //188: comma
+	{
+		cs.addLiveSearchPointer(cs.getInput().length);
 		showSugg([]);
+	}	
 }
 
 //* manages <input> input related to arrow key navigation
@@ -240,6 +248,7 @@ function takeSugg(trObject)
 	
 	input = input.concat(trObject.children().text());
 	$(trObject).removeClass("selected");
+	cs.addLiveSearchPointer(input.length);
 	cs.setInput(input);
 }
 

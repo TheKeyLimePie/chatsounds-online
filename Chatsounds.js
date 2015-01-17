@@ -58,6 +58,7 @@ function Chatsounds()
 	this.jukebox = new Jukebox(this.INPUT, this.AUDIO, this.AUDIOSRC, this.SVNPATH, this.PLAYPAUSE, this.SKIP, this.REPLAY, this.BACK, this.FORTH, this.VOLUMESLIDER, this.VOLUME, this.SEEK, this.TIMELINE);
 	this.topResults = new Array();								//shown in suggestions list
 	this.samples = new Array();									//Sample objects are saved here
+	this.liveSearchPointer = new Array();
 }
 
 //* centre of chatsounds
@@ -100,6 +101,21 @@ Chatsounds.prototype.getInput = function()
 Chatsounds.prototype.setInput = function(string)
 {
 	$(this.INPUT).val(string);
+}
+
+Chatsounds.prototype.getLiveSearchPointer = function()
+{
+	return this.liveSearchPointer.length == 0 ? 0 : this.liveSearchPointer[this.liveSearchPointer.length - 1];
+}
+
+Chatsounds.prototype.addLiveSearchPointer = function(val)
+{
+	this.liveSearchPointer.push(val);
+}
+
+Chatsounds.prototype.revLiveSearchPoint = function()
+{
+	this.liveSearchPointer.pop();
 }
 
 //* replaces parameters in a request string like '#' or '*' -> avoid reg. expr.
