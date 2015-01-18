@@ -223,12 +223,26 @@ Chatsounds.prototype.getMatches = function(input)
 }
 
 //* checks if the #xItem# parameter is valid and returns an index for possible samples
-Chatsounds.prototype.checkItem = function(handledInput, matches)
+Chatsounds.prototype.checkItem = function(handledInput, matches, prevPath)
 {
 	var xItem = handledInput[this.PARAMETERWORD[0]];
 	
 	if ($.isEmptyObject(handledInput[this.PARAMETERWORD[0]]) || xItem < 1)
+	{
+		if(prevPath)
+		{
+			prevPath = prevPath.substring(19, prevPath.length); //remove "chatsounds/autoadd/"
+			prevPath = prevPath.match(/.*\//g)[0];
+			for(var x = 0; x < matches.length; x++)
+			{
+				var testPath = matches[x].path.substring(19, matches[x].path.length);
+				if(testPath.search(prevPath) == 0)
+					return x;
+			}
+		}
+		
 		return parseInt(Math.random()*matches.length);
+	}	
 	else
 	{
 		if(xItem <= matches.length && xItem > 0)
@@ -353,7 +367,8 @@ Chatsounds.prototype.makeQueue = function()
 		var matches = this.getMatches(this.handledInput[x].name);
 		if(!$.isEmptyObject(matches))
 		{
-			var index = this.checkItem(this.handledInput[x], matches);
+			var prevPath = x == 0 ? "" : this.samples[x-1].path;
+			var index = this.checkItem(this.handledInput[x], matches, prevPath);
 			var repetitions = this.handledInput[x][this.PARAMETERWORD[1]] == "" ? 1 : this.handledInput[x][this.PARAMETERWORD[1]];
 			
 			this.addSample(new Sample(matches[index]["name"], matches[index]["path"], index + 1, repetitions, x));
