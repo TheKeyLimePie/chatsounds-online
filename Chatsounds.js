@@ -229,10 +229,11 @@ Chatsounds.prototype.checkItem = function(handledInput, matches, prevPath)
 	
 	if ($.isEmptyObject(handledInput[this.PARAMETERWORD[0]]) || xItem < 1)
 	{
+		//check if there is a sample in the same (previous) folder -> consistency of sample queues
 		if(prevPath)
 		{
 			prevPath = prevPath.substring(19, prevPath.length); //remove "chatsounds/autoadd/"
-			prevPath = prevPath.match(/.*\//g)[0];
+			prevPath = prevPath.match(/.*\//g)[0]; //get folder name with "/" -> e.g. "gabe/"
 			for(var x = 0; x < matches.length; x++)
 			{
 				var testPath = matches[x].path.substring(19, matches[x].path.length);
