@@ -65,11 +65,11 @@ function Chatsounds()
 Chatsounds.prototype.action = function()
 {
 	this.jukebox.clearQueue();
-	this.clearLiveSearchPointer();
 	this.clearSamples();
 	showSugg([]);
 	showLink(0);
 	this.handleInput();
+	this.clearLiveSearchPointer();
 	this.makeQueue();
 	this.setInput("");
 	if(this.samples.length > 0)
@@ -172,14 +172,20 @@ Chatsounds.prototype.handleInput = function()
 	var pattern = /((#)[0-9]+|(\*)[0-9]+)(?!\2\3)(#[0-9]+|\*[0-9]+)?/g;
 	var repl = "$&,";
 	input = input.replace(pattern, repl);
-	
+	//insert commas after each autocomplete string
+	var searchPointer = this.getLiveSearchPointer();
+	for(var x = 0; x < searchPointer.length; x++)
+	{
+		var a = input.substring( x == 0 ? 0 : searchPointer[x-1], searchPointer[x]);
+		input = a.trim().concat(",");
+	}
 	var splittedInput = input.split(",");
 		
 	for(var x = 0; x < splittedInput.length; x++)
 	{
 		splittedInput[x] = this.replaceParameters(splittedInput[x]);
 		
-		var inputObject = new Object ();
+		var inputObject = new Object();
 		inputObject.name = this.getName(splittedInput[x]);
 		
 		for(var y = 0; y < this.PARAMETERWORD.length; y++)
