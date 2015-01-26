@@ -289,6 +289,7 @@ Chatsounds.prototype.search = function(string)
 					sample.name = key;
 					sample.path = value[y]["path"];
 					sample.length = value[y]["length"];
+					sample.indexNumber = x.toString().concat(" | ", y); //for debugging purposes
 					results.push(sample);
 				}
 			}
