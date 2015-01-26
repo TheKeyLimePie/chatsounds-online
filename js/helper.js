@@ -395,7 +395,7 @@ function setBG()
 	
 	if(url == "" || !/^http(s){0,1}:(\/){2}(.*)\.(jpg|jpeg|png|gif)$/g.test(url))
 	{
-		$("body").css("background-image", "url(bg.jpg)");
+		$("body").css("background-image", "url(./bg.jpg)");
 		if($("#bg_input_cookies").is(":checked"))
 			cs.setCookie("bg", " ", -5);
 	}

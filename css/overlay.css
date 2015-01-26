@@ -62,7 +62,7 @@ label
 	width: 100%;
 	margin: 0;
 	border-top: 1px #ddd solid;
-	background-image: url("icons/error.png");
+	background-image: url("../icons/error.png");
 	background-color: #f8f8f8;
 	background-position: center center;
 	background-repeat: no-repeat;

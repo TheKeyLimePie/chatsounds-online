@@ -86,7 +86,7 @@ a:hover
 	width: 40px;
 	border-radius: 100%;
 	background-color: #aaa;
-	background-image: url("icons/cross.png"), linear-gradient(to top, #999, #ccc);
+	background-image: url("../icons/cross.png"), linear-gradient(to top, #999, #ccc);
 	background-position: center center;
 	background-repeat: no-repeat;
 	cursor: pointer;
@@ -97,7 +97,7 @@ a:hover
 {
 	transition: background-image 0.2s;
 	background-color: #ff4444;
-	background-image: url("icons/cross.png"), linear-gradient(to top, #990000, #ff4444);
+	background-image: url("../icons/cross.png"), linear-gradient(to top, #990000, #ff4444);
 }
 
 .notification_message

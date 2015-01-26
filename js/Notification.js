@@ -101,17 +101,17 @@ Notification.prototype.setIcon = function()
 	{
 		case 0: break;
 		
-		case 1: $(jqID).css("background-image", "url(icons/error.png)"); break;
+		case 1: $(jqID).css("background-image", "url(./icons/error.png)"); break;
 		
-		case 2: $(jqID).css("background-image", "url(icons/MSA.png)"); break;
+		case 2: $(jqID).css("background-image", "url(./icons/MSA.png)"); break;
 		
-		case 3: $(jqID).css("background-image", "url(icons/keylimepie_small.png)"); break;
+		case 3: $(jqID).css("background-image", "url(./icons/keylimepie_small.png)"); break;
 		
-		case 4: $(jqID).css("background-image", "url(icons/loading.GIF)"); break;
+		case 4: $(jqID).css("background-image", "url(./icons/loading.GIF)"); break;
 		
 		case 5: $(jqID).addClass("fi-social-github"); break;
 		
-		default: $(jqID).css("background-image", "url(icons/loading.GIF)"); break;	
+		default: $(jqID).css("background-image", "url(./icons/loading.GIF)"); break;	
 	}
 }
 
