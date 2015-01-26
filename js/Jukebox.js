@@ -77,6 +77,7 @@ Jukebox.prototype.startQueue = function()
 		$(this.SEEK).css("width", "0%");
 		this.showTimeline(this.queue);
 		this.playSample(-1);
+		$(this.INPUT).focus();
 	}
 	else
 	{
