@@ -17,22 +17,8 @@
   Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 */
 
-function Jukebox(input, audioelem, audiosrc, svnpath, playpause, skip, replay, back, forth, volumeslider, volume, seek, timeline)
+function Jukebox()
 {
-	this.INPUT = input;
-	this.AUDIOELEM = audioelem;
-	this.AUDIOSRC = audiosrc;
-	this.SVNPATH = svnpath;
-	this.PLAYPAUSE = playpause;
-	this.SKIP = skip;
-	this.REPLAY = replay;
-	this.BACK = back;
-	this.FORTH = forth;
-	this.VOLUMESLIDER = volumeslider;
-	this.VOLUME = volume;
-	this.SEEK = seek;
-	this.TIMELINE = timeline;
-	
 	this.queue = new Array();		//contains objects of Sample
 	this.playing;
 	this.repetitions;
@@ -74,7 +60,7 @@ Jukebox.prototype.startQueue = function()
 	if (!this.queue.length)
 	{
 		console.log("Queue is empty");
-		$(this.SEEK).css("width", "0%");
+		$(settings.SEEK).css("width", "0%");
 		this.showTimeline(this.queue);
 		this.playSample(-1);
 	}
@@ -88,10 +74,10 @@ Jukebox.prototype.startQueue = function()
 //* sets source path of the audio element and activates loading indicator (headline turns red)
 Jukebox.prototype.setSrc = function(sample)
 {
-	var path = this.SVNPATH.concat(sample.getPath());
+	var path = settings.SVNPATH.concat(sample.getPath());
 	console.log("Set path: " + sample.getPath());
-	$(this.AUDIOSRC).attr("src", path);
-	$(this.AUDIOELEM).load();
+	$(settings.AUDIOSRC).attr("src", path);
+	$(settings.AUDIOELEM).load();
 	if (sample.getPath() != "NULL")
 	{
 		$("h2").stop();
@@ -104,51 +90,51 @@ Jukebox.prototype.setSrc = function(sample)
 Jukebox.prototype.play = function()
 {
 	this.setPlayIcon("pause");
-	document.getElementById(this.AUDIOELEM.substr(1)).play();		//substr(1): ignore #
+	document.getElementById(settings.AUDIOELEM.substr(1)).play();		//substr(1): ignore #
 }
 
 //* pauses audio element
 Jukebox.prototype.pause = function()
 {
 	this.setPlayIcon("play");
-	document.getElementById(this.AUDIOELEM.substr(1)).pause();		//substr(1): ignore #
-	$(this.INPUT).focus();
+	document.getElementById(settings.AUDIOELEM.substr(1)).pause();		//substr(1): ignore #
+	$(settings.INPUT).focus();
 	
 }
 
 //* sets volume of audio element
 Jukebox.prototype.setVolume = function(vol)
 {
-	document.getElementById(this.AUDIOELEM.substr(1)).volume = vol; 
+	document.getElementById(settings.AUDIOELEM.substr(1)).volume = vol; 
 }
 
 //* mutes/unmutes audio and sets the volume icon
 Jukebox.prototype.toggleMute = function()
 {
-	if(document.getElementById(this.AUDIOELEM.substr(1)).volume == 0)
+	if(document.getElementById(settings.AUDIOELEM.substr(1)).volume == 0)
 	{
-		var vol = $(this.VOLUMESLIDER).slider("value");
+		var vol = $(settings.VOLUMESLIDER).slider("value");
 		this.setVolume(vol / 100);
 		if (vol <= 25)
-			$(this.VOLUME).css("background-position", "0 -15px");
+			$(settings.VOLUME).css("background-position", "0 -15px");
 		else if (vol <= 50)
-			$(this.VOLUME).css("background-position", "0 -30px");
+			$(settings.VOLUME).css("background-position", "0 -30px");
 		else if (vol <= 75)
-			$(this.VOLUME).css("background-position", "0 -45px");
+			$(settings.VOLUME).css("background-position", "0 -45px");
 		else if (vol <= 100)
-			$(this.VOLUME).css("background-position", "0 -60px");
+			$(settings.VOLUME).css("background-position", "0 -60px");
 	}
 	else
 	{
 		this.setVolume(0);
-		$(this.VOLUME).css("background-position", "0 0px");
+		$(settings.VOLUME).css("background-position", "0 0px");
 	}
 }
 
 //* skips current sample
 Jukebox.prototype.skipSample = function()
 {
-	document.getElementById(this.AUDIOELEM.substr(1)).currentTime = document.getElementById(this.AUDIOELEM.substr(1)).duration;
+	document.getElementById(settings.AUDIOELEM.substr(1)).currentTime = document.getElementById(settings.AUDIOELEM.substr(1)).duration;
 }
 
 //* replays queue
@@ -162,7 +148,7 @@ Jukebox.prototype.replayQueue = function()
 Jukebox.prototype.slideToCard = function(index)
 {
 	var element = "#card_".concat(index);
-	$(this.TIMELINE).mCustomScrollbar("scrollTo", element);
+	$(settings.TIMELINE).mCustomScrollbar("scrollTo", element);
 }
 
 //* removes "active effects" (different text color) from all cards and sets it to the current one
@@ -176,14 +162,14 @@ Jukebox.prototype.makeCardActive = function(index)
 //* removes cards from timeline and adds new cards, shows/hides timeline
 Jukebox.prototype.showTimeline = function(queue)
 {
-	$(this.TIMELINE).empty();
+	$(settings.TIMELINE).empty();
 	if (!queue.length)
 		slideTimeline(0);
 	else
 	{
 		for(var x = 0; x < queue.length; x++)
 		{
-			$(this.TIMELINE).append(queue[x].getCard());
+			$(settings.TIMELINE).append(queue[x].getCard());
 		}
 		slideTimeline(1);
 	}
@@ -192,12 +178,12 @@ Jukebox.prototype.showTimeline = function(queue)
 //* plays/pauses audio
 Jukebox.prototype.playToggle = function()
 {
-	if(document.getElementById(this.AUDIOELEM.substr(1)).paused && document.getElementById(this.AUDIOELEM.substr(1)).duration > 0)
+	if(document.getElementById(settings.AUDIOELEM.substr(1)).paused && document.getElementById(settings.AUDIOELEM.substr(1)).duration > 0)
 		this.play();
-	else if(!document.getElementById(this.AUDIOELEM.substr(1)).paused)
+	else if(!document.getElementById(settings.AUDIOELEM.substr(1)).paused)
 	{
 		this.pause();
-		$(this.INPUT).focus();
+		$(settings.INPUT).focus();
 	}
 }
 
@@ -206,14 +192,14 @@ Jukebox.prototype.setPlayIcon = function(status)
 {
 	if (status == "play")
 	{
-		$(this.PLAYPAUSE).removeClass("fi-pause")
-		$(this.PLAYPAUSE).addClass("fi-play");
+		$(settings.PLAYPAUSE).removeClass("fi-pause")
+		$(settings.PLAYPAUSE).addClass("fi-play");
 	}
 		
 	else if (status == "pause")
 	{
-		$(this.PLAYPAUSE).removeClass("fi-play");
-		$(this.PLAYPAUSE).addClass("fi-pause");
+		$(settings.PLAYPAUSE).removeClass("fi-play");
+		$(settings.PLAYPAUSE).addClass("fi-pause");
 	}
 	else
 		return -1;
@@ -222,15 +208,15 @@ Jukebox.prototype.setPlayIcon = function(status)
 //* updates the seeker line of audio, recursive
 Jukebox.prototype.updateSeek = function()
 {
-	if(document.getElementById(this.AUDIOELEM.substr(1)).ended)
-		$(this.SEEK).css("width","100%");
+	if(document.getElementById(settings.AUDIOELEM.substr(1)).ended)
+		$(settings.SEEK).css("width","100%");
 
-	else if(document.getElementById(this.AUDIOELEM.substr(1)).paused)
+	else if(document.getElementById(settings.AUDIOELEM.substr(1)).paused)
 		return;		
 	else
 	{
-		var range = (document.getElementById(this.AUDIOELEM.substr(1)).currentTime / document.getElementById(this.AUDIOELEM.substr(1)).duration) * 100;
-		$(this.SEEK).css("width", range + "%");
+		var range = (document.getElementById(settings.AUDIOELEM.substr(1)).currentTime / document.getElementById(settings.AUDIOELEM.substr(1)).duration) * 100;
+		$(settings.SEEK).css("width", range + "%");
 		requestAnimationFrame(Jukebox.prototype.updateSeek.bind(this));
 	}
 }

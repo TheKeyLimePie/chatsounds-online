@@ -58,6 +58,7 @@ $(window).load( function ()
 	  }
 	  
 	  //object of Samplecs
+	  settings = new Settings();
 	  cs = new Chatsounds();
 	  //get JSON with samples
 	  cs.sampleDB.updateDB();
