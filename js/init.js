@@ -70,7 +70,7 @@ $(window).load( function ()
 
 	  window.JSONDB.done( function ()
 	  {
-		  $(cs.INPUT).focus();
+		  $(settings.INPUT).focus();
 		  cs.parameters.useParameters();
   });
 	  
@@ -86,7 +86,7 @@ $(window).load( function ()
 	  GABE = window.setTimeout(function(){checkGaben();}, 900000);
 
 	  // character input, backspace, delete, comma, semicolon handled here
-	  $(cs.INPUT).keyup(function(e)
+	  $(settings.INPUT).keyup(function(e)
 	  {
 			if(e.which == 9)	//TAB key
 				e.preventDefault();
@@ -94,7 +94,7 @@ $(window).load( function ()
 	  });
 	  
 	  // arrow key up/down/right handled here
-	  $(cs.INPUT).keydown(function(e)
+	  $(settings.INPUT).keydown(function(e)
 	  {
 			if(e.which == 9)	//TAB key
 				e.preventDefault();
@@ -102,7 +102,7 @@ $(window).load( function ()
       });
 	  
 	  // ENTER is handled here (if ENTER was pressed on a selected element)
-	  $(cs.INPUT).keypress(function(e)
+	  $(settings.INPUT).keypress(function(e)
 	  {
         	if (e.which == 13 && $(".selected").length)
 				takeSugg($(".selected"));
@@ -129,18 +129,18 @@ $(window).load( function ()
 		  cs.jukebox.playSample (index);
 	  });
 	  
-	  $(cs.jukebox.AUDIOELEM).on("canplay", function ()
+	  $(settings.AUDIO).on("canplay", function ()
 	  {
 		  $("h2").stop();
 		  $("h2").animate({color: "#33b5e5"}, 100);
 	  });
 	  
-	  $(cs.jukebox.AUDIOELEM).on("play", function ()
+	  $(settings.AUDIO).on("play", function ()
 	  {
 		  cs.jukebox.updateSeek();
 	  });
 	  
-	  $(cs.jukebox.AUDIOELEM).on("ended", function ()
+	  $(settings.AUDIO).on("ended", function ()
 	  {
 		  cs.jukebox.setPlayIcon("play");
 		  if (cs.jukebox.repetitions > 1)
