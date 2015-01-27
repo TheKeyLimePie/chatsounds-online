@@ -77,7 +77,7 @@ Jukebox.prototype.setSrc = function(sample)
 	var path = settings.SVNPATH.concat(sample.getPath());
 	console.log("Set path: " + sample.getPath());
 	$(settings.AUDIOSRC).attr("src", path);
-	$(settings.AUDIOELEM).load();
+	$(settings.AUDIO).load();
 	if (sample.getPath() != "NULL")
 	{
 		$("h2").stop();
@@ -90,14 +90,14 @@ Jukebox.prototype.setSrc = function(sample)
 Jukebox.prototype.play = function()
 {
 	this.setPlayIcon("pause");
-	document.getElementById(settings.AUDIOELEM.substr(1)).play();		//substr(1): ignore #
+	document.getElementById(settings.AUDIO.substr(1)).play();		//substr(1): ignore #
 }
 
 //* pauses audio element
 Jukebox.prototype.pause = function()
 {
 	this.setPlayIcon("play");
-	document.getElementById(settings.AUDIOELEM.substr(1)).pause();		//substr(1): ignore #
+	document.getElementById(settings.AUDIO.substr(1)).pause();		//substr(1): ignore #
 	$(settings.INPUT).focus();
 	
 }
@@ -105,13 +105,13 @@ Jukebox.prototype.pause = function()
 //* sets volume of audio element
 Jukebox.prototype.setVolume = function(vol)
 {
-	document.getElementById(settings.AUDIOELEM.substr(1)).volume = vol; 
+	document.getElementById(settings.AUDIO.substr(1)).volume = vol; 
 }
 
 //* mutes/unmutes audio and sets the volume icon
 Jukebox.prototype.toggleMute = function()
 {
-	if(document.getElementById(settings.AUDIOELEM.substr(1)).volume == 0)
+	if(document.getElementById(settings.AUDIO.substr(1)).volume == 0)
 	{
 		var vol = $(settings.VOLUMESLIDER).slider("value");
 		this.setVolume(vol / 100);
@@ -134,7 +134,7 @@ Jukebox.prototype.toggleMute = function()
 //* skips current sample
 Jukebox.prototype.skipSample = function()
 {
-	document.getElementById(settings.AUDIOELEM.substr(1)).currentTime = document.getElementById(settings.AUDIOELEM.substr(1)).duration;
+	document.getElementById(settings.AUDIO.substr(1)).currentTime = document.getElementById(settings.AUDIO.substr(1)).duration;
 }
 
 //* replays queue
@@ -178,9 +178,9 @@ Jukebox.prototype.showTimeline = function(queue)
 //* plays/pauses audio
 Jukebox.prototype.playToggle = function()
 {
-	if(document.getElementById(settings.AUDIOELEM.substr(1)).paused && document.getElementById(settings.AUDIOELEM.substr(1)).duration > 0)
+	if(document.getElementById(settings.AUDIO.substr(1)).paused && document.getElementById(settings.AUDIO.substr(1)).duration > 0)
 		this.play();
-	else if(!document.getElementById(settings.AUDIOELEM.substr(1)).paused)
+	else if(!document.getElementById(settings.AUDIO.substr(1)).paused)
 	{
 		this.pause();
 		$(settings.INPUT).focus();
@@ -208,14 +208,14 @@ Jukebox.prototype.setPlayIcon = function(status)
 //* updates the seeker line of audio, recursive
 Jukebox.prototype.updateSeek = function()
 {
-	if(document.getElementById(settings.AUDIOELEM.substr(1)).ended)
+	if(document.getElementById(settings.AUDIO.substr(1)).ended)
 		$(settings.SEEK).css("width","100%");
 
-	else if(document.getElementById(settings.AUDIOELEM.substr(1)).paused)
+	else if(document.getElementById(settings.AUDIO.substr(1)).paused)
 		return;		
 	else
 	{
-		var range = (document.getElementById(settings.AUDIOELEM.substr(1)).currentTime / document.getElementById(settings.AUDIOELEM.substr(1)).duration) * 100;
+		var range = (document.getElementById(settings.AUDIO.substr(1)).currentTime / document.getElementById(settings.AUDIO.substr(1)).duration) * 100;
 		$(settings.SEEK).css("width", range + "%");
 		requestAnimationFrame(Jukebox.prototype.updateSeek.bind(this));
 	}
