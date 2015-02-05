@@ -303,7 +303,7 @@ function lsd()
 
 function checkGaben()
 {
-	if(document.getElementById("audio-element").ended)
+	if(document.getElementById("audio-element").ended && !cs.getInput())
 		gaben();
 	else
 	{
