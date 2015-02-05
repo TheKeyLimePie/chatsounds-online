@@ -324,7 +324,7 @@ function gaben()
     $("body").css("background-image", "url(valve.jpg)");
     var gabeNotif = new Notification("PRAISE LORD GABEN!!!1!!11!", "<iframe width=\"480\" height=\"270\" src=\"//www.youtube.com/embed/bUo1PgKksgw?loop=1&playlist=bUo1PgKksgw\" frameborder=\"0\" allowfullscreen></iframe>", true, Notification.status.KLP);
 	gabeNotif.init();
-	$(cs.INPUT).val("gaben");
+	$(settings.INPUT).val("gaben");
 	cs.action();
 }
 

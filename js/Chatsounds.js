@@ -18,44 +18,25 @@
 */
 
 function Chatsounds()
-{
-	this.INPUT = "#search-string";			//DOM ID of text input
-	this.AUDIO = "#audio-element";			//DOM ID of audio tag
-	this.AUDIOSRC = "#audio-src";			//DOM ID of audio source
-	this.SVNPATH = "https://garrysmod-chatsounds.googlecode.com/svn/trunk/sound/";
-	this.URL = "http://cs.3kv.in/";
+{	
+	this.PARAMETER = ["#","*"];				
+	this.PARAMETERWORD = ["#xItem#","#repeat#"];
 	
 	var audio = document.createElement("audio");
-	audio.setAttribute("id", this.AUDIO.substr(1,this.AUDIO.length));
+	audio.setAttribute("id", settings.AUDIO.substr(1,settings.AUDIO.length));
 	var src = document.createElement("source");
-	src.setAttribute("id", this.AUDIOSRC.substr(1,this.AUDIOSRC.length));
+	src.setAttribute("id", settings.AUDIOSRC.substr(1,settings.AUDIOSRC.length));
 	src.setAttribute("type", "audio/ogg");
 	src.setAttribute("src", "");
 	audio.appendChild(src);
 	document.body.appendChild(audio);
-	
-	this.PARAMETER = ["#","*"];				
-	this.PARAMETERWORD = ["#xItem#","#repeat#"];
-	
-	//UI REFERENCES
-	this.PLAYPAUSE = "#playerbox_controls_play";
-	this.SKIP = "#playerbox_controls_skip";
-	this.REPLAY = "#playerbox_controls_replay";
-	this.BACK = "#playerbox_controls_back";
-	this.FORTH = "#playerbox_controls_forth";
-	this.VOLUMESLIDER = "#playerbox_volume_slider";
-	this.VOLUME = "#playerbox_volume_volume";
-	this.SEEK = "#headbar_seek";
-	this.TIMELINE = "#timeline_cardline";
-	this.BACKTXT = "#playerbox_history_back";
-	this.FORTHTXT = "#playerbox_history_forth";
 	
 	this.history = new History();
 	this.handledInput = new Array();							//handled input is saved here; array of objects
 	this.sampleDB = new Samplebase();							//object of Samplebase
 	this.parameters = new URLParameter();						//object of URLParameter
 	//Note: Use Decorator pattern in future
-	this.jukebox = new Jukebox(this.INPUT, this.AUDIO, this.AUDIOSRC, this.SVNPATH, this.PLAYPAUSE, this.SKIP, this.REPLAY, this.BACK, this.FORTH, this.VOLUMESLIDER, this.VOLUME, this.SEEK, this.TIMELINE);
+	this.jukebox = new Jukebox();
 	this.topResults = new Array();								//shown in suggestions list
 	this.samples = new Array();									//Sample objects are saved here
 	this.liveSearchPointer = new Array();
@@ -79,7 +60,7 @@ Chatsounds.prototype.action = function()
 	}
 		
 	this.jukebox.startQueue();
-	$(this.INPUT).blur();
+	$(settings.INPUT).blur();
 }
 
 Chatsounds.prototype.clearSamples = function()
@@ -95,13 +76,13 @@ Chatsounds.prototype.addSample = function(sampleObj)
 //* returns input of form input
 Chatsounds.prototype.getInput = function()
 {
-	return $(this.INPUT).val().toLowerCase();
+	return $(settings.INPUT).val().toLowerCase();
 }
 
 //* sets input of form input
 Chatsounds.prototype.setInput = function(string)
 {
-	$(this.INPUT).val(string);
+	$(settings.INPUT).val(string);
 }
 
 Chatsounds.prototype.getLiveSearchPointer = function()
@@ -426,13 +407,13 @@ Chatsounds.prototype.applyHistoryLength = function()
 	var sizes = this.history.getSizes();
 	if(sizes[0] != 0 || sizes[1] != 0) //you don't need this info as long as you haven't saved any history
 	{
-		$(this.BACKTXT).html(sizes[0]);
-		$(this.FORTHTXT).html(sizes[1]);
+		$(settings.BACKTXT).html(sizes[0]);
+		$(settings.FORTHTXT).html(sizes[1]);
 	}
 	else
 	{
-		$(this.BACKTXT).html("");
-		$(this.FORTHTXT).html("");
+		$(settings.BACKTXT).html("");
+		$(settings.FORTHTXT).html("");
 	}
 }
 
@@ -476,7 +457,7 @@ Chatsounds.prototype.liveSearch = function(string)
 //* generates a link to share with the sample queue
 Chatsounds.prototype.generateLink = function()
 {
-	var stringParam = this.URL.concat("?s=");
+	var stringParam = settings.URL.concat("?s=");
 	for(var x = 0; x < this.samples.length; x++)
 	{
 		stringParam = stringParam.concat(encodeURIComponent(this.samples[x].name));

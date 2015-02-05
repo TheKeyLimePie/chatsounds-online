@@ -19,5 +19,21 @@
 
 function Settings()
 {
+	this.INPUT = "#search-string";			//DOM ID of text input
+	this.AUDIO = "#audio-element";			//DOM ID of audio tag
+	this.AUDIOSRC = "#audio-src";			//DOM ID of audio source
+	this.SVNPATH = "https://garrysmod-chatsounds.googlecode.com/svn/trunk/sound/";
+	this.URL = "http://cs.3kv.in/";
 	
+	this.PLAYPAUSE = "#playerbox_controls_play";
+	this.SKIP = "#playerbox_controls_skip";
+	this.REPLAY = "#playerbox_controls_replay";
+	this.BACK = "#playerbox_controls_back";
+	this.FORTH = "#playerbox_controls_forth";
+	this.VOLUMESLIDER = "#playerbox_volume_slider";
+	this.VOLUME = "#playerbox_volume_volume";
+	this.SEEK = "#headbar_seek";
+	this.TIMELINE = "#timeline_cardline";
+	this.BACKTXT = "#playerbox_history_back";
+	this.FORTHTXT = "#playerbox_history_forth";
 }
