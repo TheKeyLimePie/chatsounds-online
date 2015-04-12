@@ -485,7 +485,7 @@ function showAbout()
 				githash = data;
 		}).always(function()
 		{
-			var details = desc.concat("<br/><br/>", credits, "<br/>", "<a href=\"javascript:showLicenses()\">Software licenses</a>", "<br/><br/>This site is based on Git: <br/><i>", githash, "</i><br/>", "Sounds samples are based on SVN: <br/><a href=\"https://code.google.com/p/garrysmod-chatsounds/source/list\" target=\"_blank\"><i>", cs.sampleDB.getRev(), "</i></a>");
+			var details = desc.concat("<br/><br/>", credits, "<br/>", "<a href=\"javascript:showLicenses()\">Software licenses</a>", "<br/><br/>This site is based on Git: <br/><i>", githash, "</i><br/>", "Sounds samples are based on Git (via SVN gateway): <br/><a href=\"https://github.com/Metastruct/garrysmod-chatsounds\" target=\"_blank\"><i>", cs.sampleDB.getRev(), "</i></a>");
 			var about = new Notification("Some infos", details, true, Notification.status.KLP);
 			about.init();
 		});
