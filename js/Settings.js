@@ -22,7 +22,7 @@ function Settings()
 	this.INPUT = "#search-string";			//DOM ID of text input
 	this.AUDIO = "#audio-element";			//DOM ID of audio tag
 	this.AUDIOSRC = "#audio-src";			//DOM ID of audio source
-	this.SVNPATH = "https://garrysmod-chatsounds.googlecode.com/svn/trunk/sound/";
+	this.SVNPATH = "https://raw.githubusercontent.com/Metastruct/garrysmod-chatsounds/master/sound/";
 	this.URL = "http://cs.3kv.in/";
 	
 	this.PLAYPAUSE = "#playerbox_controls_play";
