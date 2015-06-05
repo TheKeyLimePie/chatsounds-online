@@ -456,7 +456,7 @@ function openLink(name)
 	if(name == "github")
 		s = "https://github.com/TheKeyLimePie/chatsounds-online";
 	else if(name == "meta")
-		s = "http://metastruct.org";
+		s = "http://metastruct.net";
 	var win = window.open(s, "_blank");
 	win.focus();
 }
