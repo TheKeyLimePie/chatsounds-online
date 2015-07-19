@@ -203,7 +203,7 @@ Chatsounds.prototype.getMatches = function(input)
 	var results = this.search(input);
 	for(var x = 0; x < results.length; x++)
 	{
-		if(input == results[x].name)
+		if(input == results[x].name.trim())
 			equal.push(results[x]);
 	}
 	return equal;
