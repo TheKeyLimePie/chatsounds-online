@@ -138,22 +138,25 @@ a:hover
 
 #headbar_settings
 {
-	width: 15px;
-	height: 29px;
+	width: auto;
+	height: auto;
 	float: right;
 	position: relative;
-	margin-top: 35px;
+	margin-top: 30px;
 	margin-left: 30px;
 	margin-right: 15px;
 	cursor: pointer;
-	background-image: url(../icons/settings.png);
-	background-repeat: no-repeat;
-	background-position: center;
+	font-size: 40px;
 }
 #headbar_settings:after
 {
 	content: "";
 	clear: both;
+}
+#headbar_settings:hover
+{
+	color: #33b5e5;
+	transition: color 0.2s;
 }
 
 #headbar_settings_box
