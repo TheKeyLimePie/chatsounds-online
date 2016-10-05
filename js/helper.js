@@ -20,7 +20,7 @@
 //* max. shown suggestions
 var LIST_LENGTH = 9;
 //* strings for credits (another one gets added for background image -> changeFooter(0))
-var names = ["Project by <a href=\"http://3kv.in/~keylimepie/\" target=\"_blank\"><b>KeyLimePie</b></a>",".lua to .json converter: <b>PotcFdk</b>","Server hosting: <b>Techbot</b>"];
+var names = ["Project by <a href=\"http://3k.keylimepie.me/\" target=\"_blank\"><b>KeyLimePie</b></a>",".lua to .json converter: <b>PotcFdk</b>","Server hosting: <b>Techbot</b>"];
 
 //* shows the box where the sample cards are shown
 function slideTimeline(slideOut)	// true:= slide in, false:= slide out
