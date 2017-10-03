@@ -485,7 +485,7 @@ function showAbout()
 				githash = data;
 		}).always(function()
 		{
-			var details = desc.concat("<br/><br/>", credits, "<br/>", "<a href=\"javascript:showLicenses()\">Software licenses</a>", "<br/><br/>This site is based on Git: <br/><i>", githash, "</i><br/>", "Sounds samples are based on Git (via SVN gateway): <br/><a href=\"https://github.com/Metastruct/garrysmod-chatsounds\" target=\"_blank\"><i>", cs.sampleDB.getRev(), "</i></a>");
+			var details = desc.concat("<br/><br/>", credits, "<br/>", "<a href=\"javascript:showLicenses()\">Software licenses</a>", "<br/><br/>This site is based on Git: <br/><i>", githash, "</i><br/>", "Sounds samples are based on Git (via SVN gateway): <br/><a href=\"https://github.com/Metastruct/garrysmod-chatsounds\" target=\"_blank\"><i>", cs.sampleDB.getRev(), "</i></a><br /><br /><a href=\"http://jigsaw.w3.org/css-validator/validator?uri=http://chatsounds.threekelv.in/\" target=\"_blank\"><img src=\"icons/css3.png\" title=\"CSS3 confirmed\" alt=\"W3-validated CSS3\" /></a><a href=\"http://validator.w3.org/check?uri=http%3A%2F%2Fchatsounds.threekelv.in%2F\" target=\"_blank\"><img src=\"icons/html5.png\" title=\"HTML5 confirmed\" alt=\"W3-validated HTML5\" /></a><a href=\"https://www.youtube.com/watch?v=vNdqdb7z89g\" target=\"_blank\"><img src=\"icons/hl3.png\" title=\"Half-Life 3 confirmed\" alt=\"It's right here!\" /></a>");
 			var about = new Notification("Some infos", details, true, Notification.status.KLP);
 			about.init();
 		});
